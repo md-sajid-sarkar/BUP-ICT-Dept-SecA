@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICT Department - BUP | Portal</title>
+    <title>BICE 2025 - Academic Portal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome for Icons -->
@@ -21,10 +21,12 @@
             font-family: 'Inter', sans-serif;
         }
 
-        html, body {
+        html,
+        body {
             overflow-x: hidden;
             max-width: 100vw;
         }
+
         /* Lock background scroll when modal is open */
         body.modal-open {
             overflow: hidden;
@@ -58,11 +60,10 @@
 <body class="bg-neutral-950 text-slate-300 font-code selection:bg-cyan-500/30">
 
     <!-- NAVIGATION BAR -->
-    <!-- NAVIGATION BAR -->
     <nav class="bg-neutral-950/80 backdrop-blur-md text-white sticky top-0 z-50 border-b border-neutral-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                
+
                 <!-- Logo -->
                 <div class="flex items-center space-x-3 group cursor-pointer">
                     <div
@@ -163,9 +164,11 @@
                 <!-- MOBILE MENU ICONS (Visible only on Mobile) -->
                 <div class="md:hidden flex items-center space-x-5">
                     <!-- Mobile Notice Bell -->
-                    <button onclick="document.getElementById('nav-notice-alarm').click()" class="text-rose-400 relative focus:outline-none">
+                    <button onclick="document.getElementById('nav-notice-alarm').click()"
+                        class="text-rose-400 relative focus:outline-none">
                         <span class="absolute -top-1 -right-1 flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                         </span>
                         <i class="fa-solid fa-bell text-xl"></i>
@@ -180,25 +183,46 @@
         </div>
 
         <!-- Mobile Menu Dropdown (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-neutral-950 border-t border-neutral-800 w-full absolute left-0 top-20 shadow-2xl overflow-y-auto max-h-[80vh] pb-4">
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-neutral-950 border-t border-neutral-800 w-full absolute left-0 top-20 shadow-2xl overflow-y-auto max-h-[80vh] pb-4">
             <div class="px-4 py-4 space-y-1 font-code text-sm">
                 <!-- Home -->
-                <a href="#" onclick="toggleMobileMenu()" class="block px-3 py-2 text-cyan-400 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-house w-5 text-center mr-2"></i> ~/home</a>
-                
+                <a href="#" onclick="toggleMobileMenu()"
+                    class="block px-3 py-2 text-cyan-400 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-house w-5 text-center mr-2"></i> ~/home</a>
+
                 <!-- Academics Section -->
                 <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">ACADEMICS</div>
-                <a href="semesters.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-layer-group w-5 text-center mr-2"></i> ~/Semesters</a>
-                <button onclick="document.getElementById('routine-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i> ~/Class_Routine</button>
-                <a href="cgpaCalc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calculator w-5 text-center mr-2"></i> ~/CGPA_Calc</a>
-                <a href="final-calc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-bullseye w-5 text-center mr-2"></i> ~/Final_Marks_Calc</a>
-                <button onclick="document.getElementById('archive-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-database w-5 text-center mr-2"></i> ~/Data_Archive</button>
+                <a href="semesters.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-layer-group w-5 text-center mr-2"></i> ~/Semesters</a>
+                <button onclick="document.getElementById('routine-btn').click(); toggleMobileMenu();"
+                    class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-calendar-days w-5 text-center mr-2"></i> ~/Class_Routine</button>
+                <a href="cgpaCalc.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-calculator w-5 text-center mr-2"></i> ~/CGPA_Calc</a>
+                <a href="final-calc.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-bullseye w-5 text-center mr-2"></i> ~/Final_Marks_Calc</a>
+                <button onclick="document.getElementById('archive-btn').click(); toggleMobileMenu();"
+                    class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-database w-5 text-center mr-2"></i> ~/Data_Archive</button>
 
                 <!-- Community & Campus Section -->
                 <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">COMMUNITY & CAMPUS</div>
-                <button onclick="document.getElementById('faculty-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-user-tie w-5 text-center mr-2"></i> ~/Faculty_Nodes</button>
-                <a href="students.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-address-book w-5 text-center mr-2"></i> ~/Student_Directory</a>
-                <a href="#events" onclick="toggleMobileMenu()" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i> ~/Events</a>
-                <a href="#gallery" onclick="toggleMobileMenu()" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-images w-5 text-center mr-2"></i> ~/Gallery</a>
+                <button onclick="document.getElementById('faculty-btn').click(); toggleMobileMenu();"
+                    class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-user-tie w-5 text-center mr-2"></i> ~/Faculty_Nodes</button>
+                <a href="students.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-address-book w-5 text-center mr-2"></i> ~/Student_Directory</a>
+                <a href="#events" onclick="toggleMobileMenu()"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-calendar-check w-5 text-center mr-2"></i> ~/Events</a>
+                <a href="#gallery" onclick="toggleMobileMenu()"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-images w-5 text-center mr-2"></i> ~/Gallery</a>
             </div>
         </div>
     </nav>
@@ -219,7 +243,7 @@
         </div>
     </div>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION (BICE-2025 Branding Updated) -->
     <header
         class="relative bg-neutral-950 py-24 px-4 overflow-hidden border-b border-neutral-800 tech-grid bg-gradient-to-b from-neutral-900/40 to-neutral-950">
         <div
@@ -231,12 +255,15 @@
                 class="inline-block bg-slate-900 border border-slate-700 text-slate-300 font-code text-xs px-3 py-1 rounded-full mb-4">
                 <i class="fa-solid fa-terminal text-cyan-400 mr-2"></i> Initializing interface...
             </div>
-            <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                Department of <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">ICT</span>
+            <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight font-code">
+                &lt;BICE_2025&gt;<br>
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500">Command_Center</span>
             </h1>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                Advanced academic portal for tracking routines, engineering resources, and real-time department updates.
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto font-code">
+                Advanced academic portal for tracking <span class="text-cyan-400">routines</span>, engineering <span
+                    class="text-indigo-400">resources</span>, and real-time <span class="text-emerald-400">batch
+                    updates</span>.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6 font-code text-sm">
                 <a href="#archive-btn" onclick="document.getElementById('archive-btn').click()"
@@ -326,25 +353,53 @@
         </div>
     </section>
 
-    <!-- ROUTINE MODAL -->
-    <div id="routine-modal"
-        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
-        <div
-            class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col">
+    <!-- SECTION SELECTION MODAL -->
+    <!-- SECTION SELECTION MODAL -->
+   <!-- SECTION SELECTION MODAL -->
+    <!-- SECTION SELECTION MODAL -->
+    <div id="section-modal"
+        class="fixed inset-0 z-[105] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 transition-all duration-300">
+        <div class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-sm shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col p-6 text-center transform scale-95 md:scale-100">
+            <button id="close-section-btn" class="absolute top-4 right-4 text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <i class="fa-solid fa-users-viewfinder text-5xl text-cyan-500 mb-4 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]"></i>
+            <h2 class="text-2xl font-bold text-white font-code mb-2">Select Section</h2>
+            <p class="text-slate-400 text-sm mb-6 font-code">Choose your section to view the specific class routine.</p>
             
-            <!-- রেসপন্সিভ হেডার শুরু -->
-            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-3 sm:p-4 flex flex-wrap justify-between items-center gap-2 z-10">
+            <div class="space-y-4">
+                <button id="sec-a-btn" class="w-full bg-slate-800 border border-slate-700 hover:border-cyan-500 hover:bg-slate-800/80 text-cyan-400 font-bold py-3.5 rounded-lg transition shadow-lg flex justify-center items-center font-code group">
+                    <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2.5 py-1 rounded text-xs mr-3 group-hover:bg-cyan-500 group-hover:text-slate-950 transition">SEC_A</span> 
+                    <span>Section A</span>
+                </button>
+                <button id="sec-b-btn" class="w-full bg-slate-800 border border-slate-700 hover:border-cyan-500 hover:bg-slate-800/80 text-cyan-400 font-bold py-3.5 rounded-lg transition shadow-lg flex justify-center items-center font-code group">
+                    <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2.5 py-1 rounded text-xs mr-3 group-hover:bg-cyan-500 group-hover:text-slate-950 transition">SEC_B</span> 
+                    <span>Section B</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROUTINE MODAL (Section A) -->
+
+    <div id="routine-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-2 sm:p-4">
+        <div
+            class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl h-[90vh] shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col overflow-hidden">
+            
+            <!-- রেসপন্সিভ হেডার (ফিক্সড থাকবে) -->
+            <div class="bg-slate-900 border-b border-slate-800 p-3 sm:p-4 flex flex-wrap justify-between items-center gap-2 z-10 shrink-0">
                 <h2 class="text-lg sm:text-xl font-bold text-cyan-400 font-code flex items-center">
                     <i class="fa-solid fa-table-list mr-2"></i> Class_Routine
                 </h2>
                 
                 <div class="flex space-x-2 items-center">
-                    <a href="asset/pdf/BICE2025_SecA_ClassRoutine.pdf" download="Class_Routine_BICE_2025.pdf"
+                    <a id="routine-pdf-btn" href="asset/pdf/BICE2025_SecA_ClassRoutine.pdf" download="Class_Routine_BICE_2025_SecA.pdf"
                         class="bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500 hover:text-slate-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-code transition flex items-center">
                         <i class="fa-solid fa-file-pdf mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Save_PDF</span><span class="sm:hidden">PDF</span>
                     </a>
                     
-                    <a href="asset/photos/BICE2025_SecA_ClassRoutine.jpg" download="Class_Routine_BICE_2025.jpg"
+                    <a id="routine-img-btn" href="asset/photos/BICE2025_SecA_ClassRoutine.jpg" download="Class_Routine_BICE_2025_SecA.jpg"
                         class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-code transition flex items-center">
                         <i class="fa-solid fa-image mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Save_IMG</span><span class="sm:hidden">IMG</span>
                     </a>
@@ -355,12 +410,12 @@
                     </button>
                 </div>
             </div>
-            <!-- রেসপন্সিভ হেডার শেষ -->
 
-            <div id="routine-capture-area" class="p-6 bg-slate-900">
+            <!-- স্ক્રોલএবল কন্টেন্ট বডি (টেবিল অংশ শুধু স্ক্রোল করবে) -->
+            <div id="routine-capture-area" class="p-4 sm:p-6 bg-slate-900 overflow-y-auto flex-grow">
                 <div class="text-center mb-6">
-                    <h3 class="text-2xl font-bold text-white mb-1">Department of ICT</h3>
-                    <p class="text-cyan-400 text-sm font-code">Class Routine - BICE 2025</p>
+                    <h3 class="text-2xl font-bold text-white mb-1">BICE - 2025</h3>
+                    <p id="routine-section-title" class="text-cyan-400 text-sm font-code">Class Routine (Section A)</p>
                 </div>
                 <div class="overflow-x-auto rounded-lg border border-slate-700">
                     <table class="w-full text-left border-collapse font-code text-sm">
@@ -492,7 +547,7 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (BICE-2025 Branding Updated) -->
     <footer class="bg-slate-950 border-t border-slate-800 py-12 px-4 mt-20">
         <!-- 4-Column Grid Layout for better balance -->
         <div
@@ -503,8 +558,8 @@
                 <div class="flex items-center space-x-3 mb-3">
                     <i class="fa-solid fa-network-wired text-cyan-500 text-2xl"></i>
                     <div class="text-left">
-                        <span class="text-white font-bold font-code block">ICT_DEPARTMENT</span>
-                        <span class="text-xs text-slate-500 font-code">Bangladesh University of Professionals</span>
+                        <span class="text-white font-bold font-code block">BICE_2025</span>
+                        <span class="text-xs text-slate-500 font-code">Department of ICT, BUP</span>
                     </div>
                 </div>
                 <p class="text-slate-500 text-xs font-code mt-1 text-center md:text-left">Advanced academic portal for
@@ -625,9 +680,9 @@
 
             try {
                 const response = await fetch(baseUrl + '?sheet=' + sheetName);
-                const text = await response.text(); 
+                const text = await response.text();
                 let data;
-                
+
                 try {
                     // API থেকে JSON এর বদলে HTML/Error আসলে এখানেই ব্লক হয়ে যাবে
                     data = JSON.parse(text);
@@ -647,34 +702,104 @@
             }
         }
 
-        // --- Routine Modal & Download Logic ---
+        // --- Routine Modal, Section Selection & Download Logic ---
         const routineBtn = document.getElementById('routine-btn');
+        const sectionModal = document.getElementById('section-modal');
+        const closeSectionBtn = document.getElementById('close-section-btn');
+        const secABtn = document.getElementById('sec-a-btn');
+        const secBBtn = document.getElementById('sec-b-btn');
+
         const routineModal = document.getElementById('routine-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
         const routineTableBody = document.getElementById('routine-table-body');
-        let isRoutineLoaded = false;
+        const routineSectionTitle = document.getElementById('routine-section-title');
 
-        if (routineBtn && routineModal) {
-            routineBtn.addEventListener('click', () => {
-                routineModal.classList.remove('hidden');
-                document.body.classList.add('modal-open'); // Background scroll lock
-                if (!isRoutineLoaded) fetchRoutineData();
+        // ১. Quick Access বা মেনু থেকে রুটিনে ক্লিক করলে সেকশন পপআপ আসবে
+        if (routineBtn && sectionModal) {
+            routineBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                sectionModal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
             });
         }
 
+        // সেকশন পপআপ বন্ধ করার জন্য
+        if (closeSectionBtn && sectionModal) {
+            closeSectionBtn.addEventListener('click', () => {
+                sectionModal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            });
+        }
+
+        // ২. Section A এ ক্লিক করলে সেকশন পপআপ বন্ধ হয়ে মেইন রুটিন ওপেন হবে ('A' ফিল্টার সহ)
+        if (secABtn && routineModal && sectionModal) {
+            secABtn.addEventListener('click', () => {
+                sectionModal.classList.add('hidden');
+                routineModal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+
+                if (routineSectionTitle) routineSectionTitle.innerText = "Class Routine (Section A)";
+
+                // === এখানে সেকশন এ এর পিডিএফ ও ছবির লিংক বসবে ===
+                document.getElementById('routine-pdf-btn').href = "asset/pdf/BICE2025_SecA_ClassRoutine.pdf";
+                document.getElementById('routine-pdf-btn').setAttribute("download", "Class_Routine_BICE_2025_SecA.pdf");
+
+                document.getElementById('routine-img-btn').href = "asset/photos/BICE2025_SecA_ClassRoutine.jpg";
+                document.getElementById('routine-img-btn').setAttribute("download", "Class_Routine_BICE_2025_SecA.jpg");
+                // =================================================
+
+                fetchRoutineData('A');
+            });
+        }
+
+        // ৩. Section B এ ক্লিক করলে সেকশন পপআপ বন্ধ হয়ে মেইন রুটিন ওপেন হবে ('B' ফিল্টার সহ)
+        if (secBBtn && routineModal && sectionModal) {
+            secBBtn.addEventListener('click', () => {
+                sectionModal.classList.add('hidden');
+                routineModal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+
+                if (routineSectionTitle) routineSectionTitle.innerText = "Class Routine (Section B)";
+
+                // === এখানে সেকশন বি এর পিডিএফ ও ছবির লিংক বসবে ===
+                document.getElementById('routine-pdf-btn').href = "asset/pdf/BICE2025_SecB_ClassRoutine.pdf";
+                document.getElementById('routine-pdf-btn').setAttribute("download", "Class_Routine_BICE_2025_SecB.pdf");
+
+                document.getElementById('routine-img-btn').href = "asset/photos/BICE2025_SecB_ClassRoutine.jpg";
+                document.getElementById('routine-img-btn').setAttribute("download", "Class_Routine_BICE_2025_SecB.jpg");
+                // =================================================
+
+                fetchRoutineData('B');
+            });
+        }
+
+        // মেইন রুটিন মডাল বন্ধ করার জন্য
         if (closeModalBtn && routineModal) {
             closeModalBtn.addEventListener('click', () => {
                 routineModal.classList.add('hidden');
-                document.body.classList.remove('modal-open'); // Background scroll unlock
+                document.body.classList.remove('modal-open');
             });
         }
 
-        async function fetchRoutineData() {
+        // গুগল শিটের 'Routine-List' থেকে ডেটা এনে সেকশন অনুযায়ী ফিল্টার করার ফাংশন
+        async function fetchRoutineData(selectedSection) {
             try {
                 routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-cyan-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 block"></i> Fetching Routine...</td></tr>';
-                const data = await fetchWithCache('Routine-List');
 
-                if (data && data.length > 0 && !data.error) {
+                const allData = await fetchWithCache('Routine-List');
+
+                if (allData && allData.length > 0 && !allData.error) {
+                    // সেকশন ফিল্টার করার সময় স্পেস বা কেস সেন্সিটিভিটি সমস্যা দূর করার জন্য trim() ও uppercase করা হলো
+                    const data = allData.filter(row => {
+                        const rowSection = row.Section ? row.Section.toString().trim().toUpperCase() : '';
+                        return rowSection === selectedSection.toUpperCase();
+                    });
+
+                    if (data.length === 0) {
+                        routineTableBody.innerHTML = `<tr><td colspan="4" class="text-center p-6 text-rose-400">No routine data found for Section ${selectedSection}.</td></tr>`;
+                        return;
+                    }
+
                     const dayCounts = {};
                     data.forEach(row => { dayCounts[row.Day] = (dayCounts[row.Day] || 0) + 1; });
                     let html = '';
@@ -694,7 +819,6 @@
                     });
 
                     routineTableBody.innerHTML = html;
-                    isRoutineLoaded = true;
                 } else {
                     routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-400">No routine data found.</td></tr>';
                 }
@@ -996,7 +1120,7 @@
 
             } catch (error) {
                 console.error("Connection Error:", error);
-                
+
                 // ইনফিনিট লোডিং থামিয়ে একটি এরর মেসেজ শো করানো হলো
                 const errorHtml = `
                 <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 text-center relative overflow-hidden">
@@ -1005,7 +1129,7 @@
                     <h3 class="font-bold text-white mb-2">API Connection Failed</h3>
                     <p class="text-sm text-slate-400 font-code">Unable to fetch active deadlines from server.</p>
                 </div>`;
-                
+
                 document.getElementById('ct-container').innerHTML = errorHtml;
                 document.getElementById('mid-container').innerHTML = errorHtml;
                 document.getElementById('final-container').innerHTML = errorHtml;
@@ -1043,14 +1167,14 @@
 
                 if (data && data.length > 0 && !data.error) {
                     if (facultyContent) {
-                        
-                        // ১. চেয়ারম্যান এবং অন্যান্য ফ্যাকাল্টিদের আলাদা করা
+
+                        // ১. চেয়ারম্যান এবং অন্যান্য ফ্যাকাল্টিদের আলাদা করা
                         const chairman = data.find(item => item.Designation && item.Designation.toLowerCase().includes('chairman'));
                         const others = data.filter(item => item !== chairman);
 
                         let htmlOutput = '';
 
-                        // ২. চেয়ারম্যান স্যারের স্পেশাল কার্ড
+                        // ২. চেয়ারম্যান স্যারের স্পেশাল কার্ড
                         if (chairman) {
                             htmlOutput += `
                             <div class="col-span-full mb-8 flex flex-col items-center text-center bg-slate-950 p-6 sm:p-10 rounded-xl border border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.15)] relative group hover:border-emerald-500 transition duration-300 mt-2">
@@ -1101,7 +1225,7 @@
 
                         // ৪. অন্যান্য ফ্যাকাল্টিদের সাধারণ লিস্ট (Desktop: 3, Tab: 2, Mobile: 1)
                         htmlOutput += `<div class="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-slate-300">`;
-                        
+
                         if (others.length > 0) {
                             htmlOutput += others.map(item => `
                                 <div class="bg-slate-950 p-5 rounded-lg border border-slate-800 hover:border-emerald-500/50 tech-card-hover transition flex items-start space-x-4">
@@ -1111,7 +1235,7 @@
                                     `<div class="bg-emerald-500/10 text-emerald-400 border-2 border-emerald-500/30 h-14 w-14 rounded-full flex items-center justify-center shrink-0 text-xl font-bold font-code shadow-lg">
                                             <i class="fa-solid fa-user-tie"></i>
                                         </div>`
-                                    }
+                                }
                                     <div class="flex-grow overflow-hidden">
                                         <h4 class="font-bold text-white text-sm truncate" title="${item.Name}">${item.Name}</h4>
                                         <p class="text-xs text-emerald-400 font-code mt-0.5 truncate">${item.Designation || ''}</p>
@@ -1123,20 +1247,20 @@
                                         </div>
                                         
                                         ${item.ProfileLink ?
-                                        `<div class="mt-4 pt-3 border-t border-slate-800">
+                                    `<div class="mt-4 pt-3 border-t border-slate-800">
                                                 <a href="${item.ProfileLink}" target="_blank" class="inline-flex items-center text-xs font-code font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-3 py-1.5 rounded transition">
                                                     <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Profile
                                                 </a>
                                             </div>`
-                                        : ''
-                                        }
+                                    : ''
+                                }
                                     </div>
                                 </div>
                             `).join('');
                         } else {
                             htmlOutput += `<div class="text-center p-6 col-span-full text-slate-500">No other faculty nodes available.</div>`;
                         }
-                        
+
                         htmlOutput += `</div>`; // Grid Wrapper Close
 
                         facultyContent.innerHTML = htmlOutput;
@@ -1184,7 +1308,7 @@
                     if (!cacheTime || (now - parseInt(cacheTime) > 60 * 60 * 1000)) {
                         const response = await fetch(baseUrl + '?sheet=' + sheetName);
                         const text = await response.text();
-                        
+
                         try {
                             const data = JSON.parse(text);
                             if (data && !data.error) {
