@@ -58,9 +58,12 @@
 <body class="bg-neutral-950 text-slate-300 font-code selection:bg-cyan-500/30">
 
     <!-- NAVIGATION BAR -->
+    <!-- NAVIGATION BAR -->
     <nav class="bg-neutral-950/80 backdrop-blur-md text-white sticky top-0 z-50 border-b border-neutral-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
                 <div class="flex items-center space-x-3 group cursor-pointer">
                     <div
                         class="bg-slate-900 border border-cyan-500 text-cyan-400 p-2.5 rounded-lg text-xl group-hover:bg-cyan-500 group-hover:text-slate-900 transition">
@@ -68,12 +71,12 @@
                     </div>
                     <div>
                         <span
-                            class="text-lg font-extrabold tracking-widest block text-white font-code">&lt;ICT_DEPT/&gt;</span>
+                            class="text-lg font-extrabold tracking-widest block text-white font-code">&lt;BICE_2025/&gt;</span>
                         <span class="text-xs text-cyan-500 font-mono">BUP_Portal_v1.0</span>
                     </div>
                 </div>
 
-                <!-- Navigation Links & Notice Alarm -->
+                <!-- Desktop Navigation Links & Notice Alarm (Hidden on Mobile) -->
                 <div class="hidden md:flex items-center space-x-5 text-sm font-medium font-code">
                     <a href="#" class="hover:text-cyan-400 transition">~/home</a>
 
@@ -155,26 +158,49 @@
                             <span>Notices</span>
                         </button>
                     </div>
-
-                    <div class="md:hidden">
-                        <button id="menu-btn" class="text-cyan-400 focus:outline-none">
-                            <i class="fa-solid fa-bars-staggered text-2xl"></i>
-                        </button>
-                    </div>
                 </div>
-            </div>
 
-            <!-- Mobile Menu Dropdown (Hidden by default) -->
-            <div id="mobile-menu" class="hidden md:hidden bg-neutral-950 border-t border-neutral-800 w-full absolute left-0 top-20 shadow-2xl">
-                <div class="px-4 py-4 space-y-3 font-code text-sm">
-                    <a href="#" class="block px-3 py-2 text-cyan-400 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-house mr-2"></i> ~/home</a>
-                    <a href="semesters.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-layer-group mr-2"></i> ~/Semesters</a>
-                    <button onclick="document.getElementById('routine-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-days mr-2"></i> ~/Class_Routine</button>
-                    <button onclick="document.getElementById('archive-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-database mr-2"></i> ~/Data_Archive</button>
-                    <button onclick="document.getElementById('faculty-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-user-tie mr-2"></i> ~/Faculty_Nodes</button>
-                    <a href="cgpaCalc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calculator mr-2"></i> ~/CGPA_Calc</a>
+                <!-- MOBILE MENU ICONS (Visible only on Mobile) -->
+                <div class="md:hidden flex items-center space-x-5">
+                    <!-- Mobile Notice Bell -->
+                    <button onclick="document.getElementById('nav-notice-alarm').click()" class="text-rose-400 relative focus:outline-none">
+                        <span class="absolute -top-1 -right-1 flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                        </span>
+                        <i class="fa-solid fa-bell text-xl"></i>
+                    </button>
+                    <!-- Hamburger Menu Button -->
+                    <button id="menu-btn" class="text-cyan-400 focus:outline-none p-1">
+                        <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                    </button>
                 </div>
+
             </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-neutral-950 border-t border-neutral-800 w-full absolute left-0 top-20 shadow-2xl overflow-y-auto max-h-[80vh] pb-4">
+            <div class="px-4 py-4 space-y-1 font-code text-sm">
+                <!-- Home -->
+                <a href="#" onclick="toggleMobileMenu()" class="block px-3 py-2 text-cyan-400 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-house w-5 text-center mr-2"></i> ~/home</a>
+                
+                <!-- Academics Section -->
+                <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">ACADEMICS</div>
+                <a href="semesters.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-layer-group w-5 text-center mr-2"></i> ~/Semesters</a>
+                <button onclick="document.getElementById('routine-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i> ~/Class_Routine</button>
+                <a href="cgpaCalc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calculator w-5 text-center mr-2"></i> ~/CGPA_Calc</a>
+                <a href="final-calc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-bullseye w-5 text-center mr-2"></i> ~/Final_Marks_Calc</a>
+                <button onclick="document.getElementById('archive-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-database w-5 text-center mr-2"></i> ~/Data_Archive</button>
+
+                <!-- Community & Campus Section -->
+                <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">COMMUNITY & CAMPUS</div>
+                <button onclick="document.getElementById('faculty-btn').click(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-user-tie w-5 text-center mr-2"></i> ~/Faculty_Nodes</button>
+                <a href="students.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-address-book w-5 text-center mr-2"></i> ~/Student_Directory</a>
+                <a href="#events" onclick="toggleMobileMenu()" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i> ~/Events</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-images w-5 text-center mr-2"></i> ~/Gallery</a>
+            </div>
+        </div>
     </nav>
 
     <!-- LIVE COUNTDOWN & URGENT ALERT BANNER -->
@@ -305,24 +331,32 @@
         class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
         <div
             class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col">
-            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
-                <h2 class="text-xl font-bold text-cyan-400 font-code"><i class="fa-solid fa-table-list mr-2"></i>
-                    Class_Routine</h2>
-                <div class="flex space-x-3">
+            
+            <!-- রেসপন্সিভ হেডার শুরু -->
+            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-3 sm:p-4 flex flex-wrap justify-between items-center gap-2 z-10">
+                <h2 class="text-lg sm:text-xl font-bold text-cyan-400 font-code flex items-center">
+                    <i class="fa-solid fa-table-list mr-2"></i> Class_Routine
+                </h2>
+                
+                <div class="flex space-x-2 items-center">
                     <a href="asset/pdf/BICE2025_SecA_ClassRoutine.pdf" download="Class_Routine_BICE_2025.pdf"
-                        class="bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500 hover:text-slate-900 px-3 py-1.5 rounded text-sm font-code transition flex items-center">
-                        <i class="fa-solid fa-file-pdf mr-2"></i> Save_PDF
+                        class="bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500 hover:text-slate-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-code transition flex items-center">
+                        <i class="fa-solid fa-file-pdf mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Save_PDF</span><span class="sm:hidden">PDF</span>
                     </a>
+                    
                     <a href="asset/photos/BICE2025_SecA_ClassRoutine.jpg" download="Class_Routine_BICE_2025.jpg"
-                        class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-3 py-1.5 rounded text-sm font-code transition flex items-center">
-                        <i class="fa-solid fa-image mr-2"></i> Save_IMG
+                        class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-code transition flex items-center">
+                        <i class="fa-solid fa-image mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Save_IMG</span><span class="sm:hidden">IMG</span>
                     </a>
+                    
                     <button id="close-modal-btn"
-                        class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none ml-2">
+                        class="text-slate-400 hover:text-rose-400 transition text-xl sm:text-2xl focus:outline-none ml-1">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
             </div>
+            <!-- রেসপন্সিভ হেডার শেষ -->
+
             <div id="routine-capture-area" class="p-6 bg-slate-900">
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold text-white mb-1">Department of ICT</h3>
@@ -420,7 +454,7 @@
     <div id="faculty-modal"
         class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
         <div
-            class="bg-slate-900 border border-emerald-500/50 rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(16,185,129,0.3)] relative flex flex-col">
+            class="bg-slate-900 border border-emerald-500/50 rounded-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(16,185,129,0.3)] relative flex flex-col">
             <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
                 <h2 class="text-xl font-bold text-emerald-400 font-code"><i
                         class="fa-solid fa-chalkboard-user mr-2"></i> Faculty_Nodes</h2>
@@ -1003,40 +1037,109 @@
 
         async function fetchFacultyData() {
             try {
-                if (facultyContent) facultyContent.innerHTML = '<div class="text-center p-12 text-emerald-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 block"></i>Loading Faculty Data...</div>';
+                if (facultyContent) facultyContent.innerHTML = '<div class="col-span-full text-center p-12 text-emerald-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 block"></i>Loading Faculty Data...</div>';
 
                 const data = await fetchWithCache('Faculty_List');
 
                 if (data && data.length > 0 && !data.error) {
                     if (facultyContent) {
-                        facultyContent.innerHTML = data.map(item => `
-                            <div class="bg-slate-950 p-5 rounded-lg border border-slate-800 hover:border-emerald-500/50 transition flex items-start space-x-4">
-                                ${item.Photo ?
-                                `<img src="${item.Photo}" alt="${item.Name}" class="h-16 w-16 rounded-full object-cover border-2 border-emerald-500/30 shrink-0 shadow-lg">`
-                                :
-                                `<div class="bg-emerald-500/10 text-emerald-400 border-2 border-emerald-500/30 h-16 w-16 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold font-code shadow-lg">
+                        
+                        // ১. চেয়ারম্যান এবং অন্যান্য ফ্যাকাল্টিদের আলাদা করা
+                        const chairman = data.find(item => item.Designation && item.Designation.toLowerCase().includes('chairman'));
+                        const others = data.filter(item => item !== chairman);
+
+                        let htmlOutput = '';
+
+                        // ২. চেয়ারম্যান স্যারের স্পেশাল কার্ড
+                        if (chairman) {
+                            htmlOutput += `
+                            <div class="col-span-full mb-8 flex flex-col items-center text-center bg-slate-950 p-6 sm:p-10 rounded-xl border border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.15)] relative group hover:border-emerald-500 transition duration-300 mt-2">
+                                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-cyan-500"></div>
+                                
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-4 py-1.5 rounded-full font-code mb-6 border border-emerald-500/30 tracking-widest uppercase shadow-sm">
+                                    <i class="fa-solid fa-star mr-1"></i> Department Head
+                                </span>
+                                
+                                ${chairman.Photo ?
+                                    `<img src="${chairman.Photo}" alt="${chairman.Name}" class="h-32 w-32 sm:h-40 sm:w-40 rounded-full object-cover border-4 border-slate-900 outline outline-2 outline-emerald-500 shadow-2xl mb-6">`
+                                    :
+                                    `<div class="bg-emerald-500/10 text-emerald-400 h-32 w-32 sm:h-40 sm:w-40 rounded-full flex items-center justify-center text-6xl font-bold font-code border-4 border-slate-900 outline outline-2 outline-emerald-500 shadow-2xl mb-6">
                                         <i class="fa-solid fa-user-tie"></i>
                                     </div>`
-                            }
-                                <div class="flex-grow">
-                                    <h4 class="font-bold text-white text-base">${item.Name}</h4>
-                                    <p class="text-xs text-emerald-400 font-code mt-0.5">${item.Designation || ''}</p>
-                                    <p class="text-xs text-slate-300 mt-2"><strong>Courses:</strong> ${item.Course || 'N/A'}</p>
-                                    <div class="mt-3 flex flex-wrap gap-3 text-xs font-code">
-                                        ${item.Phone ? `<a href="tel:${item.Phone}" class="text-cyan-400 hover:underline"><i class="fa-solid fa-phone mr-1"></i> ${item.Phone}</a>` : ''}
-                                        ${item.Email ? `<a href="mailto:${item.Email}" class="text-cyan-400 hover:underline"><i class="fa-solid fa-envelope mr-1"></i> ${item.Email}</a>` : ''}
-                                    </div>
-                                    ${item.ProfileLink ?
-                                `<div class="mt-4 pt-3 border-t border-slate-800">
-                                            <a href="${item.ProfileLink}" target="_blank" class="inline-flex items-center text-xs font-code font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-3 py-1.5 rounded transition">
-                                                <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Official Profile
-                                            </a>
-                                        </div>`
-                                : ''
-                            }
+                                }
+                                
+                                <h3 class="font-extrabold text-white text-2xl sm:text-3xl tracking-tight mb-2">${chairman.Name}</h3>
+                                <p class="text-sm sm:text-base text-emerald-400 font-code font-bold mb-4">${chairman.Designation}</p>
+                                
+                                ${chairman.Course ? `<p class="text-sm text-slate-300 max-w-xl mx-auto mb-6 leading-relaxed"><strong>Courses:</strong> ${chairman.Course}</p>` : ''}
+                                
+                                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-code w-full mb-2">
+                                    ${chairman.Phone ? `<a href="tel:${chairman.Phone}" class="text-cyan-400 hover:text-cyan-300 hover:underline bg-slate-900 px-5 py-2.5 rounded-lg border border-slate-800 transition shadow-md"><i class="fa-solid fa-phone mr-2"></i>${chairman.Phone}</a>` : ''}
+                                    ${chairman.Email ? `<a href="mailto:${chairman.Email}" class="text-cyan-400 hover:text-cyan-300 hover:underline bg-slate-900 px-5 py-2.5 rounded-lg border border-slate-800 transition shadow-md"><i class="fa-solid fa-envelope mr-2"></i>${chairman.Email}</a>` : ''}
                                 </div>
+                                
+                                ${chairman.ProfileLink ?
+                                    `<div class="mt-8 w-full pt-6 border-t border-slate-800/60">
+                                        <a href="${chairman.ProfileLink}" target="_blank" class="inline-flex items-center text-sm font-code font-bold text-slate-950 bg-emerald-500 hover:bg-emerald-400 px-8 py-3 rounded-lg transition shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+                                            <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Official Profile
+                                        </a>
+                                    </div>`
+                                    : ''
+                                }
                             </div>
-                        `).join('');
+                            
+                            <!-- ৩. ফ্যাংশি মেম্বারস হেডিং -->
+                            <div class="col-span-full relative flex items-center py-4 mb-4 mt-2">
+                                <div class="flex-grow border-t border-slate-700/50"></div>
+                                <span class="shrink-0 mx-4 text-slate-400 font-code text-sm sm:text-base tracking-widest font-bold">
+                                    <i class="fa-solid fa-users mr-2 text-emerald-500/70"></i>FACULTY MEMBERS
+                                </span>
+                                <div class="flex-grow border-t border-slate-700/50"></div>
+                            </div>
+                            `;
+                        }
+
+                        // ৪. অন্যান্য ফ্যাকাল্টিদের সাধারণ লিস্ট (Desktop: 3, Tab: 2, Mobile: 1)
+                        htmlOutput += `<div class="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-slate-300">`;
+                        
+                        if (others.length > 0) {
+                            htmlOutput += others.map(item => `
+                                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800 hover:border-emerald-500/50 tech-card-hover transition flex items-start space-x-4">
+                                    ${item.Photo ?
+                                    `<img src="${item.Photo}" alt="${item.Name}" class="h-14 w-14 rounded-full object-cover border-2 border-emerald-500/30 shrink-0 shadow-lg">`
+                                    :
+                                    `<div class="bg-emerald-500/10 text-emerald-400 border-2 border-emerald-500/30 h-14 w-14 rounded-full flex items-center justify-center shrink-0 text-xl font-bold font-code shadow-lg">
+                                            <i class="fa-solid fa-user-tie"></i>
+                                        </div>`
+                                    }
+                                    <div class="flex-grow overflow-hidden">
+                                        <h4 class="font-bold text-white text-sm truncate" title="${item.Name}">${item.Name}</h4>
+                                        <p class="text-xs text-emerald-400 font-code mt-0.5 truncate">${item.Designation || ''}</p>
+                                        <p class="text-xs text-slate-400 mt-2 line-clamp-2" title="${item.Course || ''}"><strong>Courses:</strong> ${item.Course || 'N/A'}</p>
+                                        
+                                        <div class="mt-3 flex flex-wrap gap-2 text-xs font-code">
+                                            ${item.Phone ? `<a href="tel:${item.Phone}" class="text-cyan-400 hover:underline flex items-center"><i class="fa-solid fa-phone mr-1"></i> Phone</a>` : ''}
+                                            ${item.Email ? `<a href="mailto:${item.Email}" class="text-cyan-400 hover:underline flex items-center"><i class="fa-solid fa-envelope mr-1"></i> Email</a>` : ''}
+                                        </div>
+                                        
+                                        ${item.ProfileLink ?
+                                        `<div class="mt-4 pt-3 border-t border-slate-800">
+                                                <a href="${item.ProfileLink}" target="_blank" class="inline-flex items-center text-xs font-code font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-3 py-1.5 rounded transition">
+                                                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Profile
+                                                </a>
+                                            </div>`
+                                        : ''
+                                        }
+                                    </div>
+                                </div>
+                            `).join('');
+                        } else {
+                            htmlOutput += `<div class="text-center p-6 col-span-full text-slate-500">No other faculty nodes available.</div>`;
+                        }
+                        
+                        htmlOutput += `</div>`; // Grid Wrapper Close
+
+                        facultyContent.innerHTML = htmlOutput;
                     }
                     isFacultyLoaded = true;
                 } else {
