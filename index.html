@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Department - BUP | Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Tech Vibe -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- html2canvas for Download as Image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Tech Grid Background */
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        }
+
+        /* Glowing hover effects */
+        .tech-card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .tech-card-hover:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-300 selection:bg-cyan-500 selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-slate-950/80 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div
+                        class="bg-slate-900 border border-cyan-500 text-cyan-400 p-2.5 rounded-lg text-xl group-hover:bg-cyan-500 group-hover:text-slate-900 transition">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="text-lg font-extrabold tracking-widest block text-white font-code">&lt;ICT_DEPT/&gt;</span>
+                        <span class="text-xs text-cyan-500 font-mono">BUP_Portal_v1.0</span>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium font-code">
+                    <a href="#" class="hover:text-cyan-400 transition">~/home</a>
+                    <a href="#exams" class="hover:text-cyan-400 transition">~/exams</a>
+                    <a href="#materials" class="hover:text-cyan-400 transition">~/resources</a>
+                    <a href="#faculty" class="hover:text-cyan-400 transition">~/faculty</a>
+                    <a href="#contact"
+                        class="bg-cyan-600/20 text-cyan-400 border border-cyan-600/50 px-4 py-2 rounded hover:bg-cyan-500 hover:text-slate-900 transition">Connect()</a>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-cyan-400 focus:outline-none">
+                        <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- LIVE COUNTDOWN & URGENT ALERT BANNER -->
+    <div class="bg-cyan-500/10 border-b border-cyan-500/30 text-cyan-100 py-3 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-sm gap-3">
+            <div class="flex items-center space-x-3">
+                <span
+                    class="bg-cyan-500 text-slate-950 text-xs px-2 py-1 rounded font-bold animate-pulse font-code">SYS_ALERT</span>
+                <span class="font-code text-xs sm:text-sm">Server maintenance scheduled for next weekend.</span>
+            </div>
+            <div
+                class="flex items-center space-x-3 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded text-xs font-code">
+                <span class="text-slate-400"><i class="fa-solid fa-stopwatch text-cyan-500"></i> SYSTEM_TIME:</span>
+                <span id="live-clock" class="text-cyan-400">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="relative bg-slate-950 py-24 px-4 overflow-hidden border-b border-slate-800 tech-grid">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-600/20 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-6 text-center relative z-10">
+            <div
+                class="inline-block bg-slate-900 border border-slate-700 text-slate-300 font-code text-xs px-3 py-1 rounded-full mb-4">
+                <i class="fa-solid fa-terminal text-cyan-400 mr-2"></i> Initializing interface...
+            </div>
+            <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                Department of <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">ICT</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                Advanced academic portal for tracking routines, engineering resources, and real-time department updates.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6 font-code text-sm">
+                <a href="#materials"
+                    class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-3 rounded shadow-[0_0_15px_rgba(6,182,212,0.4)] transition">
+                    <i class="fa-solid fa-download mr-2"></i> Fetch_Resources
+                </a>
+                <a href="#exams"
+                    class="bg-slate-900 border border-slate-700 text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 font-bold px-6 py-3 rounded transition">
+                    <i class="fa-solid fa-satellite-dish mr-2"></i> Sync_Exams
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- EXAMS SCHEDULE & COUNTDOWN SECTION -->
+    <section id="exams" class="max-w-7xl mx-auto px-4 mt-16 mb-20 relative z-10">
+        <div class="flex items-center mb-8 space-x-3 border-b border-slate-800 pb-4">
+            <i class="fa-solid fa-radar text-cyan-500 text-2xl animate-spin-slow"></i>
+            <h2 class="text-2xl font-bold text-white font-code">Active_Deadlines</h2>
+        </div>
+
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-cyan-400 mb-6 font-code border-l-2 border-cyan-500 pl-3">~/Class_Tests
+            </h3>
+            <div id="ct-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-indigo-400 mb-6 font-code border-l-2 border-indigo-500 pl-3">~/Mid_Terms
+            </h3>
+            <div id="mid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-rose-400 mb-6 font-code border-l-2 border-rose-500 pl-3">~/Final_Exams
+            </h3>
+            <div id="final-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- QUICK ACCESS MODULES -->
+    <section class="max-w-7xl mx-auto px-4 mb-20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group cursor-pointer"
+                id="routine-btn">
+                <i
+                    class="fa-solid fa-calendar-days text-3xl text-slate-600 group-hover:text-cyan-400 transition mb-4 block"></i>
+                <h3 class="text-white font-bold mb-2 font-code">Class_Routine</h3>
+                <p class="text-sm text-slate-400 mb-4">Dynamic schedules & room allocations for current semester.</p>
+                <span class="text-cyan-500 font-code text-sm hover:text-cyan-300">Execute &rarr;</span>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group">
+                <i
+                    class="fa-solid fa-database text-3xl text-slate-600 group-hover:text-indigo-400 transition mb-4 block"></i>
+                <h3 class="text-white font-bold mb-2 font-code">Data_Archive</h3>
+                <p class="text-sm text-slate-400 mb-4">Access lecture nodes, algorithms, and PDFs repository.</p>
+                <a href="#materials" class="text-indigo-400 font-code text-sm hover:text-indigo-300">Execute &rarr;</a>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group">
+                <i
+                    class="fa-solid fa-bullhorn text-3xl text-slate-600 group-hover:text-rose-400 transition mb-4 block"></i>
+                <h3 class="text-white font-bold mb-2 font-code">System_Notices</h3>
+                <p class="text-sm text-slate-400 mb-4">Official broadcasts from the department admin console.</p>
+                <a href="#notices" class="text-rose-400 font-code text-sm hover:text-rose-300">Execute &rarr;</a>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group">
+                <i
+                    class="fa-solid fa-user-astronaut text-3xl text-slate-600 group-hover:text-emerald-400 transition mb-4 block"></i>
+                <h3 class="text-white font-bold mb-2 font-code">Faculty_Nodes</h3>
+                <p class="text-sm text-slate-400 mb-4">Profiles, research domains, and communication endpoints.</p>
+                <a href="#faculty" class="text-emerald-400 font-code text-sm hover:text-emerald-300">Execute &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROUTINE MODAL (HIDDEN BY DEFAULT) -->
+    <div id="routine-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div
+            class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
+                <h2 class="text-xl font-bold text-cyan-400 font-code"><i class="fa-solid fa-table-list mr-2"></i>
+                    Class_Routine</h2>
+                <div class="flex space-x-3">
+                    <button id="download-routine-btn"
+                        class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-3 py-1.5 rounded text-sm font-code transition">
+                        <i class="fa-solid fa-download"></i> Save_Img
+                    </button>
+                    <button id="close-modal-btn"
+                        class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Capture Area for Image Download -->
+            <div id="routine-capture-area" class="p-6 bg-slate-900">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-white mb-1">Department of ICT</h3>
+                    <p class="text-cyan-400 text-sm font-code">Class Routine - BICE 2025</p>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-slate-700">
+                    <table class="w-full text-left border-collapse font-code text-sm">
+                        <thead>
+                            <tr class="bg-slate-800 text-cyan-400 border-b border-slate-700">
+                                <th class="p-4 border-r border-slate-700">Day</th>
+                                <th class="p-4 border-r border-slate-700">Time</th>
+                                <th class="p-4 border-r border-slate-700">Course Code & Title</th>
+                                <th class="p-4">Classroom</th>
+                            </tr>
+                        </thead>
+                        <tbody id="routine-table-body" class="text-slate-300">
+                            <!-- JS data injection here -->
+                            <tr>
+                                <td colspan="4" class="text-center p-6"><i
+                                        class="fa-solid fa-spinner fa-spin text-cyan-400 text-2xl"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-10 px-4 mt-20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-microchip text-cyan-500 text-2xl"></i>
+                <div>
+                    <span class="text-white font-bold font-code block">ICT_DEPARTMENT</span>
+                    <span class="text-xs text-slate-500 font-code">Bangladesh University of Professionals</span>
+                </div>
+            </div>
+            <div class="text-slate-500 text-xs font-code text-center md:text-right">
+                <p>System initialized: 2026</p>
+                <p>Developed by ICT Students | Status: <span class="text-green-500">Online</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript code -->
+    <script>
+        // Simple Live Clock
+        setInterval(() => {
+            const date = new Date();
+            document.getElementById('live-clock').innerText = date.toLocaleTimeString('en-US', { hour12: false });
+        }, 1000);
+
+        // API URL
+        const baseUrl = 'https://sheetdb.io/api/v1/4emkg7q46vff6';
+
+        // --- Routine Modal & Download Logic ---
+        const routineBtn = document.getElementById('routine-btn');
+        const routineModal = document.getElementById('routine-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const downloadBtn = document.getElementById('download-routine-btn');
+        const routineTableBody = document.getElementById('routine-table-body');
+        let isRoutineLoaded = false;
+
+        // Open Modal and Fetch Data
+        routineBtn.addEventListener('click', () => {
+            routineModal.classList.remove('hidden');
+            if (!isRoutineLoaded) fetchRoutineData();
+        });
+
+        // Close Modal
+        closeModalBtn.addEventListener('click', () => {
+            routineModal.classList.add('hidden');
+        });
+
+        // Download Image Functionality
+        downloadBtn.addEventListener('click', () => {
+            const captureArea = document.getElementById('routine-capture-area');
+            // Change background temporarily to make sure image looks solid
+            html2canvas(captureArea, { backgroundColor: '#0f172a' }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'ICT_Routine.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+
+        async function fetchRoutineData() {
+            try {
+                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-cyan-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Fetching data from server...</td></tr>';
+                const response = await fetch(baseUrl + '?sheet=Routine-List');
+                const data = await response.json();
+
+                if (data && data.length > 0 && !data.error) {
+                    // কোন দিন কতটি ক্লাস আছে তা গণনা করা হচ্ছে
+                    const dayCounts = {};
+                    data.forEach(row => {
+                        dayCounts[row.Day] = (dayCounts[row.Day] || 0) + 1;
+                    });
+
+                    let html = '';
+                    let currentDay = '';
+
+                    data.forEach(row => {
+                        html += `<tr class="border-b border-slate-800/50 hover:bg-slate-800 transition">`;
+
+                        // যদি নতুন দিন হয়, তাহলে rowspan যুক্ত করে একটি বড় সেল তৈরি করবে
+                        if (row.Day !== currentDay) {
+                            html += `<td rowspan="${dayCounts[row.Day]}" class="p-4 border-r border-slate-800 text-indigo-400 font-bold align-middle bg-slate-900/30 whitespace-nowrap">${row.Day}</td>`;
+                            currentDay = row.Day;
+                        }
+
+                        html += `
+                            <td class="p-4 border-r border-slate-800 text-rose-400 whitespace-nowrap">${row.Time}</td>
+                            <td class="p-4 border-r border-slate-800 text-white">${row['Course Code & Title']}</td>
+                            <td class="p-4 text-emerald-400">${row.Classroom}</td>
+                        </tr>`;
+                    });
+
+                    routineTableBody.innerHTML = html;
+                    isRoutineLoaded = true;
+                } else {
+                    routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-400">No routine data found.</td></tr>';
+                }
+            } catch (error) {
+                console.error("Routine fetch error:", error);
+                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-500">Error loading data! Check connection.</td></tr>';
+            }
+        }
+
+        // --- Exams Fetch & Countdown Logic ---
+        async function fetchExamSchedules() {
+            try {
+                const [ctResponse, midResponse, finalResponse] = await Promise.all([
+                    fetch(baseUrl + '?sheet=CT_List'),
+                    fetch(baseUrl + '?sheet=Mid_List'),
+                    fetch(baseUrl + '?sheet=Final_List')
+                ]);
+
+                const ctData = await ctResponse.json();
+                const midData = await midResponse.json();
+                const finalData = await finalResponse.json();
+
+                const now = new Date().getTime();
+
+                function getUpcomingExams(examList) {
+                    if (!examList || examList.length === 0 || examList.error) return [];
+                    const upcoming = examList.filter(item => new Date(item.TargetDate).getTime() > now);
+                    upcoming.sort((a, b) => new Date(a.TargetDate) - new Date(b.TargetDate));
+                    return upcoming.slice(0, 4);
+                }
+
+                const nextCTs = getUpcomingExams(ctData);
+                const nextMids = getUpcomingExams(midData);
+                const nextFinals = getUpcomingExams(finalData);
+
+                function generateCardHTML(exam, typeName) {
+                    const theme = {
+                        'CT': { bgGrad: 'from-cyan-500 to-blue-500', badgeTxt: 'text-cyan-400', badgeBg: 'bg-cyan-500/10', border: 'border-cyan-500/20', textVib: 'text-cyan-400', icon: 'fa-code' },
+                        'MID': { bgGrad: 'from-indigo-500 to-purple-500', badgeTxt: 'text-indigo-400', badgeBg: 'bg-indigo-500/10', border: 'border-indigo-500/20', textVib: 'text-indigo-400', icon: 'fa-network-wired' },
+                        'FINAL': { bgGrad: 'from-rose-500 to-orange-500', badgeTxt: 'text-rose-400', badgeBg: 'bg-rose-500/10', border: 'border-rose-500/20', textVib: 'text-rose-400', icon: 'fa-server' }
+                    };
+                    const t = theme[typeName];
+
+                    if (!exam) {
+                        return `
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 relative overflow-hidden flex flex-col h-full opacity-60">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${t.bgGrad}"></div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="${t.badgeBg} ${t.badgeTxt} border ${t.border} text-xs font-bold px-2 py-1 rounded font-code">${typeName}</span>
+                                <i class="fa-solid ${t.icon} text-slate-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-500 mb-2 truncate">TBA (To Be Announced)</h3>
+                            <div class="text-sm text-slate-600 mb-5 font-code flex-grow space-y-1">
+                                <div class="flex justify-between"><span>Date:</span> <span>--</span></div>
+                                <div class="flex justify-between"><span>Day:</span> <span>--</span></div>
+                                <div class="mt-2 text-slate-500">Exam: Routine Not Published</div>
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded border border-slate-800 text-center mt-auto">
+                                <span class="text-xs text-slate-600 block mb-2 font-code">STATUS</span>
+                                <span class="font-code font-bold text-slate-600 text-xl">NO_ACTIVE_TASK</span>
+                            </div>
+                        </div>`;
+                    }
+
+                    const dateObj = new Date(exam.TargetDate);
+                    const formattedDate = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+                    return `
+                    <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${t.bgGrad}"></div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="${t.badgeBg} ${t.badgeTxt} border ${t.border} text-xs font-bold px-2 py-1 rounded font-code">${typeName}</span>
+                            <i class="fa-solid ${t.icon} text-slate-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white mb-3 leading-tight" title="${exam.Subject}">${exam.Subject}</h3>
+                        <div class="text-sm text-slate-400 mb-4 font-code flex-grow space-y-1">
+                            <div class="flex justify-between"><span>Date:</span> <span class="${t.textVib}">${formattedDate}</span></div>
+                            <div class="flex justify-between"><span>Day:</span> <span class="${t.textVib}">${exam.Day || '--'}</span></div>
+                            <div class="mt-3">Exam: <span class="text-slate-300">${exam.ExamName}</span></div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded border border-slate-800 text-center mt-auto">
+                            <span class="text-xs text-slate-500 block mb-2 font-code">T-MINUS</span>
+                            <span class="countdown-timer font-code font-bold ${t.textVib} text-xl" data-target="${exam.TargetDate}">Loading...</span>
+                        </div>
+                    </div>`;
+                }
+
+                function renderExams(exams, containerId, typeName) {
+                    const container = document.getElementById(containerId);
+                    if (exams.length === 0) {
+                        container.innerHTML = generateCardHTML(null, typeName);
+                    } else {
+                        container.innerHTML = exams.map(exam => generateCardHTML(exam, typeName)).join('');
+                    }
+                }
+
+                renderExams(nextCTs, 'ct-container', 'CT');
+                renderExams(nextMids, 'mid-container', 'MID');
+                renderExams(nextFinals, 'final-container', 'FINAL');
+
+                setInterval(function () {
+                    const timers = document.querySelectorAll('.countdown-timer');
+                    const currentTime = new Date().getTime();
+
+                    timers.forEach(timer => {
+                        const targetStr = timer.getAttribute('data-target');
+                        if (!targetStr) return;
+                        const distance = new Date(targetStr).getTime() - currentTime;
+                        if (distance < 0) { timer.innerHTML = "EXPIRED"; return; }
+                        const d = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                        const s = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                        timer.innerHTML = `${d}d:${h}h:${m}m:${s}s`;
+                    });
+                }, 1000);
+
+            } catch (error) {
+                console.error("Connection Error:", error);
+            }
+        }
+        fetchExamSchedules();
+    </script>
+</body>
+
+</html>
