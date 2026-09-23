@@ -17,45 +17,89 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+    body {
+        font-family: 'Inter', sans-serif;
+    }
 
-        .font-code {
-            font-family: 'JetBrains Mono', monospace;
-        }
+    .font-code {
+        font-family: 'JetBrains Mono', monospace;
+    }
 
-        /* Tech Grid Background */
-        .tech-grid {
-            background-size: 40px 40px;
-            background-image:
-                linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-        }
+    /* Tech Grid Background */
+    .tech-grid {
+        background-size: 40px 40px;
+        background-image:
+            linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+    }
 
-        /* Glowing hover effects */
-        .tech-card-hover {
-            transition: all 0.3s ease;
-        }
+    /* Glowing hover effects */
+    .tech-card-hover {
+        transition: all 0.3s ease;
+    }
 
-        .tech-card-hover:hover {
-            border-color: #06b6d4;
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-            transform: translateY(-4px);
-        }
-    </style>
+    .tech-card-hover:hover {
+        border-color: #06b6d4;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        transform: translateY(-4px);
+    }
+
+    /* --- Refined Light Theme Overrides --- */
+    body.light-mode {
+        background-color: #f1f5f9 !important;
+        color: #0f172a !important;
+    }
+
+    body.light-mode .tech-grid {
+        background-image:
+            linear-gradient(to right, rgba(14, 165, 233, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(14, 165, 233, 0.08) 1px, transparent 1px) !important;
+    }
+
+    body.light-mode nav,
+    body.light-mode header,
+    body.light-mode footer,
+    body.light-mode .bg-neutral-950,
+    body.light-mode .bg-neutral-900 {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        border-color: #cbd5e1 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-mode .text-white {
+        color: #0f172a !important;
+    }
+
+    body.light-mode .text-slate-300,
+    body.light-mode .text-slate-400,
+    body.light-mode p {
+        color: #334155 !important;
+    }
+
+    body.light-mode div[class*="bg-neutral-"],
+    body.light-mode section {
+        background-color: #ffffff !important;
+        border-color: #cbd5e1 !important;
+        color: #1e293b !important;
+    }
+
+    body.light-mode button:not(#theme-toggle-btn) {
+        border-color: #cbd5e1 !important;
+    }
+</style>
 </head>
 
-<body class="bg-slate-950 text-slate-300 selection:bg-cyan-500 selection:text-white">
+<body class="bg-neutral-950 text-slate-300 font-code selection:bg-cyan-500/30">
 
     <!-- NAVIGATION BAR -->
-    <nav class="bg-slate-950/80 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800">
+    <nav class="bg-neutral-950/80 backdrop-blur-md text-white sticky top-0 z-50 border-b border-neutral-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center space-x-3 group cursor-pointer">
                     <div
                         class="bg-slate-900 border border-cyan-500 text-cyan-400 p-2.5 rounded-lg text-xl group-hover:bg-cyan-500 group-hover:text-slate-900 transition">
-                        <i class="fa-solid fa-microchip"></i>
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
                     <div>
                         <span
@@ -64,22 +108,104 @@
                     </div>
                 </div>
 
-                <div class="hidden md:flex items-center space-x-8 text-sm font-medium font-code">
+                <!-- Navigation Links & Notice Alarm -->
+                <div class="hidden md:flex items-center space-x-5 text-sm font-medium font-code">
                     <a href="#" class="hover:text-cyan-400 transition">~/home</a>
-                    <a href="#exams" class="hover:text-cyan-400 transition">~/exams</a>
-                    <a href="#materials" class="hover:text-cyan-400 transition">~/resources</a>
-                    <a href="#faculty" class="hover:text-cyan-400 transition">~/faculty</a>
-                    <a href="#contact"
-                        class="bg-cyan-600/20 text-cyan-400 border border-cyan-600/50 px-4 py-2 rounded hover:bg-cyan-500 hover:text-slate-900 transition">Connect()</a>
-                </div>
 
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-cyan-400 focus:outline-none">
-                        <i class="fa-solid fa-bars-staggered text-2xl"></i>
-                    </button>
+                    <!-- Academics Dropdown -->
+                    <div class="relative group py-4">
+                        <button class="hover:text-cyan-400 transition flex items-center focus:outline-none">
+                            ~/Academics <i
+                                class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(6,182,212,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
+                            <a href="semesters.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-neutral-800 hover:text-cyan-400 border-b border-neutral-800 transition">
+                                <i class="fa-solid fa-layer-group w-5 text-center mr-2"></i>Semesters
+                            </a>
+                            <a href="#routine" onclick="document.getElementById('routine-btn').click()"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i>Routine
+                            </a>
+                            <a href="cgpaCalc.html" target="_blank"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
+                                <i class="fa-solid fa-calculator w-5 text-center mr-2"></i>CGPA Calc
+                            </a>
+                            <a href="final-calc.html" target="_blank"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
+                                <i class="fa-solid fa-bullseye w-5 text-center mr-2"></i>Required Final Marks Calc
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Community Dropdown -->
+                    <div class="relative group py-4">
+                        <button class="hover:text-emerald-400 transition flex items-center focus:outline-none">
+                            ~/Community <i
+                                class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-44 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(16,185,129,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#faculty" onclick="document.getElementById('faculty-btn').click()"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-emerald-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-user-tie w-5 text-center mr-2"></i>Faculty
+                            </a>
+                            <a href="students.html" target="_blank"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
+                                <i class="fa-solid fa-address-book w-5 text-center mr-2"></i>Student Directory
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Campus Dropdown -->
+                    <div class="relative group py-4">
+                        <button class="hover:text-indigo-400 transition flex items-center focus:outline-none">
+                            ~/Campus <i
+                                class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-40 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(99,102,241,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#events"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i>Events
+                            </a>
+                            <a href="#gallery"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 transition">
+                                <i class="fa-solid fa-images w-5 text-center mr-2"></i>Gallery
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Notices & Theme Toggle Group -->
+                    <div class="flex items-center space-x-3">
+                        <!-- Notices Button -->
+                        <button id="nav-notice-alarm"
+                            class="relative bg-rose-500/10 border border-rose-500/50 text-rose-400 hover:bg-rose-500/20 px-4 py-2 rounded-lg font-code text-sm transition flex items-center space-x-2">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                            </span>
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <span>Notices</span>
+                        </button>
+
+                        <!-- Dark/Light Theme Toggle Button -->
+                        <button id="theme-toggle-btn"
+                            class="bg-neutral-900 border border-neutral-800 text-cyan-400 hover:border-cyan-500 p-2 rounded-lg transition flex items-center justify-center w-10 h-10 shadow-lg"
+                            title="Toggle Theme">
+                            <i id="theme-icon" class="fa-solid fa-moon"></i>
+                        </button>
+                    </div>
+
+                    <div class="md:hidden">
+                        <button id="menu-btn" class="text-cyan-400 focus:outline-none">
+                            <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
     </nav>
 
     <!-- LIVE COUNTDOWN & URGENT ALERT BANNER -->
@@ -99,7 +225,8 @@
     </div>
 
     <!-- HERO SECTION -->
-    <header class="relative bg-slate-950 py-24 px-4 overflow-hidden border-b border-slate-800 tech-grid">
+    <header
+        class="relative bg-neutral-950 py-24 px-4 overflow-hidden border-b border-neutral-800 tech-grid bg-gradient-to-b from-neutral-900/40 to-neutral-950">
         <div
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-600/20 rounded-full blur-[100px] pointer-events-none">
         </div>
@@ -117,7 +244,7 @@
                 Advanced academic portal for tracking routines, engineering resources, and real-time department updates.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6 font-code text-sm">
-                <a href="#materials"
+                <a href="#archive-btn" onclick="document.getElementById('archive-btn').click()"
                     class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-3 rounded shadow-[0_0_15px_rgba(6,182,212,0.4)] transition">
                     <i class="fa-solid fa-download mr-2"></i> Fetch_Resources
                 </a>
@@ -130,7 +257,8 @@
     </header>
 
     <!-- EXAMS SCHEDULE & COUNTDOWN SECTION -->
-    <section id="exams" class="max-w-7xl mx-auto px-4 mt-16 mb-20 relative z-10">
+    <section id="exams"
+        class="max-w-7xl mx-auto px-4 mt-16 mb-20 relative z-10 bg-neutral-900/30 border border-neutral-900 p-6 sm:p-8 rounded-2xl tech-grid">
         <div class="flex items-center mb-8 space-x-3 border-b border-slate-800 pb-4">
             <i class="fa-solid fa-radar text-cyan-500 text-2xl animate-spin-slow"></i>
             <h2 class="text-2xl font-bold text-white font-code">Active_Deadlines</h2>
@@ -156,8 +284,15 @@
     </section>
 
     <!-- QUICK ACCESS MODULES -->
-    <section class="max-w-7xl mx-auto px-4 mb-20">
+    <section
+        class="max-w-7xl mx-auto px-4 mb-20 mt-10 bg-neutral-900/30 border border-neutral-900 p-6 sm:p-8 rounded-2xl tech-grid">
+        <div class="flex items-center mb-8 space-x-3 border-b border-slate-800 pb-4">
+            <i class="fa-solid fa-folder-tree text-cyan-500 text-2xl"></i>
+            <h2 class="text-2xl font-bold text-white font-code">Quick_Access</h2>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Routine Box -->
             <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group cursor-pointer"
                 id="routine-btn">
                 <i
@@ -166,51 +301,59 @@
                 <p class="text-sm text-slate-400 mb-4">Dynamic schedules & room allocations for current semester.</p>
                 <span class="text-cyan-500 font-code text-sm hover:text-cyan-300">Execute &rarr;</span>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group">
+            <!-- Archive Box -->
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group cursor-pointer"
+                id="archive-btn">
                 <i
                     class="fa-solid fa-database text-3xl text-slate-600 group-hover:text-indigo-400 transition mb-4 block"></i>
                 <h3 class="text-white font-bold mb-2 font-code">Data_Archive</h3>
-                <p class="text-sm text-slate-400 mb-4">Access lecture nodes, algorithms, and PDFs repository.</p>
-                <a href="#materials" class="text-indigo-400 font-code text-sm hover:text-indigo-300">Execute &rarr;</a>
+                <p class="text-sm text-slate-400 mb-4">Access lecture nodes, algorithms, and past question papers.</p>
+                <span class="text-indigo-400 font-code text-sm hover:text-indigo-300">Execute &rarr;</span>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group">
+            <!-- Notice Box -->
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group cursor-pointer"
+                id="notice-btn">
                 <i
                     class="fa-solid fa-bullhorn text-3xl text-slate-600 group-hover:text-rose-400 transition mb-4 block"></i>
                 <h3 class="text-white font-bold mb-2 font-code">System_Notices</h3>
                 <p class="text-sm text-slate-400 mb-4">Official broadcasts from the department admin console.</p>
-                <a href="#notices" class="text-rose-400 font-code text-sm hover:text-rose-300">Execute &rarr;</a>
+                <span class="text-rose-400 font-code text-sm hover:text-rose-300">Execute &rarr;</span>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group">
+            <!-- Faculty Box -->
+            <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 tech-card-hover group cursor-pointer"
+                id="faculty-btn">
                 <i
                     class="fa-solid fa-user-astronaut text-3xl text-slate-600 group-hover:text-emerald-400 transition mb-4 block"></i>
                 <h3 class="text-white font-bold mb-2 font-code">Faculty_Nodes</h3>
                 <p class="text-sm text-slate-400 mb-4">Profiles, research domains, and communication endpoints.</p>
-                <a href="#faculty" class="text-emerald-400 font-code text-sm hover:text-emerald-300">Execute &rarr;</a>
+                <span class="text-emerald-400 font-code text-sm hover:text-emerald-300">Execute &rarr;</span>
             </div>
         </div>
     </section>
 
-    <!-- ROUTINE MODAL (HIDDEN BY DEFAULT) -->
+    <!-- ROUTINE MODAL -->
     <div id="routine-modal"
         class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
         <div
             class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col">
-            <!-- Modal Header -->
             <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
                 <h2 class="text-xl font-bold text-cyan-400 font-code"><i class="fa-solid fa-table-list mr-2"></i>
                     Class_Routine</h2>
                 <div class="flex space-x-3">
-                    <button id="download-routine-btn"
-                        class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-3 py-1.5 rounded text-sm font-code transition">
-                        <i class="fa-solid fa-download"></i> Save_Img
-                    </button>
+                    <a href="asset/pdf/BICE2025_SecA_ClassRoutine.pdf" download="Class_Routine_BICE_2025.pdf"
+                        class="bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500 hover:text-slate-900 px-3 py-1.5 rounded text-sm font-code transition flex items-center">
+                        <i class="fa-solid fa-file-pdf mr-2"></i> Save_PDF
+                    </a>
+                    <a href="asset/photos/BICE2025_SecA_ClassRoutine.jpg" download="Class_Routine_BICE_2025.jpg"
+                        class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-3 py-1.5 rounded text-sm font-code transition flex items-center">
+                        <i class="fa-solid fa-image mr-2"></i> Save_IMG
+                    </a>
                     <button id="close-modal-btn"
-                        class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none">
+                        class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none ml-2">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
             </div>
-            <!-- Capture Area for Image Download -->
             <div id="routine-capture-area" class="p-6 bg-slate-900">
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold text-white mb-1">Department of ICT</h3>
@@ -227,7 +370,6 @@
                             </tr>
                         </thead>
                         <tbody id="routine-table-body" class="text-slate-300">
-                            <!-- JS data injection here -->
                             <tr>
                                 <td colspan="4" class="text-center p-6"><i
                                         class="fa-solid fa-spinner fa-spin text-cyan-400 text-2xl"></i></td>
@@ -239,90 +381,302 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-800 py-10 px-4 mt-20">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-microchip text-cyan-500 text-2xl"></i>
-                <div>
-                    <span class="text-white font-bold font-code block">ICT_DEPARTMENT</span>
-                    <span class="text-xs text-slate-500 font-code">Bangladesh University of Professionals</span>
+    <!-- DATA ARCHIVE MODAL (WITH PYQ) -->
+    <div id="archive-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div
+            class="bg-slate-900 border border-indigo-500/50 rounded-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(99,102,241,0.3)] relative flex flex-col">
+            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
+                <h2 class="text-xl font-bold text-indigo-400 font-code"><i class="fa-solid fa-database mr-2"></i>
+                    Data_Archive</h2>
+                <button id="close-archive-btn"
+                    class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Tab Selection Buttons -->
+            <div class="p-6 bg-slate-900 text-center">
+                <p class="text-slate-400 text-sm mb-4 font-code">Select category to access department archive nodes:</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button id="theory-tab-btn"
+                        class="px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-cyan-400 hover:border-cyan-500 hover:bg-slate-800/80 transition flex items-center shadow-lg">
+                        <i class="fa-solid fa-book mr-2 text-lg"></i> Theory_Materials
+                    </button>
+                    <button id="lab-tab-btn"
+                        class="px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-emerald-400 hover:border-emerald-500 hover:bg-slate-800/80 transition flex items-center shadow-lg">
+                        <i class="fa-solid fa-laptop-code mr-2 text-lg"></i> Lab_Materials
+                    </button>
+                    <button id="pyq-tab-btn"
+                        class="px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-rose-400 hover:border-rose-500 hover:bg-slate-800/80 transition flex items-center shadow-lg">
+                        <i class="fa-solid fa-file-circle-question mr-2 text-lg"></i> Question_Bank
+                    </button>
                 </div>
             </div>
-            <div class="text-slate-500 text-xs font-code text-center md:text-right">
-                <p>System initialized: 2026</p>
-                <p>Developed by ICT Students | Status: <span class="text-green-500">Online</span></p>
+
+            <div class="px-6 pb-6 bg-slate-900">
+                <!-- Theory Portion -->
+                <div id="theory-container" class="tab-pane hidden border-t border-slate-800 pt-6">
+                    <h3 class="text-lg font-bold text-cyan-400 mb-4 font-code"><i
+                            class="fa-solid fa-folder-open mr-2"></i> Theory Archive</h3>
+                    <div id="theory-content" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-300">
+                        <div class="text-center p-6 col-span-full"><i
+                                class="fa-solid fa-spinner fa-spin text-cyan-400 text-2xl"></i></div>
+                    </div>
+                </div>
+
+                <!-- Lab Portion -->
+                <div id="lab-container" class="tab-pane hidden border-t border-slate-800 pt-6">
+                    <h3 class="text-lg font-bold text-emerald-400 mb-4 font-code"><i
+                            class="fa-solid fa-folder-open mr-2"></i> Lab Archive</h3>
+                    <div id="lab-content" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-300">
+                        <div class="text-center p-6 col-span-full"><i
+                                class="fa-solid fa-spinner fa-spin text-emerald-400 text-2xl"></i></div>
+                    </div>
+                </div>
+
+                <!-- PYQ Portion -->
+                <div id="pyq-container" class="tab-pane hidden border-t border-slate-800 pt-6">
+                    <h3 class="text-lg font-bold text-rose-400 mb-4 font-code"><i
+                            class="fa-solid fa-folder-open mr-2"></i> Question Bank Archive</h3>
+                    <div id="pyq-content" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-300">
+                        <div class="text-center p-6 col-span-full"><i
+                                class="fa-solid fa-spinner fa-spin text-rose-400 text-2xl"></i></div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- FACULTY NODES MODAL -->
+    <div id="faculty-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div
+            class="bg-slate-900 border border-emerald-500/50 rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(16,185,129,0.3)] relative flex flex-col">
+            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
+                <h2 class="text-xl font-bold text-emerald-400 font-code"><i
+                        class="fa-solid fa-chalkboard-user mr-2"></i> Faculty_Nodes</h2>
+                <button id="close-faculty-btn"
+                    class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-6 bg-slate-900">
+                <div id="faculty-content" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-300">
+                    <div class="text-center p-6 col-span-full"><i
+                            class="fa-solid fa-spinner fa-spin text-emerald-400 text-2xl"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SYSTEM NOTICES MODAL -->
+    <div id="notice-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div
+            class="bg-slate-900 border border-rose-500/50 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(244,63,94,0.3)] relative flex flex-col">
+            <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center z-10">
+                <h2 class="text-xl font-bold text-rose-400 font-code"><i class="fa-solid fa-bullhorn mr-2"></i>
+                    System_Notices</h2>
+                <button id="close-notice-btn"
+                    class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-6 bg-slate-900">
+                <div id="notice-content" class="space-y-4 text-slate-300">
+                    <div class="text-center p-6"><i class="fa-solid fa-spinner fa-spin text-rose-400 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 px-4 mt-20">
+        <!-- 4-Column Grid Layout for better balance -->
+        <div
+            class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start text-center md:text-left">
+
+            <!-- Column 1: Branding -->
+            <div class="flex flex-col items-center md:items-start">
+                <div class="flex items-center space-x-3 mb-3">
+                    <i class="fa-solid fa-network-wired text-cyan-500 text-2xl"></i>
+                    <div class="text-left">
+                        <span class="text-white font-bold font-code block">ICT_DEPARTMENT</span>
+                        <span class="text-xs text-slate-500 font-code">Bangladesh University of Professionals</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-xs font-code mt-1 text-center md:text-left">Advanced academic portal for
+                    tracking resources, routines & exams.</p>
+            </div>
+
+            <!-- Column 2: BUP Links -->
+            <div class="flex flex-col items-center md:items-start">
+                <h4
+                    class="text-white font-bold font-code text-sm mb-4 border-b border-slate-800 pb-2 w-full max-w-[200px]">
+                    BUP_Links</h4>
+                <ul class="text-sm font-code space-y-3 text-slate-400">
+                    <li>
+                        <a href="https://bup.edu.bd/" target="_blank"
+                            class="hover:text-cyan-400 transition flex items-center justify-center md:justify-start group">
+                            <i
+                                class="fa-solid fa-globe w-5 text-center text-slate-500 group-hover:text-cyan-400 transition mr-2"></i>
+                            BUP Official
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://webportal.bup.edu.bd/" target="_blank"
+                            class="hover:text-cyan-400 transition flex items-center justify-center md:justify-start group">
+                            <i
+                                class="fa-solid fa-graduation-cap w-5 text-center text-slate-500 group-hover:text-cyan-400 transition mr-2"></i>
+                            Student Portal
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 3: ICT Links -->
+            <div class="flex flex-col items-center md:items-start">
+                <h4
+                    class="text-white font-bold font-code text-sm mb-4 border-b border-slate-800 pb-2 w-full max-w-[200px]">
+                    ICT_Links</h4>
+                <ul class="text-sm font-code space-y-3 text-slate-400">
+                    <li>
+                        <a href="https://bup.edu.bd/department_home/3" target="_blank"
+                            class="hover:text-cyan-400 transition flex items-center justify-center md:justify-start group">
+                            <i
+                                class="fa-solid fa-building-columns w-5 text-center text-slate-500 group-hover:text-cyan-400 transition mr-2"></i>
+                            About ICT Dept.
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61588701219053" target="_blank"
+                            class="hover:text-blue-400 transition flex items-center justify-center md:justify-start group">
+                            <i
+                                class="fa-brands fa-facebook w-5 text-center text-slate-500 group-hover:text-blue-400 transition mr-2"></i>
+                            BUP ICT XI(Facebook)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/bup_ict_xi/" target="_blank"
+                            class="hover:text-pink-400 transition flex items-center justify-center md:justify-start group">
+                            <i
+                                class="fa-brands fa-instagram w-5 text-center text-slate-500 group-hover:text-pink-400 transition mr-2"></i>
+                            BUP ICT XI(Instagram)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Status & Credits -->
+            <div class="flex flex-col items-center lg:items-end text-slate-500 text-xs font-code space-y-2">
+                <p>System initialized: 2026</p>
+
+                <!-- Tech & Hacker Vibe Credit -->
+                <p>
+                    <span class="text-slate-700">&lt;/&gt;</span> Developed by
+                    <a href="https://www.linkedin.com/in/sajid-sarkar" target="_blank"
+                        class="text-cyan-400 hover:text-cyan-300 hover:underline transition font-bold tracking-wide">
+                        &lt;Sajid_Sarkar/&gt;
+                    </a>
+                </p>
+
+                <div class="mt-4 bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg flex items-center space-x-2">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span>System Status: <span class="text-green-400 font-bold">Online</span></span>
+                </div>
+            </div>
+
         </div>
     </footer>
 
     <!-- JavaScript code -->
+
+
+    <!-- SCRIPT -->
     <script>
         // Simple Live Clock
         setInterval(() => {
             const date = new Date();
-            document.getElementById('live-clock').innerText = date.toLocaleTimeString('en-US', { hour12: false });
+            const clock = document.getElementById('live-clock');
+            if (clock) clock.innerText = date.toLocaleTimeString('en-US', { hour12: false });
         }, 1000);
 
-        // API URL
-        const baseUrl = 'https://sheetdb.io/api/v1/4emkg7q46vff6';
+        // API URL (Declared only once)
+        const baseUrl = 'https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec';
+
+        // ==========================================
+        // ADVANCED CACHING SYSTEM (ROCKET SPEED)
+        // ==========================================
+        async function fetchWithCache(sheetName, expirationMinutes = 60) {
+            const cacheKey = 'bup_ict_data_' + sheetName;
+            const timeKey = cacheKey + '_time';
+
+            const cachedData = localStorage.getItem(cacheKey);
+            const cacheTime = localStorage.getItem(timeKey);
+            const now = new Date().getTime();
+
+            // চেক করবে ক্যাশ আছে কিনা এবং তা ১ ঘণ্টার কম পুরোনো কিনা
+            if (cachedData && cacheTime && (now - parseInt(cacheTime) < expirationMinutes * 60 * 1000)) {
+                return JSON.parse(cachedData); // থাকলে সাথে সাথে (0.001s এ) রিটার্ন করবে!
+            }
+
+            // না থাকলে বা ডেটা পুরোনো হলে সার্ভার থেকে আনবে
+            try {
+                const response = await fetch(baseUrl + '?sheet=' + sheetName);
+                const data = await response.json();
+
+                if (data && !data.error) {
+                    localStorage.setItem(cacheKey, JSON.stringify(data));
+                    localStorage.setItem(timeKey, now.toString()); // সেভ করার সময়টা লিখে রাখলো
+                }
+                return data;
+            } catch (error) {
+                // ইন্টারনেট না থাকলে বা এরর হলে, আগের ক্যাশ করা ডেটাই দেখিয়ে দেবে
+                if (cachedData) return JSON.parse(cachedData);
+                throw error;
+            }
+        }
 
         // --- Routine Modal & Download Logic ---
         const routineBtn = document.getElementById('routine-btn');
         const routineModal = document.getElementById('routine-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
-        const downloadBtn = document.getElementById('download-routine-btn');
         const routineTableBody = document.getElementById('routine-table-body');
         let isRoutineLoaded = false;
 
-        // Open Modal and Fetch Data
-        routineBtn.addEventListener('click', () => {
-            routineModal.classList.remove('hidden');
-            if (!isRoutineLoaded) fetchRoutineData();
-        });
-
-        // Close Modal
-        closeModalBtn.addEventListener('click', () => {
-            routineModal.classList.add('hidden');
-        });
-
-        // Download Image Functionality
-        downloadBtn.addEventListener('click', () => {
-            const captureArea = document.getElementById('routine-capture-area');
-            // Change background temporarily to make sure image looks solid
-            html2canvas(captureArea, { backgroundColor: '#0f172a' }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'ICT_Routine.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+        if (routineBtn && routineModal) {
+            routineBtn.addEventListener('click', () => {
+                routineModal.classList.remove('hidden');
+                if (!isRoutineLoaded) fetchRoutineData();
             });
-        });
+        }
+
+        if (closeModalBtn && routineModal) {
+            closeModalBtn.addEventListener('click', () => routineModal.classList.add('hidden'));
+        }
 
         async function fetchRoutineData() {
             try {
-                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-cyan-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Fetching data from server...</td></tr>';
-                const response = await fetch(baseUrl + '?sheet=Routine-List');
-                const data = await response.json();
+                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-cyan-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 block"></i> Fetching Routine...</td></tr>';
+
+                const data = await fetchWithCache('Routine-List');
 
                 if (data && data.length > 0 && !data.error) {
-                    // কোন দিন কতটি ক্লাস আছে তা গণনা করা হচ্ছে
                     const dayCounts = {};
-                    data.forEach(row => {
-                        dayCounts[row.Day] = (dayCounts[row.Day] || 0) + 1;
-                    });
+                    data.forEach(row => { dayCounts[row.Day] = (dayCounts[row.Day] || 0) + 1; });
 
                     let html = '';
                     let currentDay = '';
 
                     data.forEach(row => {
                         html += `<tr class="border-b border-slate-800/50 hover:bg-slate-800 transition">`;
-
-                        // যদি নতুন দিন হয়, তাহলে rowspan যুক্ত করে একটি বড় সেল তৈরি করবে
                         if (row.Day !== currentDay) {
                             html += `<td rowspan="${dayCounts[row.Day]}" class="p-4 border-r border-slate-800 text-indigo-400 font-bold align-middle bg-slate-900/30 whitespace-nowrap">${row.Day}</td>`;
                             currentDay = row.Day;
                         }
-
                         html += `
                             <td class="p-4 border-r border-slate-800 text-rose-400 whitespace-nowrap">${row.Time}</td>
                             <td class="p-4 border-r border-slate-800 text-white">${row['Course Code & Title']}</td>
@@ -341,19 +695,187 @@
             }
         }
 
+        // --- Archive Modal & Clickable Tabs Logic ---
+        const archiveBtn = document.getElementById('archive-btn');
+        const archiveModal = document.getElementById('archive-modal');
+        const closeArchiveBtn = document.getElementById('close-archive-btn');
+
+        const theoryTabBtn = document.getElementById('theory-tab-btn');
+        const labTabBtn = document.getElementById('lab-tab-btn');
+        const pyqTabBtn = document.getElementById('pyq-tab-btn');
+
+        const theoryContainer = document.getElementById('theory-container');
+        const labContainer = document.getElementById('lab-container');
+        const pyqContainer = document.getElementById('pyq-container');
+
+        const theoryContent = document.getElementById('theory-content');
+        const labContent = document.getElementById('lab-content');
+        const pyqContent = document.getElementById('pyq-content');
+
+        let isArchiveLoaded = false;
+
+        if (archiveBtn && archiveModal) {
+            archiveBtn.addEventListener('click', () => {
+                archiveModal.classList.remove('hidden');
+
+                if (theoryContainer) theoryContainer.classList.add('hidden');
+                if (labContainer) labContainer.classList.add('hidden');
+                if (pyqContainer) pyqContainer.classList.add('hidden');
+
+                if (theoryTabBtn) theoryTabBtn.className = "px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-cyan-400 hover:border-cyan-500 hover:bg-slate-800/80 transition flex items-center shadow-lg";
+                if (labTabBtn) labTabBtn.className = "px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-emerald-400 hover:border-emerald-500 hover:bg-slate-800/80 transition flex items-center shadow-lg";
+                if (pyqTabBtn) pyqTabBtn.className = "px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-rose-400 hover:border-rose-500 hover:bg-slate-800/80 transition flex items-center shadow-lg";
+
+                if (!isArchiveLoaded) fetchArchiveData();
+            });
+        }
+
+        if (closeArchiveBtn && archiveModal) {
+            closeArchiveBtn.addEventListener('click', () => archiveModal.classList.add('hidden'));
+        }
+
+        const setActiveTab = (activeBtn, activeContainer, bg, border, shadow, otherBtns, otherContainers) => {
+            activeContainer.classList.remove('hidden');
+            otherContainers.forEach(c => c.classList.add('hidden'));
+
+            activeBtn.className = `px-6 py-3 rounded-lg text-sm font-code font-bold ${bg} text-slate-950 border ${border} transition flex items-center shadow-[0_0_15px_${shadow}]`;
+            otherBtns.forEach(b => {
+                const color = b.id.includes('theory') ? 'cyan' : b.id.includes('lab') ? 'emerald' : 'rose';
+                b.className = `px-6 py-3 rounded-lg text-sm font-code font-bold bg-slate-800 border border-slate-700 text-${color}-400 hover:border-${color}-500 hover:bg-slate-800/80 transition flex items-center shadow-lg`;
+            });
+        };
+
+        if (theoryTabBtn) theoryTabBtn.addEventListener('click', () => setActiveTab(theoryTabBtn, theoryContainer, 'bg-cyan-500', 'border-cyan-400', 'rgba(6,182,212,0.4)', [labTabBtn, pyqTabBtn], [labContainer, pyqContainer]));
+        if (labTabBtn) labTabBtn.addEventListener('click', () => setActiveTab(labTabBtn, labContainer, 'bg-emerald-500', 'border-emerald-400', 'rgba(16,185,129,0.4)', [theoryTabBtn, pyqTabBtn], [theoryContainer, pyqContainer]));
+        if (pyqTabBtn) pyqTabBtn.addEventListener('click', () => setActiveTab(pyqTabBtn, pyqContainer, 'bg-rose-500', 'border-rose-400', 'rgba(244,63,94,0.4)', [theoryTabBtn, labTabBtn], [theoryContainer, labContainer]));
+
+        async function fetchArchiveData() {
+            try {
+                const loadingHtml = '<div class="col-span-full text-center p-12 text-slate-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 block text-indigo-400"></i>Accessing Database...</div>';
+                if (theoryContent) theoryContent.innerHTML = loadingHtml;
+                if (labContent) labContent.innerHTML = loadingHtml;
+                if (pyqContent) pyqContent.innerHTML = loadingHtml;
+
+                const data = await fetchWithCache('Materials_List');
+
+                if (data && data.length > 0 && !data.error) {
+                    const theoryItems = data.filter(item => item.Category && item.Category.toLowerCase() === 'theory');
+                    const labItems = data.filter(item => item.Category && item.Category.toLowerCase() === 'lab');
+                    const pyqItems = data.filter(item => item.Category && item.Category.toLowerCase() === 'previousquestion');
+
+                    const renderCards = (items, themeColor) => {
+                        return items.map(item => `
+                            <div class="bg-slate-950 p-4 rounded border border-slate-800 hover:border-${themeColor}-500/50 transition flex justify-between items-center">
+                                <div>
+                                    <span class="bg-${themeColor}-500/10 text-${themeColor}-400 text-xs px-2 py-1 rounded font-code">${item['CourseCode&Name'] || 'N/A'}</span>
+                                    <h4 class="font-bold text-white mt-2">${item.Topic}</h4>
+                                    <span class="text-xs text-slate-500 font-code">Type: ${item.Type}</span>
+                                </div>
+                                <a href="${item.Link}" target="_blank" class="bg-slate-800 text-${themeColor}-400 hover:bg-${themeColor}-500 hover:text-white h-10 w-10 flex items-center justify-center rounded-full transition shrink-0 ml-3">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        `).join('');
+                    };
+
+                    if (theoryContent) theoryContent.innerHTML = theoryItems.length > 0 ? renderCards(theoryItems, 'cyan') : '<div class="text-center p-6 col-span-full text-slate-500">No theory materials available.</div>';
+                    if (labContent) labContent.innerHTML = labItems.length > 0 ? renderCards(labItems, 'emerald') : '<div class="text-center p-6 col-span-full text-slate-500">No lab materials available.</div>';
+                    if (pyqContent) pyqContent.innerHTML = pyqItems.length > 0 ? renderCards(pyqItems, 'rose') : '<div class="text-center p-6 col-span-full text-slate-500">No question banks available.</div>';
+
+                    isArchiveLoaded = true;
+                }
+            } catch (error) {
+                console.error("Archive fetch error:", error);
+                const errHtml = '<div class="text-center p-6 col-span-full text-rose-500">Error loading data!</div>';
+                if (theoryContent) theoryContent.innerHTML = errHtml;
+                if (labContent) labContent.innerHTML = errHtml;
+                if (pyqContent) pyqContent.innerHTML = errHtml;
+            }
+        }
+
+        // --- Notice Modal Logic ---
+        const noticeBtn = document.getElementById('notice-btn');
+        const navNoticeAlarm = document.getElementById('nav-notice-alarm');
+        const noticeModal = document.getElementById('notice-modal');
+        const closeNoticeBtn = document.getElementById('close-notice-btn');
+        const noticeContent = document.getElementById('notice-content');
+        let isNoticeLoaded = false;
+
+        function openNoticeModal() {
+            if (noticeModal) noticeModal.classList.remove('hidden');
+            if (!isNoticeLoaded) fetchNoticeData();
+        }
+
+        if (noticeBtn) noticeBtn.addEventListener('click', openNoticeModal);
+        if (navNoticeAlarm) navNoticeAlarm.addEventListener('click', openNoticeModal);
+        if (closeNoticeBtn && noticeModal) closeNoticeBtn.addEventListener('click', () => noticeModal.classList.add('hidden'));
+
+        async function fetchNoticeData() {
+            try {
+                if (noticeContent) noticeContent.innerHTML = '<div class="text-center p-10 text-cyan-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 block"></i>Loading Notices...</div>';
+
+                const data = await fetchWithCache('Notice_List');
+
+                // চেক করবে ডেটা আসলেই আছে কিনা বা ফাকা কিনা
+                if (data && data.length > 0 && !data.error) {
+                    if (noticeContent) {
+                        noticeContent.innerHTML = data.reverse().map(item => `
+                    <div class="bg-neutral-900 p-5 rounded-lg border-l-4 border-rose-500 border-y border-r border-neutral-800 hover:bg-neutral-800/50 transition">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-white text-lg">${item.Title || 'Untitled Notice'}</h4>
+                            <span class="text-xs text-rose-400 font-code bg-rose-500/10 px-2 py-1 rounded">${item.Date || 'Recent'}</span>
+                        </div>
+                        <p class="text-sm text-slate-400 mb-3">${item.Description || ''}</p>
+                        ${item.Link ? `<a href="${item.Link}" target="_blank" class="text-cyan-400 text-sm hover:underline font-code">Read More &rarr;</a>` : ''}
+                    </div>
+                `).join('');
+                    }
+                    isNoticeLoaded = true;
+                } else {
+                    // শিটে নোটিস না থাকলে সুন্দর একটি মেসেজ দেখাবে, স্পিনার ঘুরবে না
+                    if (noticeContent) {
+                        noticeContent.innerHTML = `
+                    <div class="text-center py-12 text-slate-500 font-code">
+                        <i class="fa-solid fa-folder-open text-4xl mb-3 block text-slate-600"></i>
+                        <p>No system notices broadcasted yet.</p>
+                        <span class="text-xs text-slate-600 mt-1 block">Check back later for department updates.</span>
+                    </div>`;
+                    }
+                }
+            } catch (error) {
+                console.error("Notice fetch error:", error);
+                if (noticeContent) noticeContent.innerHTML = '<div class="text-center p-6 text-rose-500">Error loading notices!</div>';
+            }
+        }
+
         // --- Exams Fetch & Countdown Logic ---
         async function fetchExamSchedules() {
+            const skeletonHtml = `
+                <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 relative overflow-hidden flex flex-col h-full animate-pulse">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="h-6 w-16 bg-slate-800 rounded"></div>
+                        <div class="h-8 w-8 bg-slate-800 rounded-full"></div>
+                    </div>
+                    <div class="h-6 w-3/4 bg-slate-800 rounded mb-4"></div>
+                    <div class="space-y-3 mb-5 flex-grow">
+                        <div class="h-3 w-full bg-slate-800 rounded"></div>
+                        <div class="h-3 w-5/6 bg-slate-800 rounded"></div>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded border border-slate-800 mt-auto h-16 flex justify-center items-center">
+                        <div class="h-4 w-1/2 bg-slate-800 rounded"></div>
+                    </div>
+                </div>`;
+
+            const setSkeletons = (containerId) => {
+                const container = document.getElementById(containerId);
+                if (container) container.innerHTML = skeletonHtml.repeat(1);
+            };
+
+            setSkeletons('ct-container');
+            setSkeletons('mid-container');
+            setSkeletons('final-container');
+
             try {
-                const [ctResponse, midResponse, finalResponse] = await Promise.all([
-                    fetch(baseUrl + '?sheet=CT_List'),
-                    fetch(baseUrl + '?sheet=Mid_List'),
-                    fetch(baseUrl + '?sheet=Final_List')
-                ]);
-
-                const ctData = await ctResponse.json();
-                const midData = await midResponse.json();
-                const finalData = await finalResponse.json();
-
                 const now = new Date().getTime();
 
                 function getUpcomingExams(examList) {
@@ -362,10 +884,6 @@
                     upcoming.sort((a, b) => new Date(a.TargetDate) - new Date(b.TargetDate));
                     return upcoming.slice(0, 4);
                 }
-
-                const nextCTs = getUpcomingExams(ctData);
-                const nextMids = getUpcomingExams(midData);
-                const nextFinals = getUpcomingExams(finalData);
 
                 function generateCardHTML(exam, typeName) {
                     const theme = {
@@ -421,6 +939,7 @@
 
                 function renderExams(exams, containerId, typeName) {
                     const container = document.getElementById(containerId);
+                    if (!container) return;
                     if (exams.length === 0) {
                         container.innerHTML = generateCardHTML(null, typeName);
                     } else {
@@ -428,10 +947,17 @@
                     }
                 }
 
-                renderExams(nextCTs, 'ct-container', 'CT');
-                renderExams(nextMids, 'mid-container', 'MID');
-                renderExams(nextFinals, 'final-container', 'FINAL');
+                // গুগল এ জ্যাম এড়াতে Sequential Fetch (একটার পর একটা আনবে)
+                const ctData = await fetchWithCache('CT_List');
+                renderExams(getUpcomingExams(ctData), 'ct-container', 'CT');
 
+                const midData = await fetchWithCache('Mid_List');
+                renderExams(getUpcomingExams(midData), 'mid-container', 'MID');
+
+                const finalData = await fetchWithCache('Final_List');
+                renderExams(getUpcomingExams(finalData), 'final-container', 'FINAL');
+
+                // Countdown Timer Logic
                 setInterval(function () {
                     const timers = document.querySelectorAll('.countdown-timer');
                     const currentTime = new Date().getTime();
@@ -454,6 +980,166 @@
             }
         }
         fetchExamSchedules();
+
+        // --- Faculty Modal & Data Fetch Logic ---
+        const facultyBtn = document.getElementById('faculty-btn');
+        const facultyModal = document.getElementById('faculty-modal');
+        const closeFacultyBtn = document.getElementById('close-faculty-btn');
+        const facultyContent = document.getElementById('faculty-content');
+        let isFacultyLoaded = false;
+
+        if (facultyBtn && facultyModal) {
+            facultyBtn.addEventListener('click', () => {
+                facultyModal.classList.remove('hidden');
+                if (!isFacultyLoaded) fetchFacultyData();
+            });
+        }
+
+        if (closeFacultyBtn && facultyModal) {
+            closeFacultyBtn.addEventListener('click', () => facultyModal.classList.add('hidden'));
+        }
+
+        async function fetchFacultyData() {
+            try {
+                if (facultyContent) facultyContent.innerHTML = '<div class="text-center p-12 text-emerald-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 block"></i>Loading Faculty Data...</div>';
+
+                const data = await fetchWithCache('Faculty_List');
+
+                if (data && data.length > 0 && !data.error) {
+                    if (facultyContent) {
+                        facultyContent.innerHTML = data.map(item => `
+                            <div class="bg-slate-950 p-5 rounded-lg border border-slate-800 hover:border-emerald-500/50 transition flex items-start space-x-4">
+                                ${item.Photo ?
+                                `<img src="${item.Photo}" alt="${item.Name}" class="h-16 w-16 rounded-full object-cover border-2 border-emerald-500/30 shrink-0 shadow-lg">`
+                                :
+                                `<div class="bg-emerald-500/10 text-emerald-400 border-2 border-emerald-500/30 h-16 w-16 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold font-code shadow-lg">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    </div>`
+                            }
+                                <div class="flex-grow">
+                                    <h4 class="font-bold text-white text-base">${item.Name}</h4>
+                                    <p class="text-xs text-emerald-400 font-code mt-0.5">${item.Designation || ''}</p>
+                                    <p class="text-xs text-slate-300 mt-2"><strong>Courses:</strong> ${item.Course || 'N/A'}</p>
+                                    <div class="mt-3 flex flex-wrap gap-3 text-xs font-code">
+                                        ${item.Phone ? `<a href="tel:${item.Phone}" class="text-cyan-400 hover:underline"><i class="fa-solid fa-phone mr-1"></i> ${item.Phone}</a>` : ''}
+                                        ${item.Email ? `<a href="mailto:${item.Email}" class="text-cyan-400 hover:underline"><i class="fa-solid fa-envelope mr-1"></i> ${item.Email}</a>` : ''}
+                                    </div>
+                                    ${item.ProfileLink ?
+                                `<div class="mt-4 pt-3 border-t border-slate-800">
+                                            <a href="${item.ProfileLink}" target="_blank" class="inline-flex items-center text-xs font-code font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-3 py-1.5 rounded transition">
+                                                <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Official Profile
+                                            </a>
+                                        </div>`
+                                : ''
+                            }
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                    isFacultyLoaded = true;
+                } else {
+                    if (facultyContent) facultyContent.innerHTML = '<div class="text-center p-6 col-span-full text-slate-500">No faculty nodes available.</div>';
+                }
+            } catch (error) {
+                console.error("Faculty fetch error:", error);
+                if (facultyContent) facultyContent.innerHTML = '<div class="text-center p-6 col-span-full text-rose-500">Error loading faculty data!</div>';
+            }
+        }
+
+        // --- Refined Theme Toggle Logic ---
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const themeIcon = document.getElementById('theme-icon');
+
+// পেজ লোড হওয়ার সময় সেভ করা থিম চেক করা
+const currentTheme = localStorage.getItem('bup_ict_theme');
+if (currentTheme === 'light') {
+    document.body.classList.add('light-mode');
+    applyLightModeElements(true);
+    if(themeIcon) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+}
+
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        
+        let isLight = document.body.classList.contains('light-mode');
+        
+        if (isLight) {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            localStorage.setItem('bup_ict_theme', 'light');
+            applyLightModeElements(true);
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            localStorage.setItem('bup_ict_theme', 'dark');
+            applyLightModeElements(false);
+        }
+    });
+}
+
+// ডার্ক এবং লাইট মোডের ক্লাস ডাইনামিক হ্যান্ডেল করার ফাংশন
+function applyLightModeElements(isLight) {
+    // সেকশন ও কার্ডগুলোর ব্যাকগ্রাউন্ড এবং বর্ডার ক্লাস পরিবর্তন
+    const darkElements = document.querySelectorAll('.bg-neutral-900, .bg-neutral-950');
+    darkElements.each = Array.from(darkElements);
+    
+    darkElements.forEach(el => {
+        if (isLight) {
+            el.classList.add('light-override');
+            el.style.backgroundColor = '#ffffff';
+            el.style.borderColor = '#cbd5e1';
+            el.style.color = '#0f172a';
+        } else {
+            el.style.backgroundColor = '';
+            el.style.borderColor = '';
+            el.style.color = '';
+            el.classList.remove('light-override');
+        }
+    });
+}
+
+        // ==========================================
+        // BACKGROUND PRE-FETCHING (Ninja Technique)
+        // ==========================================
+        // Main page load howar 3 second por silently student data tene anbe
+        // ==========================================
+        // MASTER BACKGROUND PRE-FETCHING (Ninja Technique)
+        // ==========================================
+        // Main page load howar 3 second por silently sob data tene anbe
+        setTimeout(async () => {
+            console.log("Silently pre-fetching all background data...");
+
+            // Je je sheet er data background e age thekei anbo
+            const sheetsToPrefetch = ['Student_List', 'Faculty_List', 'Routine-List', 'Notice_List', 'Materials_List', 'Semesters_List'];
+
+            for (const sheetName of sheetsToPrefetch) {
+                try {
+                    const cacheKey = 'bup_ict_data_' + sheetName;
+                    const timeKey = cacheKey + '_time';
+                    const cacheTime = localStorage.getItem(timeKey);
+                    const now = new Date().getTime();
+
+                    // Jodi cache e data na thake ba 1 ghonta par hoye jay
+                    if (!cacheTime || (now - parseInt(cacheTime) > 60 * 60 * 1000)) {
+                        const response = await fetch(baseUrl + '?sheet=' + sheetName);
+                        const data = await response.json();
+
+                        if (data && !data.error) {
+                            localStorage.setItem(cacheKey, JSON.stringify(data));
+                            localStorage.setItem(timeKey, now.toString());
+                            console.log(sheetName + " is ready in cache!");
+                        }
+                    }
+                } catch (err) {
+                    console.log("Failed to pre-fetch: " + sheetName);
+                }
+            }
+            console.log("All background fetching complete! Portal is super fast now.");
+        }, 3000);
     </script>
 </body>
 

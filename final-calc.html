@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUP ICT - Required Final Exam Marks Calculator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-code { font-family: 'JetBrains Mono', monospace; }
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-300 selection:bg-cyan-500 selection:text-white min-h-screen tech-grid flex flex-col justify-between">
+
+    <!-- TOP BAR -->
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-cyan-400 font-code font-bold hover:underline">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back to Portal
+            </a>
+            <span class="text-xs text-slate-500 font-code">&lt;BUP_ICT/Final_Mark_Engine&gt;</span>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 py-12 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT: CALCULATOR FORM -->
+            <div class="lg:col-span-2 bg-slate-900 border border-cyan-500/50 rounded-2xl shadow-[0_0_40px_rgba(6,182,212,0.15)] p-6 sm:p-8">
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-code mb-3">
+                        <i class="fa-solid fa-bullseye mr-1"></i> Target Evaluation Tool
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-code">Calculate Required Final Marks</h1>
+                    <p class="text-sm text-slate-400 mt-1">Final exam is out of 100, which is later converted to 50 marks scale.</p>
+                </div>
+
+                <div class="space-y-6 font-code text-sm">
+                    
+                    <!-- PORTION 1: Class Tests (4 CTs, Best 3) -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                        <h3 class="text-cyan-400 font-bold border-b border-slate-800 pb-2">
+                            <i class="fa-solid fa-file-pen mr-2"></i>Portion 1: Class Tests (4 CTs total, Best 3 counted, scaled to 10 marks)
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">CT 1 (Obtained / Total)</label>
+                                <div class="flex space-x-2">
+                                    <input type="number" id="ct1-obt" placeholder="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                    <span class="self-center text-slate-500">/</span>
+                                    <input type="number" id="ct1-tot" value="10" min="1" class="w-20 bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">CT 2 (Obtained / Total)</label>
+                                <div class="flex space-x-2">
+                                    <input type="number" id="ct2-obt" placeholder="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                    <span class="self-center text-slate-500">/</span>
+                                    <input type="number" id="ct2-tot" value="10" min="1" class="w-20 bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">CT 3 (Obtained / Total)</label>
+                                <div class="flex space-x-2">
+                                    <input type="number" id="ct3-obt" placeholder="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                    <span class="self-center text-slate-500">/</span>
+                                    <input type="number" id="ct3-tot" value="10" min="1" class="w-20 bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">CT 4 (Obtained / Total)</label>
+                                <div class="flex space-x-2">
+                                    <input type="number" id="ct4-obt" placeholder="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                    <span class="self-center text-slate-500">/</span>
+                                    <input type="number" id="ct4-tot" value="10" min="1" class="w-20 bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PORTION 2: Mid, Assignment/Project/Presentation, Attendance -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                        <h3 class="text-indigo-400 font-bold border-b border-slate-800 pb-2">
+                            <i class="fa-solid fa-list-check mr-2"></i>Portion 2: Mid, Assignment/Project/Presentation & Attendance
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Mid Term Exam (Max 20)</label>
+                                <input type="number" id="mid-marks" placeholder="0" min="0" max="20" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Project / Assignment / Presentation (Max 10)</label>
+                                <input type="number" id="project-assignment-marks" placeholder="0" min="0" max="10" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs text-slate-400 mb-1">Attendance (Max 10)</label>
+                                <input type="number" id="attendance-marks" placeholder="0" min="0" max="10" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-white focus:border-cyan-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desired GPA -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <label class="block text-xs text-slate-400 mb-2">Select Your Desired Grade / Percentage</label>
+                        <select id="desired-gpa" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2.5 text-white focus:border-cyan-500 outline-none">
+                            <option value="80">A+ (4.00) - 80% and above</option>
+                            <option value="75">A (3.75) - 75% to less than 80%</option>
+                            <option value="70">A- (3.50) - 70% to less than 75%</option>
+                            <option value="65">B+ (3.25) - 65% to less than 70%</option>
+                            <option value="60">B (3.00) - 60% to less than 65%</option>
+                            <option value="55">B- (2.75) - 55% to less than 60%</option>
+                            <option value="50">C+ (2.50) - 50% to less than 55%</option>
+                            <option value="45">C (2.25) - 45% to less than 50%</option>
+                            <option value="40">D (2.00) - 40% to less than 45%</option>
+                        </select>
+                    </div>
+
+                    <button onclick="calculateRequiredMarks()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                        Calculate Required Final Exam Marks
+                    </button>
+
+                    <!-- Result Area -->
+                    <div id="result-box" class="hidden mt-6 bg-slate-950 border border-cyan-500/40 p-6 rounded-xl text-center space-y-2">
+                        <span id="result-title" class="text-xs text-slate-400 block">MINIMUM FINAL EXAM MARKS NEEDED</span>
+                        <span id="final-needed-score" class="text-4xl font-extrabold text-cyan-400 tracking-wider">0.00</span>
+                        <p id="result-message" class="text-xs text-slate-400 pt-2"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: BUP GRADING SYSTEM CHART -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 h-fit sticky top-24">
+                <h3 class="text-lg font-bold text-white font-code mb-4 border-b border-slate-800 pb-2">
+                    <i class="fa-solid fa-chart-bar text-cyan-500 mr-2"></i>BUP Grading System
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-code">
+                        <thead>
+                            <tr class="text-slate-500 border-b border-slate-800">
+                                <th class="pb-2">Numerical Grade</th>
+                                <th class="pb-2">Letter</th>
+                                <th class="pb-2 text-right">Point</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                            <tr><td class="py-2">80% & above</td><td class="py-2 text-cyan-400 font-bold">A+</td><td class="py-2 text-right">4.00</td></tr>
+                            <tr><td class="py-2">75% to &lt;80%</td><td class="py-2 text-cyan-400 font-bold">A</td><td class="py-2 text-right">3.75</td></tr>
+                            <tr><td class="py-2">70% to &lt;75%</td><td class="py-2 text-cyan-400 font-bold">A-</td><td class="py-2 text-right">3.50</td></tr>
+                            <tr><td class="py-2">65% to &lt;70%</td><td class="py-2 text-cyan-400 font-bold">B+</td><td class="py-2 text-right">3.25</td></tr>
+                            <tr><td class="py-2">60% to &lt;65%</td><td class="py-2 text-cyan-400 font-bold">B</td><td class="py-2 text-right">3.00</td></tr>
+                            <tr><td class="py-2">55% to &lt;60%</td><td class="py-2 text-cyan-400 font-bold">B-</td><td class="py-2 text-right">2.75</td></tr>
+                            <tr><td class="py-2">50% to &lt;55%</td><td class="py-2 text-cyan-400 font-bold">C+</td><td class="py-2 text-right">2.50</td></tr>
+                            <tr><td class="py-2">45% to &lt;50%</td><td class="py-2 text-cyan-400 font-bold">C</td><td class="py-2 text-right">2.25</td></tr>
+                            <tr><td class="py-2">40% to &lt;45%</td><td class="py-2 text-cyan-400 font-bold">D</td><td class="py-2 text-right">2.00</td></tr>
+                            <tr><td class="py-2">Less than 40%</td><td class="py-2 text-rose-400 font-bold">F</td><td class="py-2 text-right">0.00</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-xs text-slate-600 font-code border-t border-slate-900">
+        <p>BUP ICT Department Portal Evaluation Engine</p>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        function calculateRequiredMarks() {
+            let mid = parseFloat(document.getElementById('mid-marks').value) || 0;
+            let projAssign = parseFloat(document.getElementById('project-assignment-marks').value) || 0;
+            let attendance = parseFloat(document.getElementById('attendance-marks').value) || 0;
+
+            // Validation check for max limits
+            if (mid > 20) {
+                alert("Mid Term marks cannot exceed 20!");
+                return;
+            }
+            if (projAssign > 10) {
+                alert("Project/Assignment/Presentation marks cannot exceed 10!");
+                return;
+            }
+            if (attendance > 10) {
+                alert("Attendance marks cannot exceed 10!");
+                return;
+            }
+
+            // Helper to convert CT to 10 marks scale
+            function convertTo10(obt, tot) {
+                if (!tot || tot <= 0) return 0;
+                let converted = (obt / tot) * 10;
+                return converted > 10 ? 10 : converted;
+            }
+
+            let c1 = convertTo10(parseFloat(document.getElementById('ct1-obt').value) || 0, parseFloat(document.getElementById('ct1-tot').value) || 10);
+            let c2 = convertTo10(parseFloat(document.getElementById('ct2-obt').value) || 0, parseFloat(document.getElementById('ct2-tot').value) || 10);
+            let c3 = convertTo10(parseFloat(document.getElementById('ct3-obt').value) || 0, parseFloat(document.getElementById('ct3-tot').value) || 10);
+            let c4 = convertTo10(parseFloat(document.getElementById('ct4-obt').value) || 0, parseFloat(document.getElementById('ct4-tot').value) || 10);
+
+            // Best 3 out of 4 CTs, averaged to 10 marks scale
+            let cts = [c1, c2, c3, c4].sort((a, b) => b - a);
+            let bestThreeCTAvg = (cts[0] + cts[1] + cts[2]) / 3;
+
+            // Total In-Course obtained out of 50
+            let obtainedInCourse = bestThreeCTAvg + mid + projAssign + attendance;
+
+            let targetPercentage = parseFloat(document.getElementById('desired-gpa').value); // e.g. 80% for A+
+            
+            // Final needed score out of 50 (since final exam is converted from 100 to 50 scale)
+            let finalNeededOutof50 = targetPercentage - obtainedInCourse;
+            let finalNeededOutof100 = finalNeededOutof50 * 2;
+
+            const resultBox = document.getElementById('result-box');
+            const resultTitle = document.getElementById('result-title');
+            const resultScore = document.getElementById('final-needed-score');
+            const resultMsg = document.getElementById('result-message');
+
+            resultBox.classList.remove('hidden');
+
+            if (finalNeededOutof50 <= 0) {
+                resultScore.innerText = "0.00 / 100";
+                resultMsg.innerText = "Congratulations! Your current in-course marks are already enough to secure this target grade!";
+                resultScore.className = "text-4xl font-extrabold text-emerald-400 tracking-wider";
+                resultTitle.innerText = "MINIMUM FINAL EXAM MARKS NEEDED";
+            } else if (finalNeededOutof50 > 50) {
+                resultScore.innerText = "Not Possible";
+                resultMsg.innerText = "Even with full marks in the final exam, reaching this target is mathematically impossible based on your current in-course score.";
+                resultScore.className = "text-4xl font-extrabold text-rose-400 tracking-wider";
+                resultTitle.innerText = "MINIMUM FINAL EXAM MARKS NEEDED";
+            } else {
+                resultScore.innerText = finalNeededOutof100.toFixed(2) + " / 100";
+                resultMsg.innerText = `You need to score at least ${finalNeededOutof100.toFixed(2)} marks out of 100 in the final exam (which converts to ${finalNeededOutof50.toFixed(2)} out of 50).`;
+                resultScore.className = "text-4xl font-extrabold text-cyan-400 tracking-wider";
+                resultTitle.innerText = "MINIMUM FINAL EXAM MARKS NEEDED (OUT OF 100)";
+            }
+        }
+    </script>
+</body>
+</html>

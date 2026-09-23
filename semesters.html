@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full overflow-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Timeline - ICT Dept</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-code { font-family: 'JetBrains Mono', monospace; }
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        }
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-list::-webkit-scrollbar { width: 4px; display: block; }
+        .course-list::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; display: block; }
+        
+        .modal-scroll::-webkit-scrollbar { width: 6px; display: block; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; display: block; }
+    </style>
+</head>
+<body class="bg-neutral-950 text-slate-300 font-code selection:bg-cyan-500/30 h-full flex flex-col tech-grid overflow-hidden">
+
+    <!-- HEADER: Back to Portal -->
+    <header class="bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800 shrink-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+            <a href="index.html" class="text-cyan-400 hover:text-cyan-300 transition font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back to Portal</span>
+            </a>
+            <span class="text-slate-500 text-xs hidden sm:block">&lt;BUP_ICT/Academic_Timeline&gt;</span>
+        </div>
+    </header>
+
+    <!-- TIMELINE CONTENT -->
+    <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full flex flex-col overflow-hidden">
+        
+        <div class="mb-6 border-b border-neutral-800 pb-4 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white flex items-center">
+                    <i class="fa-solid fa-code-branch text-cyan-500 mr-3"></i> Academic_Timeline
+                </h1>
+                <p class="text-slate-400 mt-1 text-xs sm:text-sm">Click any semester card to view detailed course structure table.</p>
+            </div>
+            <span class="text-xs text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-3 py-1.5 rounded-lg">
+                <i class="fa-solid fa-hand-pointer mr-1"></i> Interactive Nodes
+            </span>
+        </div>
+
+        <!-- Dynamic Grid Container -->
+        <div id="semesters-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch overflow-y-auto pb-6 pr-1 flex-grow">
+            <!-- Loading State -->
+            <div class="col-span-full text-center py-20 text-cyan-400 font-code animate-pulse my-auto">
+                <i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 block"></i> Syncing Semester Nodes from Database...
+            </div>
+        </div>
+    </main>
+
+    <!-- DETAILED COURSE TABLE MODAL -->
+    <div id="course-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-neutral-950/80 backdrop-blur-md p-4">
+        <div class="bg-neutral-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl max-h-[85vh] shadow-[0_0_40px_rgba(6,182,212,0.25)] relative flex flex-col overflow-hidden transform transition-all">
+            
+            <!-- Modal Header -->
+            <div class="bg-neutral-900 border-b border-neutral-800 p-5 flex justify-between items-center shrink-0">
+                <div>
+                    <span id="modal-badge" class="text-xs font-bold px-2.5 py-1 rounded font-code uppercase"></span>
+                    <h2 id="modal-title" class="text-xl font-bold text-white font-code mt-1"></h2>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none h-10 w-10 flex items-center justify-center rounded-lg bg-neutral-800/50 hover:bg-neutral-800">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Table) -->
+            <div class="p-6 overflow-y-auto modal-scroll bg-neutral-900/50 flex-grow">
+                <div class="overflow-x-auto rounded-lg border border-neutral-800">
+                    <table class="w-full text-left border-collapse font-code text-sm">
+                        <thead>
+                            <tr class="bg-neutral-800/80 text-cyan-400 border-b border-neutral-700">
+                                <th class="p-3.5 pl-4 text-center w-12">SI</th>
+                                <th class="p-3.5">Course Code</th>
+                                <th class="p-3.5">Course Title</th>
+                                <th class="p-3.5 text-center">Credit</th>
+                                <th class="p-3.5 text-center">Type</th>
+                                <th class="p-3.5 pr-4 text-center">Contact Hour</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-table-body" class="text-slate-300 divide-y divide-neutral-800">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-neutral-950 border-t border-neutral-800 p-4 px-6 flex justify-between items-center text-xs text-slate-500 shrink-0">
+                <span id="modal-total-credits">Total Credits: --</span>
+                <button onclick="closeModal()" class="bg-neutral-800 hover:bg-neutral-700 text-slate-300 px-4 py-2 rounded transition font-code">
+                    Close [ESC]
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT WITH LOCALSTORAGE CACHING & MODAL INTERACTION -->
+    <script>
+        const baseUrl = 'https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec';
+        let globalSemestersData = {};
+
+        async function getSemestersData() {
+            const cacheKey = 'bup_ict_data_Semesters_List';
+            const timeKey = cacheKey + '_time';
+            const cachedData = localStorage.getItem(cacheKey);
+            const cacheTime = localStorage.getItem(timeKey);
+            const now = new Date().getTime();
+
+            if (cachedData && cacheTime && (now - parseInt(cacheTime) < 60 * 60 * 1000)) {
+                return JSON.parse(cachedData);
+            }
+
+            try {
+                const response = await fetch(baseUrl + '?sheet=Semesters_List');
+                const data = await response.json();
+                if (data && !data.error) {
+                    localStorage.setItem(cacheKey, JSON.stringify(data));
+                    localStorage.setItem(timeKey, now.toString());
+                }
+                return data;
+            } catch (err) {
+                if (cachedData) return JSON.parse(cachedData);
+                throw err;
+            }
+        }
+
+        async function initSemesters() {
+            try {
+                const data = await getSemestersData();
+                if (data && data.length > 0 && !data.error) {
+                    processAndRender(data);
+                } else {
+                    document.getElementById('semesters-container').innerHTML = '<div class="col-span-full text-center text-rose-500 m-auto">No semester data found in sheet!</div>';
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('semesters-container').innerHTML = '<div class="col-span-full text-center text-rose-500 m-auto">Failed to connect to database!</div>';
+            }
+        }
+
+        function calculateDynamicProgress(semesterIndex) {
+            const now = new Date();
+            let semTimeline = [
+                { start: new Date(2025, 0, 1), end: new Date(2025, 6, 30) },   
+                { start: new Date(2025, 7, 1), end: new Date(2025, 11, 31) },  
+                { start: new Date(2026, 0, 1), end: new Date(2026, 6, 30) },   
+                { start: new Date(2026, 7, 1), end: new Date(2026, 11, 31) },  
+                { start: new Date(2027, 0, 1), end: new Date(2027, 6, 30) },   
+                { start: new Date(2027, 7, 1), end: new Date(2027, 11, 31) },  
+                { start: new Date(2028, 0, 1), end: new Date(2028, 6, 30) },   
+                { start: new Date(2028, 7, 1), end: new Date(2028, 11, 31) }   
+            ];
+
+            if (semesterIndex >= semTimeline.length) return 0;
+            let sTarget = semTimeline[semesterIndex];
+            let nowTime = now.getTime();
+
+            if (nowTime > sTarget.end.getTime()) return 100; 
+            if (nowTime < sTarget.start.getTime()) return 0;  
+
+            let totalDuration = sTarget.end.getTime() - sTarget.start.getTime();
+            let elapsed = nowTime - sTarget.start.getTime();
+            let progress = Math.floor((elapsed / totalDuration) * 100);
+
+            return Math.min(Math.max(progress, 5), 98); 
+        }
+
+        function processAndRender(data) {
+            globalSemestersData = {};
+            data.forEach(row => {
+                let semName = row.Semester;
+                if (!globalSemestersData[semName]) globalSemestersData[semName] = [];
+                globalSemestersData[semName].push(row);
+            });
+
+            const semNamesOrder = [
+                "Level-1 Term-1", "Level-1 Term-2",
+                "Level-2 Term-1", "Level-2 Term-2",
+                "Level-3 Term-1", "Level-3 Term-2",
+                "Level-4 Term-1", "Level-4 Term-2"
+            ];
+
+            let containerHtml = '';
+
+            semNamesOrder.forEach((semName, index) => {
+                const courses = globalSemestersData[semName] || [];
+                let progress = calculateDynamicProgress(index);
+                let status = "Locked";
+                if (progress === 100) status = "Completed";
+                else if (progress > 0 && progress < 100) status = "Active";
+
+                let cardStyle = "";
+                let badgeHtml = "";
+                let progressBarHtml = "";
+
+                if (status === "Completed") {
+                    cardStyle = "bg-neutral-900 border border-emerald-500/30 opacity-75 hover:opacity-100 hover:border-emerald-500 shadow-lg";
+                    badgeHtml = `<div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2 py-1 rounded-bl-lg font-code border-b border-l border-emerald-500/30"><i class="fa-solid fa-check-double mr-1"></i>COMPLETED</div>`;
+                } else if (status === "Active") {
+                    cardStyle = "bg-neutral-900 border-2 border-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.15)] z-10 ring-1 ring-cyan-500/55 hover:border-cyan-400";
+                    badgeHtml = `<div class="absolute top-0 right-0 bg-cyan-500 text-neutral-950 text-[10px] font-bold px-2 py-1 rounded-bl-lg font-code animate-pulse shadow-lg"><i class="fa-solid fa-spinner fa-spin mr-1"></i>SYSTEM_RUNNING (${progress}%)</div>`;
+                    progressBarHtml = `
+                        <div class="mt-3 pt-3 border-t border-neutral-800 shrink-0">
+                            <div class="flex justify-between text-[10px] text-slate-400 mb-1">
+                                <span>Calendar Progress</span>
+                                <span class="text-cyan-400 font-bold">${progress}%</span>
+                            </div>
+                            <div class="w-full bg-neutral-950 rounded-full h-1.5 overflow-hidden border border-neutral-800 relative">
+                                <div class="absolute inset-0 bg-cyan-400 opacity-20 animate-pulse"></div>
+                                <div class="bg-cyan-400 h-1.5 rounded-full shadow-[0_0_10px_#22d3ee]" style="width: ${progress}%"></div>
+                            </div>
+                        </div>`;
+                } else {
+                    cardStyle = "bg-neutral-950 border border-neutral-800 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 hover:border-slate-700 transition duration-500";
+                    badgeHtml = `<div class="absolute top-0 right-0 bg-neutral-800 text-neutral-400 text-[10px] font-bold px-2 py-1 rounded-bl-lg font-code"><i class="fa-solid fa-lock mr-1"></i>LOCKED</div>`;
+                }
+
+                let coursesHtml = courses.map(c => `
+                    <li class="flex items-start py-1 border-b border-neutral-800/40 last:border-0 pointer-events-none">
+                        <i class="fa-solid ${c.Type === 'Lab' ? 'fa-laptop-code' : 'fa-book'} ${status === 'Active' ? 'text-cyan-400' : status === 'Completed' ? 'text-emerald-500/50' : 'text-neutral-500'} mt-1 mr-2 w-3 shrink-0"></i> 
+                        <span class="leading-tight">${c.CourseTitle} <span class="text-[10px] opacity-60 block font-mono">(${c.CourseCode} - ${c.Credit} Cr)</span></span>
+                    </li>
+                `).join('');
+
+                containerHtml += `
+                    <div onclick="openModal('${semName}', '${status}')" class="${cardStyle} p-4 sm:p-5 rounded-lg relative overflow-hidden flex flex-col h-[400px] shrink-0 cursor-pointer group transition-all duration-300 hover:-translate-y-1">
+                        ${badgeHtml}
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="text-base sm:text-lg font-bold ${status === 'Active' ? 'text-cyan-400 text-lg sm:text-xl font-extrabold' : 'text-slate-300'} font-code">${semName}</h3>
+                            <i class="fa-solid fa-up-right-from-square text-xs text-slate-500 group-hover:text-cyan-400 transition"></i>
+                        </div>
+                        <p class="text-xs ${status === 'Active' ? 'text-cyan-500/70' : 'text-slate-500'} font-code mb-3 border-b border-neutral-800 pb-2">Click to view full table</p>
+                        <ul class="text-xs ${status === 'Active' ? 'text-white' : 'text-slate-400'} space-y-1 font-code course-list overflow-y-auto pr-1 flex-grow">
+                            ${coursesHtml}
+                        </ul>
+                        ${progressBarHtml}
+                    </div>
+                `;
+            });
+
+            document.getElementById('semesters-container').innerHTML = containerHtml;
+        }
+
+        // Modal Handler Functions with SI No & Auto Contact Hour
+        function openModal(semName, status) {
+            const courses = globalSemestersData[semName] || [];
+            const modal = document.getElementById('course-modal');
+            const title = document.getElementById('modal-title');
+            const badge = document.getElementById('modal-badge');
+            const tbody = document.getElementById('modal-table-body');
+            const totalCreditsEl = document.getElementById('modal-total-credits');
+
+            title.innerText = semName + " - Course Curriculum";
+            
+            if (status === 'Completed') {
+                badge.className = "text-xs font-bold px-2.5 py-1 rounded font-code uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30";
+                badge.innerHTML = '<i class="fa-solid fa-check-double mr-1"></i> Completed Semester';
+            } else if (status === 'Active') {
+                badge.className = "text-xs font-bold px-2.5 py-1 rounded font-code uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30";
+                badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Active Semester';
+            } else {
+                badge.className = "text-xs font-bold px-2.5 py-1 rounded font-code uppercase bg-neutral-800 text-neutral-400 border border-neutral-700";
+                badge.innerHTML = '<i class="fa-solid fa-lock mr-1"></i> Locked Semester';
+            }
+
+            let totalCredits = 0;
+            let rowsHtml = '';
+
+            courses.forEach((c, index) => {
+                let creditVal = parseFloat(c.Credit) || 0;
+                totalCredits += creditVal;
+
+                let contactHour = (c.Type === 'Theory') ? (creditVal === 3 ? '3.0 Hrs' : creditVal + ' Hrs') : (creditVal === 1.5 ? '3.0 Hrs' : (creditVal === 0.75 ? '1.5 Hrs' : '2.0 Hrs'));
+
+                rowsHtml += `
+                    <tr class="hover:bg-neutral-800/40 transition">
+                        <td class="p-3 pl-4 text-center font-mono text-slate-500">${index + 1}</td>
+                        <td class="p-3 font-bold text-cyan-400">${c.CourseCode}</td>
+                        <td class="p-3">${c.CourseTitle}</td>
+                        <td class="p-3 text-center font-semibold text-slate-300">${c.Credit}</td>
+                        <td class="p-3 text-center">
+                            <span class="text-xs px-2 py-0.5 rounded font-mono ${c.Type === 'Lab' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/30' : 'bg-blue-500/10 text-blue-400 border border-blue-500/30'}">
+                                ${c.Type}
+                            </span>
+                        </td>
+                        <td class="p-3 pr-4 text-center font-mono text-cyan-300">${contactHour}</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = rowsHtml;
+            totalCreditsEl.innerText = `Total Courses: ${courses.length} | Total Credits: ${totalCredits.toFixed(2)}`;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('course-modal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        document.getElementById('course-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'course-modal') closeModal();
+        });
+
+        initSemesters();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUP ICT - Student Directory</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-code { font-family: 'JetBrains Mono', monospace; }
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        }
+        /* Custom scrollbar for the table */
+        .table-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+        .table-scroll::-webkit-scrollbar-track { background: #0f172a; }
+        .table-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-300 selection:bg-cyan-500 selection:text-white min-h-screen tech-grid flex flex-col justify-between">
+
+    <!-- TOP BAR -->
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-cyan-400 font-code font-bold hover:underline">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back to Portal
+            </a>
+            <span class="text-xs text-slate-500 font-code">&lt;BUP_ICT/Student_Directory&gt;</span>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
+        
+        <!-- HEADER & SEARCH BAR -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
+            <!-- Decorative blur -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 w-full md:w-auto text-center md:text-left">
+                <div class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-code mb-2">
+                    <i class="fa-solid fa-database mr-1"></i> Live Database
+                </div>
+                <h1 class="text-2xl font-extrabold text-white font-code">Department Student List</h1>
+                <p class="text-xs text-slate-400 mt-1">Search students instantly and click on any row to view full details.</p>
+            </div>
+            
+            <!-- Live Search Box -->
+            <div class="relative z-10 w-full md:w-80 font-code">
+                <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="text" id="searchInput" onkeyup="filterStudents()" placeholder="Search by name or ID..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition shadow-inner">
+            </div>
+        </div>
+
+        <!-- CONTENT LAYOUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            
+            <!-- LEFT: STUDENT TABLE (2 Columns) -->
+            <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="overflow-x-auto table-scroll max-h-[600px] overflow-y-auto">
+                    <table class="w-full text-left text-sm font-code relative">
+                        <thead class="bg-slate-950/95 backdrop-blur-sm text-slate-400 border-b border-slate-800 text-xs sticky top-0 z-10">
+                            <tr>
+                                <th class="p-4 whitespace-nowrap">ID</th>
+                                <th class="p-4 whitespace-nowrap">Name</th>
+                                <th class="p-4 whitespace-nowrap">Gender</th>
+                                <th class="p-4 text-right whitespace-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody" class="divide-y divide-slate-800/50 text-slate-300">
+                            <!-- Loading State -->
+                            <tr id="loadingRow">
+                                <td colspan="4" class="p-12 text-center text-cyan-400 font-code">
+                                    <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-3 block"></i> 
+                                    Fetching data from Google Sheets...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- RIGHT: PROFILE DETAILS CARD -->
+            <!-- RIGHT: PROFILE DETAILS CARD -->
+            <div class="sticky top-24 bg-slate-900 border border-cyan-500/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.05)]">
+                <!-- RIGHT: PROFILE DETAILS CARD -->
+            <div class="sticky top-24 bg-slate-900 border border-cyan-500/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.05)]">
+                <div class="flex items-center space-x-4 border-b border-slate-800 pb-5 mb-5">
+                    <div class="w-14 h-14 bg-gradient-to-br from-slate-800 to-slate-900 border border-cyan-500/30 rounded-2xl flex items-center justify-center text-cyan-400 text-2xl font-bold font-code shadow-inner">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <h3 class="text-[15px] font-extrabold text-slate-300 font-code" id="profileName">No Student Selected</h3>
+                        <p class="text-xs text-cyan-400 font-code mt-1 animate-pulse" id="profileId">
+                            <i class="fa-solid fa-hand-pointer mr-1"></i> Select a student from the list
+                        </p>
+                    </div>
+                </div>
+
+                <!-- (এরপর থেকে session, gender এর div গুলো যেমন ছিল তেমনই থাকবে) -->
+
+                <div class="space-y-3 font-code text-xs">
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                        <span class="text-slate-500"><i class="fa-solid fa-calendar-days mr-2 w-3"></i>Session</span>
+                        <span id="profileSession" class="text-white font-bold">--</span>
+                    </div>
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                        <span class="text-slate-500"><i class="fa-solid fa-venus-mars mr-2 w-3"></i>Gender</span>
+                        <span id="profileGender" class="text-white font-bold">--</span>
+                    </div>
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                        <span class="text-slate-500"><i class="fa-solid fa-droplet mr-2 w-3"></i>Blood Group</span>
+                        <span id="profileBlood" class="text-rose-400 font-bold">--</span>
+                    </div>
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                        <span class="text-slate-500"><i class="fa-brands fa-whatsapp mr-2 w-3"></i>WhatsApp</span>
+                        <span id="profilePhone" class="text-emerald-400 font-bold">--</span>
+                    </div>
+
+                    <div class="pt-3">
+                        <a href="#" id="profileFb" target="_blank" class="block text-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-[0_0_15px_rgba(6,182,212,0.3)] opacity-50 pointer-events-none">
+                            <i class="fa-brands fa-facebook mr-2"></i> View Facebook Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-xs text-slate-600 font-code border-t border-slate-900 mt-auto">
+        <p>BUP ICT Department Student Directory</p>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        // 1. Apnar Google App Script Web App URL (Main Base URL)
+        const baseUrl = "https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec";
+
+        // 2. Advanced Caching System (Super Fast Speed er jonno)
+        async function fetchWithCache(sheetName, expirationMinutes = 60) {
+            const cacheKey = 'bup_ict_data_' + sheetName;
+            const timeKey = cacheKey + '_time';
+            
+            const cachedData = localStorage.getItem(cacheKey);
+            const cacheTime = localStorage.getItem(timeKey);
+            const now = new Date().getTime();
+            
+            if (cachedData && cacheTime && (now - parseInt(cacheTime) < expirationMinutes * 60 * 1000)) {
+                return JSON.parse(cachedData);
+            }
+
+            try {
+                // Ekhane URL er sathe ?sheet=Student_List add hobe
+                const response = await fetch(baseUrl + '?sheet=' + sheetName);
+                const data = await response.json();
+                
+                if (data && !data.error) {
+                    localStorage.setItem(cacheKey, JSON.stringify(data));
+                    localStorage.setItem(timeKey, now.toString());
+                }
+                return data;
+            } catch(error) {
+                if(cachedData) return JSON.parse(cachedData);
+                throw error;
+            }
+        }
+
+        // 3. Fetch Data and Populate Table
+        async function fetchStudentData() {
+            const tableBody = document.getElementById('studentTableBody');
+            
+            try {
+                // Fetch using cache and specific sheet name
+                const data = await fetchWithCache('Student_List');
+                
+                let students = [];
+                if(Array.isArray(data)) {
+                    students = data;
+                } else if(data.data && Array.isArray(data.data)) {
+                    students = data.data;
+                }
+
+                tableBody.innerHTML = ''; // Clear loading text
+
+                if(students.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-500">No students found in the sheet.</td></tr>`;
+                    return;
+                }
+
+                students.forEach(student => {
+                    const session = student["Session"] || "--";
+                    const id = student["ID"] || "--";
+                    const name = student["Name"] || "--";
+                    const gender = student["Gender"] || "--";
+                    const whatsapp = student["Whatsapp Number"] || "--";
+                    const bloodGroup = student["Blood Group"] || "--";
+                    const fbLink = student["Facebook Id Link"] || "";
+
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-800/80 cursor-pointer transition student-row";
+                    
+                    tr.onclick = () => showProfile(id, name, session, gender, whatsapp, bloodGroup, fbLink, tr);
+
+                    tr.innerHTML = `
+                        <td class="p-4 text-cyan-400 font-bold">${id}</td>
+                        <td class="p-4 font-semibold text-white student-name">${name}</td>
+                        <td class="p-4 text-xs text-slate-400">${gender}</td>
+                        <td class="p-4 text-right"><i class="fa-solid fa-chevron-right text-xs text-slate-600"></i></td>
+                    `;
+                    
+                    tableBody.appendChild(tr);
+                });
+
+            } catch (error) {
+                console.error("API Fetch Error:", error);
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-rose-400 font-code">
+                            <i class="fa-solid fa-triangle-exclamation mr-2 text-xl block mb-2"></i> 
+                            Failed to load database. Check connection.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // 4. Update Profile Details Card (Right Side)
+        function showProfile(id, name, session, gender, phone, blood, fbLink, selectedRow) {
+            
+            // Highlight selected row
+            document.querySelectorAll('.student-row').forEach(row => row.classList.remove('bg-cyan-900/30', 'border-l-2', 'border-cyan-500'));
+            selectedRow.classList.add('bg-cyan-900/30', 'border-l-2', 'border-cyan-500');
+
+            // Update details
+            document.getElementById('profileName').innerText = name;
+            document.getElementById('profileId').innerText = "ID: " + id;
+            document.getElementById('profileSession').innerText = session;
+            document.getElementById('profileGender').innerText = gender;
+            document.getElementById('profileBlood').innerText = blood;
+            
+            // --- Smart WhatsApp & Phone Dialer Logic ---
+            const phoneContainer = document.getElementById('profilePhone');
+            let phoneNum = phone ? phone.toString().trim() : "";
+
+            if (phoneNum && phoneNum !== "--" && phoneNum !== "") {
+                // নাম্বার থেকে স্পেস বা ড্যাশ রিমুভ করা
+                let cleanNum = phoneNum.replace(/[\s-]/g, ''); 
+                // হোয়াটসঅ্যাপ লিংকের জন্য শুধু নাম্বার (প্লাস চিহ্ন ছাড়া)
+                let waNum = cleanNum.replace('+', ''); 
+                
+                phoneContainer.innerHTML = `
+                    <div class="flex items-center space-x-2.5">
+                        <span class="text-emerald-400 font-bold">${phoneNum}</span>
+                        <!-- WhatsApp Button -->
+                        <a href="https://wa.me/${waNum}" target="_blank" title="Message on WhatsApp" class="bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white h-7 w-7 rounded-md flex items-center justify-center transition shadow-sm">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <!-- Phone Call Button -->
+                        <a href="tel:${cleanNum}" title="Make a Call" class="bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white h-7 w-7 rounded-md flex items-center justify-center transition shadow-sm">
+                            <i class="fa-solid fa-phone"></i>
+                        </a>
+                    </div>
+                `;
+            } else {
+                phoneContainer.innerHTML = '<span class="text-slate-500 font-bold">--</span>';
+            }
+
+            // Update Facebook Button
+            const fbBtn = document.getElementById('profileFb');
+            if (fbLink && fbLink.trim() !== "" && fbLink !== "--") {
+                fbBtn.href = fbLink;
+                fbBtn.classList.remove('opacity-50', 'pointer-events-none');
+            } else {
+                fbBtn.href = "#";
+                fbBtn.classList.add('opacity-50', 'pointer-events-none');
+            }
+        }
+
+        // 5. Live Search Filter
+        function filterStudents() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.getElementById('studentTableBody').getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                if(rows[i].id === 'loadingRow' || rows[i].cells.length < 2) continue;
+
+                let idText = rows[i].cells[0].innerText.toLowerCase();
+                let nameText = rows[i].cells[1].innerText.toLowerCase();
+
+                if (idText.includes(input) || nameText.includes(input)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        // 6. Trigger API fetch when page loads
+        window.onload = fetchStudentData;
+    </script>
+</body>
+</html>
