@@ -17,77 +17,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-    body {
-        font-family: 'Inter', sans-serif;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-    .font-code {
-        font-family: 'JetBrains Mono', monospace;
-    }
+        .font-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
 
-    /* Tech Grid Background */
-    .tech-grid {
-        background-size: 40px 40px;
-        background-image:
-            linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-    }
+        /* Tech Grid Background */
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        }
 
-    /* Glowing hover effects */
-    .tech-card-hover {
-        transition: all 0.3s ease;
-    }
+        /* Glowing hover effects */
+        .tech-card-hover {
+            transition: all 0.3s ease;
+        }
 
-    .tech-card-hover:hover {
-        border-color: #06b6d4;
-        box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-        transform: translateY(-4px);
-    }
-
-    /* --- Refined Light Theme Overrides --- */
-    body.light-mode {
-        background-color: #f1f5f9 !important;
-        color: #0f172a !important;
-    }
-
-    body.light-mode .tech-grid {
-        background-image:
-            linear-gradient(to right, rgba(14, 165, 233, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(14, 165, 233, 0.08) 1px, transparent 1px) !important;
-    }
-
-    body.light-mode nav,
-    body.light-mode header,
-    body.light-mode footer,
-    body.light-mode .bg-neutral-950,
-    body.light-mode .bg-neutral-900 {
-        background-color: #ffffff !important;
-        color: #0f172a !important;
-        border-color: #cbd5e1 !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-
-    body.light-mode .text-white {
-        color: #0f172a !important;
-    }
-
-    body.light-mode .text-slate-300,
-    body.light-mode .text-slate-400,
-    body.light-mode p {
-        color: #334155 !important;
-    }
-
-    body.light-mode div[class*="bg-neutral-"],
-    body.light-mode section {
-        background-color: #ffffff !important;
-        border-color: #cbd5e1 !important;
-        color: #1e293b !important;
-    }
-
-    body.light-mode button:not(#theme-toggle-btn) {
-        border-color: #cbd5e1 !important;
-    }
-</style>
+        .tech-card-hover:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+            transform: translateY(-4px);
+        }
+    </style>
 </head>
 
 <body class="bg-neutral-950 text-slate-300 font-code selection:bg-cyan-500/30">
@@ -177,9 +133,8 @@
                         </div>
                     </div>
 
-                    <!-- Notices & Theme Toggle Group -->
+                    <!-- Notices Button Group -->
                     <div class="flex items-center space-x-3">
-                        <!-- Notices Button -->
                         <button id="nav-notice-alarm"
                             class="relative bg-rose-500/10 border border-rose-500/50 text-rose-400 hover:bg-rose-500/20 px-4 py-2 rounded-lg font-code text-sm transition flex items-center space-x-2">
                             <span class="relative flex h-2 w-2">
@@ -189,13 +144,6 @@
                             </span>
                             <i class="fa-solid fa-bullhorn"></i>
                             <span>Notices</span>
-                        </button>
-
-                        <!-- Dark/Light Theme Toggle Button -->
-                        <button id="theme-toggle-btn"
-                            class="bg-neutral-900 border border-neutral-800 text-cyan-400 hover:border-cyan-500 p-2 rounded-lg transition flex items-center justify-center w-10 h-10 shadow-lg"
-                            title="Toggle Theme">
-                            <i id="theme-icon" class="fa-solid fa-moon"></i>
                         </button>
                     </div>
 
@@ -592,9 +540,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript code -->
-
-
     <!-- SCRIPT -->
     <script>
         // Simple Live Clock
@@ -608,7 +553,7 @@
         const baseUrl = 'https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec';
 
         // ==========================================
-        // ADVANCED CACHING SYSTEM (ROCKET SPEED)
+        // ADVANCED CACHING SYSTEM (ROCKET SPEED & BUG FIXED)
         // ==========================================
         async function fetchWithCache(sheetName, expirationMinutes = 60) {
             const cacheKey = 'bup_ict_data_' + sheetName;
@@ -620,21 +565,28 @@
 
             // চেক করবে ক্যাশ আছে কিনা এবং তা ১ ঘণ্টার কম পুরোনো কিনা
             if (cachedData && cacheTime && (now - parseInt(cacheTime) < expirationMinutes * 60 * 1000)) {
-                return JSON.parse(cachedData); // থাকলে সাথে সাথে (0.001s এ) রিটার্ন করবে!
+                return JSON.parse(cachedData);
             }
 
-            // না থাকলে বা ডেটা পুরোনো হলে সার্ভার থেকে আনবে
             try {
                 const response = await fetch(baseUrl + '?sheet=' + sheetName);
-                const data = await response.json();
+                const text = await response.text(); 
+                let data;
+                
+                try {
+                    // API থেকে JSON এর বদলে HTML/Error আসলে এখানেই ব্লক হয়ে যাবে
+                    data = JSON.parse(text);
+                } catch (err) {
+                    throw new Error("Invalid JSON Data or 404 HTML Error Received.");
+                }
 
                 if (data && !data.error) {
                     localStorage.setItem(cacheKey, JSON.stringify(data));
-                    localStorage.setItem(timeKey, now.toString()); // সেভ করার সময়টা লিখে রাখলো
+                    localStorage.setItem(timeKey, now.toString());
                 }
                 return data;
             } catch (error) {
-                // ইন্টারনেট না থাকলে বা এরর হলে, আগের ক্যাশ করা ডেটাই দেখিয়ে দেবে
+                // এরর হলে ব্রাউজার ক্যাশ করা ডেটা দেখাবে (যাতে সাইট ব্লাংক না থাকে)
                 if (cachedData) return JSON.parse(cachedData);
                 throw error;
             }
@@ -661,13 +613,11 @@
         async function fetchRoutineData() {
             try {
                 routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-cyan-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 block"></i> Fetching Routine...</td></tr>';
-
                 const data = await fetchWithCache('Routine-List');
 
                 if (data && data.length > 0 && !data.error) {
                     const dayCounts = {};
                     data.forEach(row => { dayCounts[row.Day] = (dayCounts[row.Day] || 0) + 1; });
-
                     let html = '';
                     let currentDay = '';
 
@@ -691,7 +641,7 @@
                 }
             } catch (error) {
                 console.error("Routine fetch error:", error);
-                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-500">Error loading data! Check connection.</td></tr>';
+                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-500">Error loading data! Check API connection.</td></tr>';
             }
         }
 
@@ -786,7 +736,7 @@
                 }
             } catch (error) {
                 console.error("Archive fetch error:", error);
-                const errHtml = '<div class="text-center p-6 col-span-full text-rose-500">Error loading data!</div>';
+                const errHtml = '<div class="text-center p-6 col-span-full text-rose-500">Error loading data from API!</div>';
                 if (theoryContent) theoryContent.innerHTML = errHtml;
                 if (labContent) labContent.innerHTML = errHtml;
                 if (pyqContent) pyqContent.innerHTML = errHtml;
@@ -816,7 +766,6 @@
 
                 const data = await fetchWithCache('Notice_List');
 
-                // চেক করবে ডেটা আসলেই আছে কিনা বা ফাকা কিনা
                 if (data && data.length > 0 && !data.error) {
                     if (noticeContent) {
                         noticeContent.innerHTML = data.reverse().map(item => `
@@ -832,7 +781,6 @@
                     }
                     isNoticeLoaded = true;
                 } else {
-                    // শিটে নোটিস না থাকলে সুন্দর একটি মেসেজ দেখাবে, স্পিনার ঘুরবে না
                     if (noticeContent) {
                         noticeContent.innerHTML = `
                     <div class="text-center py-12 text-slate-500 font-code">
@@ -947,7 +895,6 @@
                     }
                 }
 
-                // গুগল এ জ্যাম এড়াতে Sequential Fetch (একটার পর একটা আনবে)
                 const ctData = await fetchWithCache('CT_List');
                 renderExams(getUpcomingExams(ctData), 'ct-container', 'CT');
 
@@ -957,7 +904,6 @@
                 const finalData = await fetchWithCache('Final_List');
                 renderExams(getUpcomingExams(finalData), 'final-container', 'FINAL');
 
-                // Countdown Timer Logic
                 setInterval(function () {
                     const timers = document.querySelectorAll('.countdown-timer');
                     const currentTime = new Date().getTime();
@@ -977,6 +923,19 @@
 
             } catch (error) {
                 console.error("Connection Error:", error);
+                
+                // ইনফিনিট লোডিং থামিয়ে একটি এরর মেসেজ শো করানো হলো
+                const errorHtml = `
+                <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                    <i class="fa-solid fa-triangle-exclamation text-rose-500 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-white mb-2">API Connection Failed</h3>
+                    <p class="text-sm text-slate-400 font-code">Unable to fetch active deadlines from server.</p>
+                </div>`;
+                
+                document.getElementById('ct-container').innerHTML = errorHtml;
+                document.getElementById('mid-container').innerHTML = errorHtml;
+                document.getElementById('final-container').innerHTML = errorHtml;
             }
         }
         fetchExamSchedules();
@@ -1046,74 +1005,12 @@
             }
         }
 
-        // --- Refined Theme Toggle Logic ---
-const themeToggleBtn = document.getElementById('theme-toggle-btn');
-const themeIcon = document.getElementById('theme-icon');
-
-// পেজ লোড হওয়ার সময় সেভ করা থিম চেক করা
-const currentTheme = localStorage.getItem('bup_ict_theme');
-if (currentTheme === 'light') {
-    document.body.classList.add('light-mode');
-    applyLightModeElements(true);
-    if(themeIcon) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    }
-}
-
-if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        
-        let isLight = document.body.classList.contains('light-mode');
-        
-        if (isLight) {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-            localStorage.setItem('bup_ict_theme', 'light');
-            applyLightModeElements(true);
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-            localStorage.setItem('bup_ict_theme', 'dark');
-            applyLightModeElements(false);
-        }
-    });
-}
-
-// ডার্ক এবং লাইট মোডের ক্লাস ডাইনামিক হ্যান্ডেল করার ফাংশন
-function applyLightModeElements(isLight) {
-    // সেকশন ও কার্ডগুলোর ব্যাকগ্রাউন্ড এবং বর্ডার ক্লাস পরিবর্তন
-    const darkElements = document.querySelectorAll('.bg-neutral-900, .bg-neutral-950');
-    darkElements.each = Array.from(darkElements);
-    
-    darkElements.forEach(el => {
-        if (isLight) {
-            el.classList.add('light-override');
-            el.style.backgroundColor = '#ffffff';
-            el.style.borderColor = '#cbd5e1';
-            el.style.color = '#0f172a';
-        } else {
-            el.style.backgroundColor = '';
-            el.style.borderColor = '';
-            el.style.color = '';
-            el.classList.remove('light-override');
-        }
-    });
-}
-
         // ==========================================
         // BACKGROUND PRE-FETCHING (Ninja Technique)
         // ==========================================
-        // Main page load howar 3 second por silently student data tene anbe
-        // ==========================================
-        // MASTER BACKGROUND PRE-FETCHING (Ninja Technique)
-        // ==========================================
-        // Main page load howar 3 second por silently sob data tene anbe
         setTimeout(async () => {
             console.log("Silently pre-fetching all background data...");
 
-            // Je je sheet er data background e age thekei anbo
             const sheetsToPrefetch = ['Student_List', 'Faculty_List', 'Routine-List', 'Notice_List', 'Materials_List', 'Semesters_List'];
 
             for (const sheetName of sheetsToPrefetch) {
@@ -1126,19 +1023,23 @@ function applyLightModeElements(isLight) {
                     // Jodi cache e data na thake ba 1 ghonta par hoye jay
                     if (!cacheTime || (now - parseInt(cacheTime) > 60 * 60 * 1000)) {
                         const response = await fetch(baseUrl + '?sheet=' + sheetName);
-                        const data = await response.json();
-
-                        if (data && !data.error) {
-                            localStorage.setItem(cacheKey, JSON.stringify(data));
-                            localStorage.setItem(timeKey, now.toString());
-                            console.log(sheetName + " is ready in cache!");
+                        const text = await response.text();
+                        
+                        try {
+                            const data = JSON.parse(text);
+                            if (data && !data.error) {
+                                localStorage.setItem(cacheKey, JSON.stringify(data));
+                                localStorage.setItem(timeKey, now.toString());
+                                console.log(sheetName + " is ready in cache!");
+                            }
+                        } catch (e) {
+                            console.log("Failed to parse pre-fetch for: " + sheetName);
                         }
                     }
                 } catch (err) {
                     console.log("Failed to pre-fetch: " + sheetName);
                 }
             }
-            console.log("All background fetching complete! Portal is super fast now.");
         }, 3000);
     </script>
 </body>
