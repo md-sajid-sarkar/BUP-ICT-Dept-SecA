@@ -895,13 +895,15 @@
                     }
                 }
 
-                const ctData = await fetchWithCache('CT_List');
+                // ROCKET SPEED: Fetch all exams concurrently (একসাথে তিনটি ডেটা কল করবে)
+                const [ctData, midData, finalData] = await Promise.all([
+                    fetchWithCache('CT_List'),
+                    fetchWithCache('Mid_List'),
+                    fetchWithCache('Final_List')
+                ]);
+
                 renderExams(getUpcomingExams(ctData), 'ct-container', 'CT');
-
-                const midData = await fetchWithCache('Mid_List');
                 renderExams(getUpcomingExams(midData), 'mid-container', 'MID');
-
-                const finalData = await fetchWithCache('Final_List');
                 renderExams(getUpcomingExams(finalData), 'final-container', 'FINAL');
 
                 setInterval(function () {
