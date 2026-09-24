@@ -10,65 +10,259 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .font-code { font-family: 'JetBrains Mono', monospace; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
         .tech-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
         }
+
         /* Custom scrollbar for the table */
-        .table-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
-        .table-scroll::-webkit-scrollbar-track { background: #0f172a; }
-        .table-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .table-scroll::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+
+        .table-scroll::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        .table-scroll::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
-<body class="bg-slate-950 text-slate-300 selection:bg-cyan-500 selection:text-white min-h-screen tech-grid flex flex-col justify-between">
+<body
+    class="bg-slate-950 text-slate-300 selection:bg-cyan-500 selection:text-white min-h-screen tech-grid flex flex-col justify-between">
 
-    <!-- TOP BAR -->
-    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 p-4 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-cyan-400 font-code font-bold hover:underline">
-                <i class="fa-solid fa-arrow-left mr-2"></i>Back to Portal
+    <!-- NAVIGATION BAR (z-[60] দিয়ে ফিক্স করা হয়েছে) -->
+    <nav class="bg-neutral-950/80 backdrop-blur-md text-white sticky top-0 z-[60] border-b border-neutral-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer"
+                    onclick="window.location.href='index.html'">
+                    <div
+                        class="bg-slate-900 border border-cyan-500 text-cyan-400 p-2.5 rounded-lg text-xl group-hover:bg-cyan-500 group-hover:text-slate-900 transition">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="text-lg font-extrabold tracking-widest block text-white font-code">&lt;BICE_2025/&gt;</span>
+                        <span class="text-xs text-cyan-500 font-mono">BUP_Portal_v1.0</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center space-x-5 text-sm font-medium font-code">
+                    <a href="index.html" class="hover:text-cyan-400 transition">~/home</a>
+
+                    <!-- Academics Dropdown -->
+                    <div class="relative group py-4">
+                        <button class="hover:text-cyan-400 transition flex items-center focus:outline-none">
+                            ~/Academics <i
+                                class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(6,182,212,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
+                            <a href="semesters.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-neutral-800 hover:text-cyan-400 border-b border-neutral-800 transition">
+                                <i class="fa-solid fa-layer-group w-5 text-center mr-2"></i>Semesters
+                            </a>
+                            <a href="#" id="routine-btn-desktop"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i>Routine
+                            </a>
+                            <a href="cgpaCalc.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-calculator w-5 text-center mr-2"></i>CGPA Calc
+                            </a>
+                            <a href="final-calc.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
+                                <i class="fa-solid fa-bullseye w-5 text-center mr-2"></i>Required Final Marks
+                            </a>
+                            <a href="archive.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
+                                <i class="fa-solid fa-database w-5 text-center mr-2"></i>Data Archive
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Community Dropdown -->
+                    <div class="relative group py-4">
+                        <button class="hover:text-emerald-400 transition flex items-center focus:outline-none">
+                            ~/Community <i
+                                class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-44 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(16,185,129,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
+                            <a href="faculty.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-emerald-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-user-tie w-5 text-center mr-2"></i>Faculty
+                            </a>
+                            <a href="students.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
+                                <i class="fa-solid fa-address-book w-5 text-center mr-2"></i>Student Directory
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Campus Dropdown -->
+                    <div class="relative group py-4">
+                        <button class="hover:text-indigo-400 transition flex items-center focus:outline-none">
+                            ~/Campus <i
+                                class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-40 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(99,102,241,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
+                            <a href="events.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 border-b border-slate-800 transition">
+                                <i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i>Events
+                            </a>
+                            <a href="gallery.html"
+                                class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 transition">
+                                <i class="fa-solid fa-images w-5 text-center mr-2"></i>Gallery
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Notices Button Group -->
+                    <div class="flex items-center space-x-3">
+                        <button onclick="window.location.href='index.html'"
+                            class="relative bg-rose-500/10 border border-rose-500/50 text-rose-400 hover:bg-rose-500/20 px-4 py-2 rounded-lg font-code text-sm transition flex items-center space-x-2">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                            </span>
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <span>Notices</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MOBILE MENU ICONS -->
+                <div class="md:hidden flex items-center space-x-5">
+                    <button onclick="window.location.href='index.html'"
+                        class="text-rose-400 relative focus:outline-none">
+                        <span class="absolute -top-1 -right-1 flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                        </span>
+                        <i class="fa-solid fa-bell text-xl"></i>
+                    </button>
+                    <button id="menu-btn" class="text-cyan-400 focus:outline-none p-1">
+                        <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-neutral-950 border-t border-neutral-800 w-full absolute left-0 top-20 shadow-2xl overflow-y-auto max-h-[80vh] pb-4">
+            <div class="px-4 py-4 space-y-1 font-code text-sm">
+                <a href="index.html" class="block px-3 py-2 text-cyan-400 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-house w-5 text-center mr-2"></i> ~/home</a>
+
+                <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">ACADEMICS</div>
+                <a href="semesters.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-layer-group w-5 text-center mr-2"></i> ~/Semesters</a>
+                <a href="#" id="routine-btn-mobile"
+    class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+        class="fa-solid fa-calendar-days w-5 text-center mr-2"></i> ~/Class_Routine</a>
+                <a href="cgpaCalc.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-calculator w-5 text-center mr-2"></i> ~/CGPA_Calc</a>
+                <a href="final-calc.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-bullseye w-5 text-center mr-2"></i> ~/Final_Marks_Calc</a>
+                <a href="archive.html"
+                    class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-database w-5 text-center mr-2"></i> ~/Data_Archive</a>
+
+                <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">COMMUNITY & CAMPUS</div>
+
+                <a href="faculty.html"
+                    class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-user-tie w-5 text-center mr-2"></i> ~/Faculty_Nodes</a>
+                <a href="students.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-address-book w-5 text-center mr-2"></i> ~/Student_Directory</a>
+                <a href="events.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-calendar-check w-5 text-center mr-2"></i> ~/Events</a>
+                <a href="gallery.html"
+                    class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i
+                        class="fa-solid fa-images w-5 text-center mr-2"></i> ~/Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shrink-0 z-40 relative">
+        <div
+            class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex flex-row justify-between items-center text-xs sm:text-sm font-code">
+            <a href="index.html"
+                class="text-cyan-400 hover:text-cyan-300 transition font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back to Portal</span>
             </a>
-            <span class="text-xs text-slate-500 font-code">&lt;BUP_ICT/Student_Directory&gt;</span>
+            <span class="text-slate-400">&lt;BICE_2025/Student_Directory&gt;</span>
         </div>
     </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
-        
+    <!-- HEADER & MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow mt-6">
+
         <!-- HEADER & SEARCH BAR -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
             <!-- Decorative blur -->
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
-            
+
             <div class="relative z-10 w-full md:w-auto text-center md:text-left">
-                <div class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-code mb-2">
+                <div
+                    class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-code mb-2">
                     <i class="fa-solid fa-database mr-1"></i> Live Database
                 </div>
                 <h1 class="text-2xl font-extrabold text-white font-code">Department Student List</h1>
-                <p class="text-xs text-slate-400 mt-1">Search students instantly and click on any row to view full details.</p>
+                <p class="text-xs text-slate-400 mt-1">Search students instantly and click on any row to view full
+                    details.</p>
             </div>
-            
+
             <!-- Live Search Box -->
             <div class="relative z-10 w-full md:w-80 font-code">
                 <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-500 text-sm"></i>
-                <input type="text" id="searchInput" onkeyup="filterStudents()" placeholder="Search by name or ID..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition shadow-inner">
+                <input type="text" id="searchInput" onkeyup="filterStudents()" placeholder="Search by name or ID..."
+                    class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition shadow-inner">
             </div>
         </div>
 
         <!-- CONTENT LAYOUT -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            
+
             <!-- LEFT: STUDENT TABLE (2 Columns) -->
             <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div class="overflow-x-auto table-scroll max-h-[600px] overflow-y-auto">
                     <table class="w-full text-left text-sm font-code relative">
-                        <thead class="bg-slate-950/95 backdrop-blur-sm text-slate-400 border-b border-slate-800 text-xs sticky top-0 z-10">
+                        <thead
+                            class="bg-slate-950/95 backdrop-blur-sm text-slate-400 border-b border-slate-800 text-xs sticky top-0 z-10">
                             <tr>
                                 <th class="p-4 whitespace-nowrap">ID</th>
                                 <th class="p-4 whitespace-nowrap">Name</th>
@@ -79,9 +273,9 @@
                         <tbody id="studentTableBody" class="divide-y divide-slate-800/50 text-slate-300">
                             <!-- Loading State -->
                             <tr id="loadingRow">
-                                <td colspan="4" class="p-12 text-center text-cyan-400 font-code">
-                                    <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-3 block"></i> 
-                                    Fetching data from Google Sheets...
+                                <td colspan="4" class="p-12 text-center text-cyan-500 font-code animate-pulse">
+                                    <i class="fa-solid fa-server fa-pulse text-3xl mb-3 block"></i>
+                                    Syncing Student Database from Secure Server...
                                 </td>
                             </tr>
                         </tbody>
@@ -90,88 +284,178 @@
             </div>
 
             <!-- RIGHT: PROFILE DETAILS CARD -->
-            <!-- RIGHT: PROFILE DETAILS CARD -->
-            <div class="sticky top-24 bg-slate-900 border border-cyan-500/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.05)]">
-                <!-- RIGHT: PROFILE DETAILS CARD -->
-            <div class="sticky top-24 bg-slate-900 border border-cyan-500/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.05)]">
-                <div class="flex items-center space-x-4 border-b border-slate-800 pb-5 mb-5">
-                    <div class="w-14 h-14 bg-gradient-to-br from-slate-800 to-slate-900 border border-cyan-500/30 rounded-2xl flex items-center justify-center text-cyan-400 text-2xl font-bold font-code shadow-inner">
-                        <i class="fa-solid fa-user-astronaut"></i>
-                    </div>
-                    <div class="overflow-hidden">
-                        <h3 class="text-[15px] font-extrabold text-slate-300 font-code" id="profileName">No Student Selected</h3>
-                        <p class="text-xs text-cyan-400 font-code mt-1 animate-pulse" id="profileId">
-                            <i class="fa-solid fa-hand-pointer mr-1"></i> Select a student from the list
-                        </p>
-                    </div>
-                </div>
-
-                <!-- (এরপর থেকে session, gender এর div গুলো যেমন ছিল তেমনই থাকবে) -->
-
-                <div class="space-y-3 font-code text-xs">
-                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
-                        <span class="text-slate-500"><i class="fa-solid fa-calendar-days mr-2 w-3"></i>Session</span>
-                        <span id="profileSession" class="text-white font-bold">--</span>
-                    </div>
-                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
-                        <span class="text-slate-500"><i class="fa-solid fa-venus-mars mr-2 w-3"></i>Gender</span>
-                        <span id="profileGender" class="text-white font-bold">--</span>
-                    </div>
-                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
-                        <span class="text-slate-500"><i class="fa-solid fa-droplet mr-2 w-3"></i>Blood Group</span>
-                        <span id="profileBlood" class="text-rose-400 font-bold">--</span>
-                    </div>
-                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
-                        <span class="text-slate-500"><i class="fa-brands fa-whatsapp mr-2 w-3"></i>WhatsApp</span>
-                        <span id="profilePhone" class="text-emerald-400 font-bold">--</span>
+            <div
+                class="sticky top-24 bg-slate-900/50 p-2 rounded-3xl border border-slate-800 shadow-[0_0_30px_rgba(6,182,212,0.05)]">
+                <div class="bg-slate-900 border border-cyan-500/30 rounded-2xl p-6 h-full">
+                    <div class="flex items-center space-x-4 border-b border-slate-800 pb-5 mb-5">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-slate-800 to-slate-900 border border-cyan-500/30 rounded-2xl flex items-center justify-center text-cyan-400 text-2xl font-bold font-code shadow-inner">
+                            <i class="fa-solid fa-user-astronaut"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h3 class="text-[15px] font-extrabold text-slate-300 font-code truncate" id="profileName">No
+                                Student Selected</h3>
+                            <p class="text-xs text-cyan-400 font-code mt-1 animate-pulse" id="profileId">
+                                <i class="fa-solid fa-hand-pointer mr-1"></i> Select a student from the list
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="pt-3">
-                        <a href="#" id="profileFb" target="_blank" class="block text-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-[0_0_15px_rgba(6,182,212,0.3)] opacity-50 pointer-events-none">
-                            <i class="fa-brands fa-facebook mr-2"></i> View Facebook Profile
-                        </a>
+                    <div class="space-y-3 font-code text-xs">
+                        <div
+                            class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                            <span class="text-slate-500"><i
+                                    class="fa-solid fa-calendar-days mr-2 w-3"></i>Session</span>
+                            <span id="profileSession" class="text-white font-bold">--</span>
+                        </div>
+                        <div
+                            class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                            <span class="text-slate-500"><i class="fa-solid fa-venus-mars mr-2 w-3"></i>Gender</span>
+                            <span id="profileGender" class="text-white font-bold">--</span>
+                        </div>
+                        <div
+                            class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                            <span class="text-slate-500"><i class="fa-solid fa-droplet mr-2 w-3"></i>Blood Group</span>
+                            <span id="profileBlood" class="text-rose-400 font-bold">--</span>
+                        </div>
+                        <div
+                            class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 flex justify-between items-center group hover:border-slate-700 transition">
+                            <span class="text-slate-500"><i class="fa-brands fa-whatsapp mr-2 w-3"></i>WhatsApp</span>
+                            <span id="profilePhone" class="text-emerald-400 font-bold">--</span>
+                        </div>
+
+                        <div class="pt-3">
+                            <a href="#" id="profileFb" target="_blank"
+                                class="block text-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-[0_0_15px_rgba(6,182,212,0.3)] opacity-50 pointer-events-none">
+                                <i class="fa-brands fa-facebook mr-2"></i> View Facebook Profile
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
     </main>
+    <!-- ROUTINE MODALS SECTION -->
+    <div id="section-modal"
+        class="fixed inset-0 z-[105] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 transition-all duration-300">
+        <div
+            class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-sm shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col p-6 text-center transform scale-95 md:scale-100">
+            <button id="close-section-btn"
+                class="absolute top-4 right-4 text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <i
+                class="fa-solid fa-users-viewfinder text-5xl text-cyan-500 mb-4 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]"></i>
+            <h2 class="text-2xl font-bold text-white font-code mb-2">Select Section</h2>
+            <p class="text-slate-400 text-sm mb-6 font-code">Choose your section to view the specific class routine.</p>
+            <div class="space-y-4">
+                <button id="sec-a-btn"
+                    class="w-full bg-slate-800 border border-slate-700 hover:border-cyan-500 hover:bg-slate-800/80 text-cyan-400 font-bold py-3.5 rounded-lg transition shadow-lg flex justify-center items-center font-code group">
+                    <span
+                        class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2.5 py-1 rounded text-xs mr-3 group-hover:bg-cyan-500 group-hover:text-slate-950 transition">SEC_A</span>
+                    <span>Section A</span>
+                </button>
+                <button id="sec-b-btn"
+                    class="w-full bg-slate-800 border border-slate-700 hover:border-cyan-500 hover:bg-slate-800/80 text-cyan-400 font-bold py-3.5 rounded-lg transition shadow-lg flex justify-center items-center font-code group">
+                    <span
+                        class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2.5 py-1 rounded text-xs mr-3 group-hover:bg-cyan-500 group-hover:text-slate-950 transition">SEC_B</span>
+                    <span>Section B</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROUTINE MODAL -->
+    <div id="routine-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-2 sm:p-4">
+        <div
+            class="bg-slate-900 border border-cyan-500/50 rounded-xl w-full max-w-5xl h-[90vh] shadow-[0_0_30px_rgba(6,182,212,0.3)] relative flex flex-col overflow-hidden">
+            <div
+                class="bg-slate-900 border-b border-slate-800 p-3 sm:p-4 flex flex-wrap justify-between items-center gap-2 z-10 shrink-0">
+                <h2 class="text-lg sm:text-xl font-bold text-cyan-400 font-code flex items-center">
+                    <i class="fa-solid fa-table-list mr-2"></i> Class_Routine
+                </h2>
+                <div class="flex space-x-2 items-center">
+                    <a id="routine-pdf-btn" href="#" download
+                        class="bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500 hover:text-slate-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-code transition flex items-center">
+                        <i class="fa-solid fa-file-pdf mr-1 sm:mr-2"></i> <span
+                            class="hidden sm:inline">Save_PDF</span><span class="sm:hidden">PDF</span>
+                    </a>
+                    <a id="routine-img-btn" href="#" download
+                        class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500 hover:text-slate-900 px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-code transition flex items-center">
+                        <i class="fa-solid fa-image mr-1 sm:mr-2"></i> <span
+                            class="hidden sm:inline">Save_IMG</span><span class="sm:hidden">IMG</span>
+                    </a>
+                    <button id="close-routine-modal-btn"
+                        class="text-slate-400 hover:text-rose-400 transition text-xl sm:text-2xl focus:outline-none ml-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="routine-capture-area" class="p-4 sm:p-6 bg-slate-900 overflow-y-auto flex-grow">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-white mb-1">BICE - 2025</h3>
+                    <p id="routine-section-title" class="text-cyan-400 text-sm font-code">Class Routine</p>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-slate-700">
+                    <table class="w-full text-left border-collapse font-code text-sm">
+                        <thead>
+                            <tr class="bg-slate-800 text-cyan-400 border-b border-slate-700">
+                                <th class="p-4 border-r border-slate-700">Day</th>
+                                <th class="p-4 border-r border-slate-700">Time</th>
+                                <th class="p-4 border-r border-slate-700">Course Code & Title</th>
+                                <th class="p-4">Classroom</th>
+                            </tr>
+                        </thead>
+                        <tbody id="routine-table-body" class="text-slate-300">
+                            <tr>
+                                <td colspan="4" class="text-center p-6"><i
+                                        class="fa-solid fa-circle-notch fa-spin text-cyan-400 text-2xl"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="text-center py-6 text-xs text-slate-600 font-code border-t border-slate-900 mt-auto">
         <p>BUP ICT Department Student Directory</p>
     </footer>
 
+
+
     <!-- SCRIPT -->
     <script>
-        // 1. Apnar Google App Script Web App URL (Main Base URL)
+        // 1. Google App Script Web App URL
         const baseUrl = "https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec";
 
-        // 2. Advanced Caching System (Super Fast Speed er jonno)
+        // 2. Advanced Caching System
         async function fetchWithCache(sheetName, expirationMinutes = 60) {
             const cacheKey = 'bup_ict_data_' + sheetName;
             const timeKey = cacheKey + '_time';
-            
+
             const cachedData = localStorage.getItem(cacheKey);
             const cacheTime = localStorage.getItem(timeKey);
             const now = new Date().getTime();
-            
+
             if (cachedData && cacheTime && (now - parseInt(cacheTime) < expirationMinutes * 60 * 1000)) {
                 return JSON.parse(cachedData);
             }
 
             try {
-                // Ekhane URL er sathe ?sheet=Student_List add hobe
                 const response = await fetch(baseUrl + '?sheet=' + sheetName);
                 const data = await response.json();
-                
+
                 if (data && !data.error) {
                     localStorage.setItem(cacheKey, JSON.stringify(data));
                     localStorage.setItem(timeKey, now.toString());
                 }
                 return data;
-            } catch(error) {
-                if(cachedData) return JSON.parse(cachedData);
+            } catch (error) {
+                if (cachedData) return JSON.parse(cachedData);
                 throw error;
             }
         }
@@ -179,22 +463,21 @@
         // 3. Fetch Data and Populate Table
         async function fetchStudentData() {
             const tableBody = document.getElementById('studentTableBody');
-            
+
             try {
-                // Fetch using cache and specific sheet name
                 const data = await fetchWithCache('Student_List');
-                
+
                 let students = [];
-                if(Array.isArray(data)) {
+                if (Array.isArray(data)) {
                     students = data;
-                } else if(data.data && Array.isArray(data.data)) {
+                } else if (data.data && Array.isArray(data.data)) {
                     students = data.data;
                 }
 
-                tableBody.innerHTML = ''; // Clear loading text
+                tableBody.innerHTML = '';
 
-                if(students.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-500">No students found in the sheet.</td></tr>`;
+                if (students.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-500"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Empty matrix detected. No student data found.</td></tr>`;
                     return;
                 }
 
@@ -209,16 +492,16 @@
 
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-slate-800/80 cursor-pointer transition student-row";
-                    
+
                     tr.onclick = () => showProfile(id, name, session, gender, whatsapp, bloodGroup, fbLink, tr);
 
                     tr.innerHTML = `
                         <td class="p-4 text-cyan-400 font-bold">${id}</td>
                         <td class="p-4 font-semibold text-white student-name">${name}</td>
                         <td class="p-4 text-xs text-slate-400">${gender}</td>
-                        <td class="p-4 text-right"><i class="fa-solid fa-chevron-right text-xs text-slate-600"></i></td>
+                        <td class="p-4 text-right"><i class="fa-solid fa-chevron-right text-xs text-slate-600 group-hover:text-cyan-400 transition"></i></td>
                     `;
-                    
+
                     tableBody.appendChild(tr);
                 });
 
@@ -226,9 +509,9 @@
                 console.error("API Fetch Error:", error);
                 tableBody.innerHTML = `
                     <tr>
-                        <td colspan="4" class="p-8 text-center text-rose-400 font-code">
-                            <i class="fa-solid fa-triangle-exclamation mr-2 text-xl block mb-2"></i> 
-                            Failed to load database. Check connection.
+                        <td colspan="4" class="p-8 text-center text-rose-400 font-code font-bold">
+                            <i class="fa-solid fa-network-wired mr-2 text-xl block mb-2"></i> 
+                            Connection Refused: Failed to sync with the database.
                         </td>
                     </tr>
                 `;
@@ -237,37 +520,52 @@
 
         // 4. Update Profile Details Card (Right Side)
         function showProfile(id, name, session, gender, phone, blood, fbLink, selectedRow) {
-            
+
             // Highlight selected row
             document.querySelectorAll('.student-row').forEach(row => row.classList.remove('bg-cyan-900/30', 'border-l-2', 'border-cyan-500'));
             selectedRow.classList.add('bg-cyan-900/30', 'border-l-2', 'border-cyan-500');
 
             // Update details
             document.getElementById('profileName').innerText = name;
-            document.getElementById('profileId').innerText = "ID: " + id;
+
+            // Stop pulsing on ID once selected
+            const profileId = document.getElementById('profileId');
+            profileId.innerText = "ID: " + id;
+            profileId.classList.remove('animate-pulse');
+
             document.getElementById('profileSession').innerText = session;
             document.getElementById('profileGender').innerText = gender;
             document.getElementById('profileBlood').innerText = blood;
-            
+
             // --- Smart WhatsApp & Phone Dialer Logic ---
             const phoneContainer = document.getElementById('profilePhone');
             let phoneNum = phone ? phone.toString().trim() : "";
 
             if (phoneNum && phoneNum !== "--" && phoneNum !== "") {
-                // নাম্বার থেকে স্পেস বা ড্যাশ রিমুভ করা
-                let cleanNum = phoneNum.replace(/[\s-]/g, ''); 
-                // হোয়াটসঅ্যাপ লিংকের জন্য শুধু নাম্বার (প্লাস চিহ্ন ছাড়া)
-                let waNum = cleanNum.replace('+', ''); 
-                
+                // Number processing: Keep '+' if it exists, remove spaces/dashes
+                let rawNum = phoneNum.replace(/[^\d+]/g, '');
+
+                // Smart Number Formatting
+                if (rawNum.startsWith('1')) {
+                    rawNum = '+880' + rawNum;
+                } else if (rawNum.startsWith('01')) {
+                    rawNum = '+88' + rawNum;
+                } else if (rawNum.startsWith('880')) {
+                    rawNum = '+' + rawNum;
+                }
+
+                let displayNum = rawNum;
+                let waNum = rawNum.replace('+', '');
+
                 phoneContainer.innerHTML = `
                     <div class="flex items-center space-x-2.5">
-                        <span class="text-emerald-400 font-bold">${phoneNum}</span>
+                        <span class="text-emerald-400 font-bold">${displayNum}</span>
                         <!-- WhatsApp Button -->
                         <a href="https://wa.me/${waNum}" target="_blank" title="Message on WhatsApp" class="bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white h-7 w-7 rounded-md flex items-center justify-center transition shadow-sm">
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
                         <!-- Phone Call Button -->
-                        <a href="tel:${cleanNum}" title="Make a Call" class="bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white h-7 w-7 rounded-md flex items-center justify-center transition shadow-sm">
+                        <a href="tel:${displayNum}" title="Make a Call" class="bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white h-7 w-7 rounded-md flex items-center justify-center transition shadow-sm">
                             <i class="fa-solid fa-phone"></i>
                         </a>
                     </div>
@@ -293,7 +591,7 @@
             const rows = document.getElementById('studentTableBody').getElementsByTagName('tr');
 
             for (let i = 0; i < rows.length; i++) {
-                if(rows[i].id === 'loadingRow' || rows[i].cells.length < 2) continue;
+                if (rows[i].id === 'loadingRow' || rows[i].cells.length < 2) continue;
 
                 let idText = rows[i].cells[0].innerText.toLowerCase();
                 let nameText = rows[i].cells[1].innerText.toLowerCase();
@@ -305,9 +603,154 @@
                 }
             }
         }
+        // --- Routine Modal Logic ---
+        const routineBtnDesktop = document.getElementById('routine-btn-desktop');
+        const routineBtnMobile = document.getElementById('routine-btn-mobile');
+        const sectionModal = document.getElementById('section-modal');
+        const closeSectionBtn = document.getElementById('close-section-btn');
+        const secABtn = document.getElementById('sec-a-btn');
+        const secBBtn = document.getElementById('sec-b-btn');
+        const routineModal = document.getElementById('routine-modal');
+        const closeRoutineModalBtn = document.getElementById('close-routine-modal-btn');
+        const routineTableBody = document.getElementById('routine-table-body');
+        const routineSectionTitle = document.getElementById('routine-section-title');
+
+        function openSectionModal(e) {
+            e.preventDefault();
+            if (typeof toggleMobileMenu === "function") {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+            sectionModal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        if (routineBtnDesktop) routineBtnDesktop.addEventListener('click', openSectionModal);
+        if (routineBtnMobile) routineBtnMobile.addEventListener('click', openSectionModal);
+
+        if (closeSectionBtn) {
+            closeSectionBtn.addEventListener('click', () => {
+                sectionModal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            });
+        }
+
+        if (secABtn) {
+            secABtn.addEventListener('click', () => {
+                sectionModal.classList.add('hidden');
+                routineModal.classList.remove('hidden');
+                if (routineSectionTitle) routineSectionTitle.innerText = "Class Routine (Section A)";
+                document.getElementById('routine-pdf-btn').href = "asset/pdf/BICE2025_SecA_ClassRoutine.pdf";
+                document.getElementById('routine-img-btn').href = "asset/photos/BICE2025_SecA_ClassRoutine.jpg";
+                fetchRoutineData('A');
+            });
+        }
+
+        if (secBBtn) {
+            secBBtn.addEventListener('click', () => {
+                sectionModal.classList.add('hidden');
+                routineModal.classList.remove('hidden');
+                if (routineSectionTitle) routineSectionTitle.innerText = "Class Routine (Section B)";
+                document.getElementById('routine-pdf-btn').href = "asset/pdf/BICE2025_SecB_ClassRoutine.pdf";
+                document.getElementById('routine-img-btn').href = "asset/photos/BICE2025_SecB_ClassRoutine.jpeg";
+                fetchRoutineData('B');
+            });
+        }
+
+        if (closeRoutineModalBtn) {
+            closeRoutineModalBtn.addEventListener('click', () => {
+                routineModal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            });
+        }
+
+        async function fetchRoutineData(selectedSection) {
+            try {
+                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-cyan-400 font-code animate-pulse"><i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 block"></i> Syncing Routine Data...</td></tr>';
+                const allData = await fetchWithCache('Routine-List');
+                if (allData && allData.length > 0 && !allData.error) {
+                    const data = allData.filter(row => {
+                        const rowSection = row.Section ? row.Section.toString().trim().toUpperCase() : '';
+                        return rowSection === selectedSection.toUpperCase();
+                    });
+                    if (data.length === 0) {
+                        routineTableBody.innerHTML = `<tr><td colspan="4" class="text-center p-6 text-rose-400">No routine parameters found for Section ${selectedSection}.</td></tr>`;
+                        return;
+                    }
+                    const dayCounts = {};
+                    data.forEach(row => { dayCounts[row.Day] = (dayCounts[row.Day] || 0) + 1; });
+                    let html = '';
+                    let currentDay = '';
+                    data.forEach(row => {
+                        html += `<tr class="border-b border-slate-800/50 hover:bg-slate-800 transition">`;
+                        if (row.Day !== currentDay) {
+                            html += `<td rowspan="${dayCounts[row.Day]}" class="p-4 border-r border-slate-800 text-indigo-400 font-bold align-middle bg-slate-900/30 whitespace-nowrap">${row.Day}</td>`;
+                            currentDay = row.Day;
+                        }
+                        html += `
+                            <td class="p-4 border-r border-slate-800 text-rose-400 whitespace-nowrap">${row.Time}</td>
+                            <td class="p-4 border-r border-slate-800 text-white">${row['Course Code & Title']}</td>
+                            <td class="p-4 text-emerald-400">${row.Classroom}</td>
+                        </tr>`;
+                    });
+                    routineTableBody.innerHTML = html;
+                } else {
+                    routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-400">Empty matrix detected.</td></tr>';
+                }
+            } catch (error) {
+                routineTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-6 text-rose-500 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Connection Refused: Target Server Unreachable.</td></tr>';
+            }
+        }
 
         // 6. Trigger API fetch when page loads
         window.onload = fetchStudentData;
+
+        // --- Mobile Menu Toggle Logic ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        function toggleMobileMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        }
+        if (menuBtn) {
+            menuBtn.addEventListener('click', toggleMobileMenu);
+        }
+
+        // ==========================================
+        // BACKGROUND PRE-FETCHING (Ninja Technique)
+        // ==========================================
+        setTimeout(async () => {
+            const sheetsToPrefetch = ['Student_List', 'Faculty_List', 'Routine-List', 'Notice_List', 'Materials_List', 'Semesters_List'];
+
+            for (const sheetName of sheetsToPrefetch) {
+                try {
+                    const cacheKey = 'bup_ict_data_' + sheetName;
+                    const timeKey = cacheKey + '_time';
+                    const cacheTime = localStorage.getItem(timeKey);
+                    const now = new Date().getTime();
+
+                    if (!cacheTime || (now - parseInt(cacheTime) > 60 * 60 * 1000)) {
+                        const response = await fetch(baseUrl + '?sheet=' + sheetName);
+                        const text = await response.text();
+                        try {
+                            const data = JSON.parse(text);
+                            if (data && !data.error) {
+                                localStorage.setItem(cacheKey, JSON.stringify(data));
+                                localStorage.setItem(timeKey, now.toString());
+                            }
+                        } catch (e) {
+                            // Silent fail for background tasks
+                        }
+                    }
+                } catch (err) {
+                    // Silent fail
+                }
+            }
+        }, 3000); 
     </script>
 </body>
+
 </html>

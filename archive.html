@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUP ICT - Data Archive</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-code { font-family: 'JetBrains Mono', monospace; }
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-300 selection:bg-indigo-500 selection:text-white min-h-screen tech-grid flex flex-col justify-between">
+
+    <!-- TOP BAR -->
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 p-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-indigo-400 font-code font-bold hover:text-indigo-300 transition flex items-center">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back to Portal
+            </a>
+            <span class="text-xs text-slate-500 font-code">&lt;BUP_ICT/Data_Archive&gt;</span>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12 w-full flex-grow">
+        <div class="bg-slate-900 border border-indigo-500/50 rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.15)] relative flex flex-col overflow-hidden">
+            
+            <div class="p-6 sm:p-8 bg-slate-900 text-center border-b border-slate-800">
+                <i class="fa-solid fa-database text-4xl text-indigo-500 mb-4 drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]"></i>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-code mb-2">Data_Archive</h1>
+                <p class="text-slate-400 text-sm mb-8 font-code">Select category to access department archive nodes:</p>
+                
+                <!-- Tabs -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button id="theory-tab-btn" onclick="setActiveTab('theory')" class="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-code font-bold bg-cyan-500 text-slate-950 border border-cyan-400 transition flex items-center shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+                        <i class="fa-solid fa-book mr-2 text-lg"></i> Theory
+                    </button>
+                    <button id="lab-tab-btn" onclick="setActiveTab('lab')" class="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-code font-bold bg-slate-800 border border-slate-700 text-emerald-400 hover:border-emerald-500 hover:bg-slate-800/80 transition flex items-center shadow-lg">
+                        <i class="fa-solid fa-laptop-code mr-2 text-lg"></i> Lab
+                    </button>
+                    <button id="pyq-tab-btn" onclick="setActiveTab('pyq')" class="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-code font-bold bg-slate-800 border border-slate-700 text-rose-400 hover:border-rose-500 hover:bg-slate-800/80 transition flex items-center shadow-lg">
+                        <i class="fa-solid fa-file-circle-question mr-2 text-lg"></i> PYQ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-4 sm:p-6 bg-slate-900/50 min-h-[400px]">
+                
+                <div id="theory-container" class="tab-pane">
+                    <h3 class="text-lg font-bold text-cyan-400 mb-6 font-code border-l-4 border-cyan-500 pl-3">Theory Archive</h3>
+                    <div id="theory-content" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="text-center p-12 col-span-full text-cyan-400 font-code animate-pulse"><i class="fa-solid fa-circle-nodes fa-spin text-3xl mb-3 block"></i>Establishing Secure Connection...</div>
+                    </div>
+                </div>
+
+                <div id="lab-container" class="tab-pane hidden">
+                    <h3 class="text-lg font-bold text-emerald-400 mb-6 font-code border-l-4 border-emerald-500 pl-3">Lab Archive</h3>
+                    <div id="lab-content" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="text-center p-12 col-span-full text-emerald-400 font-code animate-pulse"><i class="fa-solid fa-circle-nodes fa-spin text-3xl mb-3 block"></i>Establishing Secure Connection...</div>
+                    </div>
+                </div>
+
+                <div id="pyq-container" class="tab-pane hidden">
+                    <h3 class="text-lg font-bold text-rose-400 mb-6 font-code border-l-4 border-rose-500 pl-3">Question Bank Archive</h3>
+                    <div id="pyq-content" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="text-center p-12 col-span-full text-rose-400 font-code animate-pulse"><i class="fa-solid fa-circle-nodes fa-spin text-3xl mb-3 block"></i>Establishing Secure Connection...</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-600 font-code border-t border-slate-900 mt-auto">
+        <p>BUP ICT Department Portal</p>
+    </footer>
+
+    <script>
+        const baseUrl = 'https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec';
+
+        async function fetchWithCache(sheetName, expirationMinutes = 60) {
+            const cacheKey = 'bup_ict_data_' + sheetName;
+            const timeKey = cacheKey + '_time';
+            const cachedData = localStorage.getItem(cacheKey);
+            const cacheTime = localStorage.getItem(timeKey);
+            const now = new Date().getTime();
+
+            if (cachedData && cacheTime && (now - parseInt(cacheTime) < expirationMinutes * 60 * 1000)) {
+                return JSON.parse(cachedData);
+            }
+            try {
+                const response = await fetch(baseUrl + '?sheet=' + sheetName);
+                const data = await response.json();
+                if (data && !data.error) {
+                    localStorage.setItem(cacheKey, JSON.stringify(data));
+                    localStorage.setItem(timeKey, now.toString());
+                }
+                return data;
+            } catch (error) {
+                if (cachedData) return JSON.parse(cachedData);
+                throw error;
+            }
+        }
+
+        const tabs = {
+            'theory': { btn: 'theory-tab-btn', container: 'theory-container', bg: 'bg-cyan-500', border: 'border-cyan-400', shadow: 'rgba(6,182,212,0.4)', color: 'cyan' },
+            'lab': { btn: 'lab-tab-btn', container: 'lab-container', bg: 'bg-emerald-500', border: 'border-emerald-400', shadow: 'rgba(16,185,129,0.4)', color: 'emerald' },
+            'pyq': { btn: 'pyq-tab-btn', container: 'pyq-container', bg: 'bg-rose-500', border: 'border-rose-400', shadow: 'rgba(244,63,94,0.4)', color: 'rose' }
+        };
+
+        function setActiveTab(selected) {
+            Object.keys(tabs).forEach(key => {
+                const tab = tabs[key];
+                const btn = document.getElementById(tab.btn);
+                const container = document.getElementById(tab.container);
+                
+                if (key === selected) {
+                    container.classList.remove('hidden');
+                    btn.className = `px-5 py-2.5 rounded-lg text-xs sm:text-sm font-code font-bold ${tab.bg} text-slate-950 border ${tab.border} transition flex items-center shadow-[0_0_15px_${tab.shadow}]`;
+                } else {
+                    container.classList.add('hidden');
+                    btn.className = `px-5 py-2.5 rounded-lg text-xs sm:text-sm font-code font-bold bg-slate-800 border border-slate-700 text-${tab.color}-400 hover:border-${tab.color}-500 hover:bg-slate-800/80 transition flex items-center shadow-lg`;
+                }
+            });
+        }
+
+        async function loadArchiveData() {
+            try {
+                const data = await fetchWithCache('Materials_List');
+
+                if (data && data.length > 0 && !data.error) {
+                    const theoryItems = data.filter(item => item.Category && item.Category.toLowerCase() === 'theory');
+                    const labItems = data.filter(item => item.Category && item.Category.toLowerCase() === 'lab');
+                    const pyqItems = data.filter(item => item.Category && item.Category.toLowerCase() === 'previousquestion');
+
+                    const renderCards = (items, themeColor) => {
+                        return items.map(item => `
+                            <div class="bg-slate-950 p-4 sm:p-5 rounded-xl border border-slate-800 hover:border-${themeColor}-500/50 transition flex justify-between items-center group shadow-md">
+                                <div class="overflow-hidden pr-2">
+                                    <span class="bg-${themeColor}-500/10 text-${themeColor}-400 text-[10px] sm:text-xs px-2 py-1 rounded font-code border border-${themeColor}-500/20">${item['CourseCode&Name'] || 'N/A'}</span>
+                                    <h4 class="font-bold text-white mt-2 sm:mt-3 text-base sm:text-lg leading-tight group-hover:text-${themeColor}-300 transition truncate">${item.Topic}</h4>
+                                    <span class="text-[10px] sm:text-xs text-slate-500 font-code block mt-1"><i class="fa-solid fa-tag mr-1"></i>${item.Type}</span>
+                                </div>
+                                <a href="${item.Link}" target="_blank" class="bg-slate-800 text-${themeColor}-400 hover:bg-${themeColor}-500 hover:text-white h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl transition shrink-0 shadow-sm group-hover:shadow-[0_0_15px_rgba(var(--${themeColor}),0.3)]">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        `).join('');
+                    };
+
+                    document.getElementById('theory-content').innerHTML = theoryItems.length > 0 ? renderCards(theoryItems, 'cyan') : '<div class="text-center p-6 col-span-full text-slate-500">No theory materials accessible.</div>';
+                    document.getElementById('lab-content').innerHTML = labItems.length > 0 ? renderCards(labItems, 'emerald') : '<div class="text-center p-6 col-span-full text-slate-500">No lab materials accessible.</div>';
+                    document.getElementById('pyq-content').innerHTML = pyqItems.length > 0 ? renderCards(pyqItems, 'rose') : '<div class="text-center p-6 col-span-full text-slate-500">No question banks accessible.</div>';
+                }
+            } catch (error) {
+                const errHtml = '<div class="text-center p-6 col-span-full text-rose-500 font-bold"><i class="fa-solid fa-network-wired mr-2"></i>Database Connection Refused!</div>';
+                document.getElementById('theory-content').innerHTML = errHtml;
+                document.getElementById('lab-content').innerHTML = errHtml;
+                document.getElementById('pyq-content').innerHTML = errHtml;
+            }
+        }
+        window.onload = loadArchiveData;
+    </script>
+</body>
+</html>

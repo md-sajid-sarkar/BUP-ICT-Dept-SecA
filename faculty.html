@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUP ICT - CGPA & Cumulative Calculator</title>
+    <title>BUP ICT - Faculty Directory</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- html2canvas for Download as Image -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
         body.modal-open { overflow: hidden; }
@@ -22,6 +20,8 @@
             background-image: linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
         }
+        .modal-scroll::-webkit-scrollbar { width: 6px; display: block; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; display: block; }
     </style>
 </head>
 
@@ -31,7 +31,6 @@
     <nav class="bg-neutral-950/80 backdrop-blur-md text-white sticky top-0 z-[60] border-b border-neutral-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-
                 <!-- Logo -->
                 <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.location.href='index.html'">
                     <div class="bg-slate-900 border border-cyan-500 text-cyan-400 p-2.5 rounded-lg text-xl group-hover:bg-cyan-500 group-hover:text-slate-900 transition">
@@ -46,62 +45,40 @@
                 <!-- Desktop Navigation Links -->
                 <div class="hidden md:flex items-center space-x-5 text-sm font-medium font-code">
                     <a href="index.html" class="hover:text-cyan-400 transition">~/home</a>
-
                     <!-- Academics Dropdown -->
                     <div class="relative group py-4">
                         <button class="hover:text-cyan-400 transition flex items-center focus:outline-none">
                             ~/Academics <i class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
                         </button>
                         <div class="absolute top-full left-0 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(6,182,212,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
-                            <a href="semesters.html" class="block px-4 py-3 text-slate-300 hover:bg-neutral-800 hover:text-cyan-400 border-b border-neutral-800 transition">
-                                <i class="fa-solid fa-layer-group w-5 text-center mr-2"></i>Semesters
-                            </a>
-                            <!-- ROUTINE POPUP TRIGGER -->
-                            <a href="#" id="routine-btn-desktop" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-neutral-800 transition">
-                                <i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i>Routine
-                            </a>
-                            <a href="cgpaCalc.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-neutral-800 transition">
-                                <i class="fa-solid fa-calculator w-5 text-center mr-2"></i>CGPA Calc
-                            </a>
-                            <a href="final-calc.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
-                                <i class="fa-solid fa-bullseye w-5 text-center mr-2"></i>Required Final Marks
-                            </a>
-                            <a href="archive.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
-                                <i class="fa-solid fa-database w-5 text-center mr-2"></i>Data Archive
-                            </a>
+                            <a href="semesters.html" class="block px-4 py-3 text-slate-300 hover:bg-neutral-800 hover:text-cyan-400 border-b border-neutral-800 transition"><i class="fa-solid fa-layer-group w-5 text-center mr-2"></i>Semesters</a>
+                            <!-- ROUTINE POPUP TRIGGER (Fixed href to #) -->
+                            <a href="#" id="routine-btn-desktop" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-slate-800 transition"><i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i>Routine</a>
+                            <a href="cgpaCalc.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 border-b border-slate-800 transition"><i class="fa-solid fa-calculator w-5 text-center mr-2"></i>CGPA Calc</a>
+                            <a href="final-calc.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition"><i class="fa-solid fa-bullseye w-5 text-center mr-2"></i>Required Final Marks</a>
+                            <a href="archive.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition"><i class="fa-solid fa-database w-5 text-center mr-2"></i>Data Archive</a>
                         </div>
                     </div>
-
                     <!-- Community Dropdown -->
                     <div class="relative group py-4">
                         <button class="hover:text-emerald-400 transition flex items-center focus:outline-none">
                             ~/Community <i class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
                         </button>
                         <div class="absolute top-full left-0 w-44 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(16,185,129,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
-                            <a href="faculty.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-emerald-400 border-b border-slate-800 transition">
-                                <i class="fa-solid fa-user-tie w-5 text-center mr-2"></i>Faculty
-                            </a>
-                            <a href="students.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition">
-                                <i class="fa-solid fa-address-book w-5 text-center mr-2"></i>Student Directory
-                            </a>
+                            <a href="faculty.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-emerald-400 border-b border-slate-800 transition"><i class="fa-solid fa-user-tie w-5 text-center mr-2"></i>Faculty</a>
+                            <a href="students.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition"><i class="fa-solid fa-address-book w-5 text-center mr-2"></i>Student Directory</a>
                         </div>
                     </div>
-
                     <!-- Campus Dropdown -->
                     <div class="relative group py-4">
                         <button class="hover:text-indigo-400 transition flex items-center focus:outline-none">
                             ~/Campus <i class="fa-solid fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-300"></i>
                         </button>
                         <div class="absolute top-full left-0 w-40 bg-slate-900 border border-slate-700 rounded-lg shadow-[0_5px_15px_rgba(99,102,241,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform translate-y-2 group-hover:translate-y-0">
-                            <a href="events.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 border-b border-slate-800 transition">
-                                <i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i>Events
-                            </a>
-                            <a href="gallery.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 transition">
-                                <i class="fa-solid fa-images w-5 text-center mr-2"></i>Gallery
-                            </a>
+                            <a href="index.html#events" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 border-b border-slate-800 transition"><i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i>Events</a>
+                            <a href="index.html#gallery" class="block px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-indigo-400 transition"><i class="fa-solid fa-images w-5 text-center mr-2"></i>Gallery</a>
                         </div>
                     </div>
-
                     <!-- Notices Button Group -->
                     <div class="flex items-center space-x-3">
                         <button onclick="window.location.href='index.html'" class="relative bg-rose-500/10 border border-rose-500/50 text-rose-400 hover:bg-rose-500/20 px-4 py-2 rounded-lg font-code text-sm transition flex items-center space-x-2">
@@ -135,147 +112,116 @@
         <div id="mobile-menu" class="hidden md:hidden bg-neutral-950 border-t border-neutral-800 w-full absolute left-0 top-20 shadow-2xl overflow-y-auto max-h-[80vh] pb-4">
             <div class="px-4 py-4 space-y-1 font-code text-sm">
                 <a href="index.html" class="block px-3 py-2 text-cyan-400 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-house w-5 text-center mr-2"></i> ~/home</a>
-
                 <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">ACADEMICS</div>
                 <a href="semesters.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-layer-group w-5 text-center mr-2"></i> ~/Semesters</a>
+                <!-- ROUTINE POPUP TRIGGER (Fixed href to #) -->
                 <a href="#" id="routine-btn-mobile" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-days w-5 text-center mr-2"></i> ~/Class_Routine</a>
                 <a href="cgpaCalc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calculator w-5 text-center mr-2"></i> ~/CGPA_Calc</a>
                 <a href="final-calc.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-bullseye w-5 text-center mr-2"></i> ~/Final_Marks_Calc</a>
                 <a href="archive.html" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-database w-5 text-center mr-2"></i> ~/Data_Archive</a>
-
                 <div class="pt-4 pb-1 px-3 text-xs text-slate-500 font-bold tracking-wider">COMMUNITY & CAMPUS</div>
-                
                 <a href="faculty.html" class="block w-full text-left px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-user-tie w-5 text-center mr-2"></i> ~/Faculty_Nodes</a>
                 <a href="students.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-address-book w-5 text-center mr-2"></i> ~/Student_Directory</a>
-                <a href="events.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-calendar-check w-5 text-center mr-2"></i> ~/Events</a>
-                <a href="gallery.html" class="block px-3 py-2 text-slate-300 hover:bg-neutral-900 rounded transition"><i class="fa-solid fa-images w-5 text-center mr-2"></i> ~/Gallery</a>
             </div>
         </div>
     </nav>
 
-    <!-- TOP BAR (Back to portal on left, engine tag on right - matched with semesters.html) -->
-    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shrink-0 z-40 relative">
+    <!-- TOP BAR -->
+     <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shrink-0 z-40 relative">
         <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex flex-row justify-between items-center text-xs sm:text-sm font-code">
             <a href="index.html" class="text-cyan-400 hover:text-cyan-300 transition font-bold flex items-center space-x-2">
                 <i class="fa-solid fa-arrow-left"></i>
                 <span>Back to Portal</span>
             </a>
-            <span class="text-slate-500">&lt;BUP_ICT/CGPA_Engine&gt;</span>
+            <span class="text-slate-400">&lt;BUP_ICT/Faculty_Directory&gt;</span>
         </div>
     </header>
+    <!-- <header class="bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800 shrink-0 z-40 relative">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex flex-row justify-between items-center text-xs sm:text-sm font-code">
+            <a href="index.html" class="text-cyan-400 hover:text-cyan-300 transition font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back to Portal</span>
+            </a>
+            <span class="text-slate-500">&lt;BUP_ICT/Faculty_Directory&gt;</span>
+        </div>
+    </header> -->
 
-    <!-- CALCULATOR CONTAINER -->
-    <main class="max-w-2xl mx-auto px-4 py-12 w-full space-y-8 flex-grow">
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
         
-        <!-- SEMESTER SGPA CALCULATOR -->
-        <div class="bg-slate-900 border border-cyan-500/50 rounded-2xl shadow-[0_0_40px_rgba(6,182,212,0.15)] p-6 sm:p-8 relative">
-            <div class="text-center mb-8">
-                <div class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-code mb-3 animate-pulse">
-                    <i class="fa-solid fa-calculator mr-1"></i> Academic Tool
+        <!-- HEADER & LIVE SEARCH -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
+            <div class="relative z-10 w-full md:w-auto text-center md:text-left">
+                <div class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-code mb-2">
+                    <i class="fa-solid fa-user-tie mr-1"></i> Live Database
                 </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-code">Semester SGPA Calculator</h1>
-                <p class="text-sm text-slate-400 mt-1">Calculate your BUP semester grade point average accurately.</p>
+                <h1 class="text-2xl font-extrabold text-white font-code">Department Faculty Directory</h1>
+                <p class="text-xs text-slate-400 mt-1">Search faculty instantly and click on any card to view full details.</p>
             </div>
-
-            <!-- Course Inputs -->
-            <div class="space-y-4 font-code">
-                <div class="grid grid-cols-12 gap-2 text-xs text-slate-500 px-1">
-                    <span class="col-span-5">Course Title (Optional)</span>
-                    <span class="col-span-3">Credit</span>
-                    <span class="col-span-3">Grade Point</span>
-                    <span class="col-span-1"></span>
-                </div>
-
-                <div id="course-rows" class="space-y-3">
-                    <!-- Default Row -->
-                    <div class="grid grid-cols-12 gap-2 items-center course-row">
-                        <input type="text" placeholder="e.g. ICE 1101" class="col-span-5 bg-slate-950 border border-slate-800 rounded px-3 py-2 text-sm text-white focus:border-cyan-500 outline-none transition">
-                        
-                        <!-- Credits -->
-                        <select class="col-span-3 bg-slate-950 border border-slate-800 rounded px-2 py-2 text-sm text-slate-300 focus:border-cyan-500 outline-none transition course-credit cursor-pointer">
-                            <option value="0.75">0.75 Cr</option>
-                            <option value="1.00">1.00 Cr</option>
-                            <option value="1.25">1.25 Cr</option>
-                            <option value="1.50">1.50 Cr</option>
-                            <option value="1.75">1.75 Cr</option>
-                            <option value="2.00">2.00 Cr</option>
-                            <option value="2.50">2.50 Cr</option>
-                            <option value="3.00" selected>3.00 Cr</option>
-                        </select>
-
-                        <!-- Grade Points -->
-                        <select class="col-span-3 bg-slate-950 border border-slate-800 rounded px-2 py-2 text-sm text-slate-300 focus:border-cyan-500 outline-none transition course-grade cursor-pointer">
-                            <option value="4.00">4.00 (A+)</option>
-                            <option value="3.75">3.75 (A)</option>
-                            <option value="3.50">3.50 (A-)</option>
-                            <option value="3.25">3.25 (B+)</option>
-                            <option value="3.00">3.00 (B)</option>
-                            <option value="2.75">2.75 (B-)</option>
-                            <option value="2.50">2.50 (C+)</option>
-                            <option value="2.25">2.25 (C)</option>
-                            <option value="2.00">2.00 (D)</option>
-                            <option value="0.00">0.00 (F)</option>
-                        </select>
-                        <button onclick="removeRow(this)" class="col-span-1 text-slate-600 hover:text-rose-500 text-center transition"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-
-                <!-- Actions -->
-                <div class="pt-4 border-t border-slate-800/50 mt-4">
-                    <div class="flex justify-between items-center">
-                        <button onclick="addCourseRow()" class="bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs px-4 py-2.5 rounded-lg transition border border-slate-700 font-bold flex items-center">
-                            <i class="fa-solid fa-plus mr-2"></i> Add Course
-                        </button>
-                        <button onclick="calculateSGPA()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs px-6 py-2.5 rounded-lg transition shadow-[0_0_15px_rgba(6,182,212,0.4)] flex items-center">
-                            <i class="fa-solid fa-microchip mr-2"></i> Execute
-                        </button>
-                    </div>
-                    <!-- Custom Error Message Container (Replaces cheap alert) -->
-                    <div id="row-error" class="hidden text-rose-500 text-xs font-code mt-3 text-center bg-rose-500/10 border border-rose-500/20 py-2 rounded">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> CRITICAL: Minimum one operational course node required.
-                    </div>
-                </div>
-
-                <!-- Result Card -->
-                <div class="mt-8 bg-slate-950 border border-slate-800 p-6 rounded-xl text-center shadow-inner">
-                    <span class="text-xs text-slate-500 block mb-1 tracking-widest font-bold">FINAL SEMESTER SGPA</span>
-                    <span id="cgpa-result" class="text-4xl font-extrabold text-cyan-400 tracking-wider">0.00</span>
-                    <p id="total-credits-text" class="text-xs text-slate-500 mt-2">Total Credits Evaluated: 0.00</p>
-                </div>
+            <!-- Live Search Box -->
+            <div class="relative z-10 w-full md:w-80 font-code">
+                <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="text" id="searchInput" onkeyup="filterFaculty()" placeholder="Search by name or designation..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition shadow-inner">
             </div>
         </div>
 
-        <!-- OVERALL CUMULATIVE CGPA CALCULATOR -->
-        <div class="bg-slate-900 border border-indigo-500/50 rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.15)] p-6 sm:p-8 relative">
-            <div class="text-center mb-6">
-                <div class="inline-block bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 px-3 py-1 rounded-full text-xs font-code mb-3">
-                    <i class="fa-solid fa-chart-line mr-1"></i> Cumulative Option
-                </div>
-                <h2 class="text-xl font-extrabold text-white font-code">Overall Cumulative CGPA</h2>
-                <p class="text-xs text-slate-400 mt-1">Enter your previous total earned credits and previous cumulative CGPA.</p>
-            </div>
-
-            <div class="space-y-4 font-code text-sm">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-1">Previous Total Earned Credits</label>
-                        <input type="number" id="prev-credits" placeholder="e.g. 43.00" step="0.25" oninput="calculateOverallCGPA()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2.5 text-white focus:border-indigo-500 outline-none transition">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-1">Previous Cumulative CGPA</label>
-                        <input type="number" id="prev-cgpa" placeholder="e.g. 3.48" step="0.0001" max="4.00" oninput="calculateOverallCGPA()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2.5 text-white focus:border-indigo-500 outline-none transition">
-                    </div>
-                </div>
-
-                <!-- Overall Result Card -->
-                <div class="mt-4 bg-slate-950 border border-slate-800 p-5 rounded-xl text-center shadow-inner">
-                    <span class="text-xs text-slate-500 block mb-1 tracking-widest font-bold">OVERALL CUMULATIVE CGPA</span>
-                    <span id="overall-cgpa-result" class="text-3xl font-extrabold text-indigo-400 tracking-wider">0.00</span>
-                </div>
-            </div>
+        <!-- HOD SECTION (Vertical Layout, Centered) -->
+        <div id="hod-container" class="mb-4 flex justify-center">
+            <!-- JS will inject HOD here -->
         </div>
 
+        <!-- FACULTY MEMBERS HEADING -->
+        <div id="faculty-heading" class="hidden flex flex-row items-center justify-center mb-8 mt-12 w-full">
+            <div class="h-px bg-slate-800/80 flex-grow max-w-xs"></div>
+            <span class="shrink-0 mx-4 text-slate-400 font-code text-sm sm:text-base tracking-widest font-bold uppercase">
+                <i class="fa-solid fa-users mr-2 text-emerald-500/70"></i>Faculty Members
+            </span>
+            <div class="h-px bg-slate-800/80 flex-grow max-w-xs"></div>
+        </div>
+
+        <!-- REGULAR FACULTY GRID -->
+        <div id="faculty-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loading State -->
+            <div class="col-span-full text-center py-20 text-cyan-400 font-code animate-pulse">
+                <i class="fa-solid fa-server fa-pulse text-3xl mb-3 block"></i> Syncing Faculty Database from Secure Server...
+            </div>
+        </div>
     </main>
+
+    <!-- DETAILED FACULTY MODAL -->
+    <div id="faculty-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-neutral-950/80 backdrop-blur-md p-4">
+        <div class="bg-neutral-900 border border-cyan-500/50 rounded-xl w-full max-w-3xl max-h-[85vh] shadow-[0_0_40px_rgba(6,182,212,0.25)] relative flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-neutral-900 border-b border-neutral-800 p-5 flex justify-between items-center shrink-0">
+                <div class="flex items-center space-x-3">
+                    <img id="modal-img" src="" alt="" class="w-12 h-12 rounded-xl object-cover border border-cyan-500 shadow-sm">
+                    <div>
+                        <h2 id="modal-name" class="text-lg font-bold text-white font-code"></h2>
+                        <span id="modal-designation" class="text-xs text-cyan-400 font-code"></span>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-rose-400 transition text-2xl focus:outline-none h-10 w-10 flex items-center justify-center rounded-lg bg-neutral-800/50 hover:bg-neutral-800">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body (Dynamic injection) -->
+            <div id="modal-dynamic-content" class="p-6 overflow-y-auto modal-scroll bg-neutral-900/50 flex-grow font-code text-xs sm:text-sm">
+                <!-- JS will automatically inject Contact, Courses, and Education here -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-neutral-950 border-t border-neutral-800 p-4 px-6 flex justify-between items-center shrink-0">
+                <a id="modal-profile-link" href="#" target="_blank" class="text-xs text-indigo-400 hover:underline font-code flex items-center">
+                    <i class="fa-solid fa-globe mr-1.5"></i>Official BUP Profile Link
+                </a>
+                <button onclick="closeModal()" class="bg-neutral-800 hover:bg-neutral-700 text-slate-300 px-4 py-2 rounded transition font-code text-xs">
+                    Close [ESC]
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- ROUTINE MODALS SECTION -->
     <div id="section-modal" class="fixed inset-0 z-[105] hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 transition-all duration-300">
@@ -346,134 +292,14 @@
 
     <!-- FOOTER -->
     <footer class="text-center py-6 text-xs text-slate-600 font-code border-t border-slate-900 mt-auto">
-        <p>BUP ICT Department Portal Evaluation Engine</p>
+        <p>BUP ICT Department Faculty Directory</p>
     </footer>
 
     <!-- SCRIPT -->
     <script>
         const baseUrl = 'https://script.google.com/macros/s/AKfycbyB3t6Dg8rINXE4j-D5FHa7-OYAmIQD364-6iN23t7OT9fBD6jg6bJIzhXRSUysPa2BCQ/exec';
+        let globalFacultyData = [];
 
-        function addCourseRow() {
-            const container = document.getElementById('course-rows');
-            const newRow = document.createElement('div');
-            newRow.className = "grid grid-cols-12 gap-2 items-center course-row mt-3";
-            newRow.innerHTML = `
-                <input type="text" placeholder="Course Title (Optional)" class="col-span-5 bg-slate-950 border border-slate-800 rounded px-3 py-2 text-sm text-white focus:border-cyan-500 outline-none transition">
-                <select class="col-span-3 bg-slate-950 border border-slate-800 rounded px-2 py-2 text-sm text-slate-300 focus:border-cyan-500 outline-none transition course-credit cursor-pointer">
-                    <option value="0.75">0.75 Cr</option>
-                    <option value="1.00">1.00 Cr</option>
-                    <option value="1.25">1.25 Cr</option>
-                    <option value="1.50">1.50 Cr</option>
-                    <option value="1.75">1.75 Cr</option>
-                    <option value="2.00">2.00 Cr</option>
-                    <option value="2.50">2.50 Cr</option>
-                    <option value="3.00" selected>3.00 Cr</option>
-                </select>
-                <select class="col-span-3 bg-slate-950 border border-slate-800 rounded px-2 py-2 text-sm text-slate-300 focus:border-cyan-500 outline-none transition course-grade cursor-pointer">
-                    <option value="4.00">4.00 (A+)</option>
-                    <option value="3.75">3.75 (A)</option>
-                    <option value="3.50">3.50 (A-)</option>
-                    <option value="3.25">3.25 (B+)</option>
-                    <option value="3.00">3.00 (B)</option>
-                    <option value="2.75">2.75 (B-)</option>
-                    <option value="2.50">2.50 (C+)</option>
-                    <option value="2.25">2.25 (C)</option>
-                    <option value="2.00">2.00 (D)</option>
-                    <option value="0.00">0.00 (F)</option>
-                </select>
-                <button onclick="removeRow(this)" class="col-span-1 text-slate-600 hover:text-rose-500 text-center transition"><i class="fa-solid fa-trash"></i></button>
-            `;
-            container.appendChild(newRow);
-        }
-
-        function removeRow(btn) {
-            const row = btn.closest('.course-row');
-            const errorMsg = document.getElementById('row-error');
-            
-            if (document.querySelectorAll('.course-row').length > 1) {
-                row.remove();
-                errorMsg.classList.add('hidden');
-                calculateSGPA(); 
-            } else {
-                errorMsg.classList.remove('hidden');
-                setTimeout(() => {
-                    errorMsg.classList.add('hidden');
-                }, 4000);
-            }
-        }
-
-        function calculateSGPA() {
-            const rows = document.querySelectorAll('.course-row');
-            let totalPoints = 0;
-            let totalCredits = 0;
-
-            rows.forEach(row => {
-                const creditSelect = row.querySelector('.course-credit');
-                const gradeSelect = row.querySelector('.course-grade');
-                
-                const credit = parseFloat(creditSelect.options[creditSelect.selectedIndex].value);
-                const grade = parseFloat(gradeSelect.options[gradeSelect.selectedIndex].value);
-                
-                totalPoints += (credit * grade);
-                totalCredits += credit;
-            });
-
-            const resultSpan = document.getElementById('cgpa-result');
-            const totalCreditsText = document.getElementById('total-credits-text');
-
-            if (totalCredits === 0) {
-                resultSpan.innerText = "0.00";
-                totalCreditsText.innerText = "Total Credits Evaluated: 0.00";
-                return;
-            }
-
-            const sgpa = totalPoints / totalCredits;
-            resultSpan.innerText = sgpa.toFixed(2);
-            totalCreditsText.innerText = "Total Credits Evaluated: " + totalCredits.toFixed(2);
-            
-            calculateOverallCGPA();
-        }
-
-        function calculateOverallCGPA() {
-            const rows = document.querySelectorAll('.course-row');
-            let currentPoints = 0;
-            let currentCredits = 0;
-
-            rows.forEach(row => {
-                const creditSelect = row.querySelector('.course-credit');
-                const gradeSelect = row.querySelector('.course-grade');
-                
-                const credit = parseFloat(creditSelect.options[creditSelect.selectedIndex].value);
-                const grade = parseFloat(gradeSelect.options[gradeSelect.selectedIndex].value);
-                
-                currentPoints += (credit * grade);
-                currentCredits += credit;
-            });
-
-            const prevCredits = parseFloat(document.getElementById('prev-credits').value) || 0;
-            const prevCGPA = parseFloat(document.getElementById('prev-cgpa').value) || 0;
-            const overallResultSpan = document.getElementById('overall-cgpa-result');
-
-            if (currentCredits === 0 && prevCredits === 0) {
-                overallResultSpan.innerText = "0.00";
-                return;
-            }
-
-            if (prevCredits === 0 || prevCGPA === 0) {
-                const currentSGPA = currentCredits > 0 ? (currentPoints / currentCredits) : 0;
-                overallResultSpan.innerText = currentSGPA.toFixed(2);
-                return;
-            }
-
-            const prevQualityPoints = prevCredits * prevCGPA;
-            const totalQualityPoints = prevQualityPoints + currentPoints;
-            const totalEarnedCredits = prevCredits + currentCredits;
-
-            const overallCGPA = totalEarnedCredits > 0 ? (totalQualityPoints / totalEarnedCredits) : 0;
-            overallResultSpan.innerText = overallCGPA.toFixed(2);
-        }
-
-        // --- Routine Modal Logic & Cache Integration ---
         async function fetchWithCache(sheetName, expirationMinutes = 60) {
             const cacheKey = 'bup_ict_data_' + sheetName;
             const timeKey = cacheKey + '_time';
@@ -486,8 +312,7 @@
             }
             try {
                 const response = await fetch(baseUrl + '?sheet=' + sheetName);
-                const text = await response.text();
-                const data = JSON.parse(text);
+                const data = await response.json();
                 if (data && !data.error) {
                     localStorage.setItem(cacheKey, JSON.stringify(data));
                     localStorage.setItem(timeKey, now.toString());
@@ -499,6 +324,177 @@
             }
         }
 
+        async function initFaculty() {
+            const hodContainer = document.getElementById('hod-container');
+            const facultyGrid = document.getElementById('faculty-grid');
+            const heading = document.getElementById('faculty-heading');
+
+            try {
+                const data = await fetchWithCache('Faculty_List');
+                globalFacultyData = Array.isArray(data) ? data : (data.data || []);
+
+                if (globalFacultyData.length === 0) {
+                    facultyGrid.innerHTML = '<div class="col-span-full text-center text-slate-500 font-code">No faculty data found.</div>';
+                    return;
+                }
+
+                const chairman = globalFacultyData.find(item => item.Designation && (item.Designation.toLowerCase().includes('chairman') || item.Designation.toLowerCase().includes('head')));
+                const others = globalFacultyData.filter(item => item !== chairman);
+
+                let hodHtml = '';
+                let gridHtml = '';
+
+                if (chairman) {
+                    hodHtml = renderFacultyCard(chairman, true);
+                }
+
+                if (others.length > 0) {
+                    heading.classList.remove('hidden');
+                    gridHtml = others.map(item => renderFacultyCard(item, false)).join('');
+                }
+
+                hodContainer.innerHTML = hodHtml;
+                facultyGrid.innerHTML = gridHtml;
+
+            } catch (err) {
+                console.error(err);
+                facultyGrid.innerHTML = '<div class="col-span-full text-center text-rose-500 font-code font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Failed to sync with the faculty database!</div>';
+            }
+        }
+
+        function renderFacultyCard(f, isHod) {
+            const name = f["Name"] ? f["Name"].toString().trim() : "N/A";
+            const designation = f["Designation"] ? f["Designation"].toString().trim() : "Faculty Member";
+            const email = f["Email"] ? f["Email"].toString().trim() : "";
+            const phone = f["Phone"] ? f["Phone"].toString().trim() : "";
+            const photo = f["Photo"] ? f["Photo"].toString().trim() : "";
+            const bupLink = (f["ProfileLink"] || f["BUP Profile Link"]) ? (f["ProfileLink"] || f["BUP Profile Link"]).toString().trim() : "#";
+
+            if (isHod) {
+                return `
+                    <div onclick="openFacultyModal('${name.replace(/'/g, "\\'")}')" class="w-full max-w-md mx-auto bg-[#0b1120] border border-cyan-500/50 p-8 rounded-3xl shadow-[0_0_40px_rgba(6,182,212,0.15)] relative group cursor-pointer hover:border-cyan-400 transition-all duration-300 font-code text-center flex flex-col items-center">
+                        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-t-3xl"></div>
+                        
+                        <span class="bg-cyan-500/10 text-cyan-400 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full border border-cyan-500/30 shadow-sm mb-6 inline-flex items-center tracking-widest uppercase">
+                            <i class="fa-solid fa-star mr-2"></i> Department Head
+                        </span>
+                        
+                        ${photo ? `<img src="${photo}" alt="${name}" class="h-36 w-36 sm:h-44 sm:w-44 rounded-full object-cover border-4 border-slate-900 ring-4 ring-cyan-500/50 shadow-2xl mb-6 transition-transform duration-500 group-hover:scale-105">` : `<div class="bg-cyan-500/10 text-cyan-400 h-36 w-36 sm:h-44 sm:w-44 rounded-full flex items-center justify-center text-5xl font-bold border-4 border-slate-900 ring-4 ring-cyan-500/50 shadow-2xl mb-6 transition-transform duration-500 group-hover:scale-105"><i class="fa-solid fa-user-tie"></i></div>`}
+                        
+                        <h3 class="font-extrabold text-white text-2xl sm:text-3xl group-hover:text-cyan-400 transition tracking-tight break-words w-full px-2">${name}</h3>
+                        <p class="text-sm sm:text-base text-cyan-400 font-bold mt-2 mb-6">${designation}</p>
+                        
+                        <div class="flex flex-wrap justify-center gap-3 w-full mb-6 text-sm font-semibold">
+                            ${phone ? `<a href="tel:${phone}" onclick="event.stopPropagation()" class="text-cyan-400 hover:text-white bg-slate-950 hover:bg-cyan-600 px-4 py-2.5 rounded-lg border border-slate-800 transition flex items-center shadow-md"><i class="fa-solid fa-phone mr-2"></i>${phone}</a>` : ''}
+                            ${email ? `<a href="mailto:${email}" onclick="event.stopPropagation()" class="text-cyan-400 hover:text-white bg-slate-950 hover:bg-cyan-600 px-4 py-2.5 rounded-lg border border-slate-800 transition flex items-center shadow-md"><i class="fa-solid fa-envelope mr-2"></i>Email</a>` : ''}
+                        </div>
+                        
+                        ${bupLink !== '#' ? `<div class="w-full pt-6 border-t border-slate-800/80"><a href="${bupLink}" target="_blank" onclick="event.stopPropagation()" class="bg-[#0f292e] text-emerald-400 hover:bg-emerald-500 hover:text-slate-900 px-6 py-3 rounded-xl transition flex items-center justify-center font-bold text-sm shadow-[0_0_20px_rgba(16,185,129,0.3)] w-full"><i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Official Profile</a></div>` : ''}
+                    </div>
+                `;
+            } else {
+                return `
+                    <div onclick="openFacultyModal('${name.replace(/'/g, "\\'")}')" class="faculty-card bg-[#0b1120] border border-slate-800 hover:border-cyan-500/50 p-5 sm:p-6 rounded-2xl shadow-lg hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] cursor-pointer transition-all duration-300 hover:-translate-y-1.5 group flex flex-col h-full font-code relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-800 via-cyan-500/40 to-slate-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        <div class="flex items-start space-x-4 mb-5">
+                            ${photo ? `<div class="relative shrink-0"><img src="${photo}" alt="${name}" class="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border-2 border-slate-900 ring-2 ring-cyan-500/30 group-hover:ring-cyan-400 shadow-md transition-all duration-300"></div>` : `<div class="bg-cyan-500/10 text-cyan-400 h-16 w-16 sm:h-20 sm:w-20 rounded-full flex items-center justify-center text-2xl font-bold border-2 border-slate-900 ring-2 ring-cyan-500/30 shrink-0 group-hover:ring-cyan-400 transition-all duration-300"><i class="fa-solid fa-user-tie"></i></div>`}
+                            
+                            <div class="flex-1 min-w-0 pt-1">
+                                <h4 class="font-extrabold text-white text-base sm:text-lg leading-snug group-hover:text-cyan-400 transition break-words">${name}</h4>
+                                <p class="text-xs sm:text-sm text-cyan-400/90 mt-1.5 mb-3">${designation}</p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    ${phone ? `<a href="tel:${phone}" onclick="event.stopPropagation()" class="text-slate-300 hover:text-cyan-400 transition flex items-center w-fit"><i class="fa-solid fa-phone w-4 text-cyan-500 mr-1.5"></i>${phone}</a>` : ''}
+                                    ${email ? `<a href="mailto:${email}" onclick="event.stopPropagation()" class="text-slate-300 hover:text-cyan-400 transition flex items-center w-fit"><i class="fa-solid fa-envelope w-4 text-cyan-500 mr-1.5"></i><span class="truncate">${email}</span></a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-auto pt-4 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2">
+                            ${bupLink !== '#' ? `<a href="${bupLink}" target="_blank" onclick="event.stopPropagation()" class="text-emerald-400 hover:text-emerald-300 flex items-center font-bold text-xs sm:text-sm transition bg-emerald-500/10 hover:bg-emerald-500/20 px-3 py-1.5 rounded"><i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Profile</a>` : '<span class="text-slate-600 text-xs italic mt-1">No Profile Link</span>'}
+                            <span class="text-xs text-slate-400 group-hover:text-cyan-400 transition flex items-center font-semibold bg-slate-800/40 px-3 py-1.5 rounded">Details <i class="fa-solid fa-arrow-right ml-1.5"></i></span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function openFacultyModal(name) {
+            const faculty = globalFacultyData.find(f => f["Name"] === name);
+            if (!faculty) return;
+
+            document.getElementById('modal-img').src = faculty["Photo"] ? faculty["Photo"].toString().trim() : "";
+            document.getElementById('modal-name').innerText = faculty["Name"] || "";
+            document.getElementById('modal-designation').innerText = faculty["Designation"] || "";
+            document.getElementById('modal-profile-link').href = (faculty["ProfileLink"] || faculty["BUP Profile Link"]) ? (faculty["ProfileLink"] || faculty["BUP Profile Link"]).toString().trim() : "#";
+
+            const modalContent = document.getElementById('modal-dynamic-content');
+
+            // Courses (Split by comma)
+            let rawCourses = faculty["Course"] || faculty["Courses"] || "";
+            let coursesList = rawCourses ? rawCourses.split(',').map(c => c.trim()).filter(c => c.length > 0) : [];
+            
+            let coursesHtml = coursesList.length > 0 ? coursesList.map((c, idx) => `
+                <div class="flex items-start bg-slate-950 p-3 rounded-lg border border-slate-800/80 mb-2.5">
+                    <span class="text-cyan-400 font-bold mr-3 font-mono">${idx + 1}.</span>
+                    <span class="text-slate-200 leading-relaxed">${c}</span>
+                </div>
+            `).join('') : '<p class="text-slate-500 italic bg-slate-950 p-4 rounded-lg border border-slate-800/80">No course history listed.</p>';
+
+            // Education (Split by semicolon)
+            let rawEdu = faculty["Education"] || "";
+            let eduList = rawEdu ? rawEdu.split(';').map(e => e.trim()).filter(e => e.length > 0) : [];
+            
+            let eduHtml = eduList.length > 0 ? eduList.map((e, idx) => `
+                <div class="flex items-start bg-slate-950 p-3 rounded-lg border border-slate-800/80 mb-2.5">
+                    <span class="text-indigo-400 font-bold mr-3 font-mono">🎓</span>
+                    <span class="text-slate-200 leading-relaxed">${e}</span>
+                </div>
+            `).join('') : '<p class="text-slate-500 italic bg-slate-950 p-4 rounded-lg border border-slate-800/80">No education history listed.</p>';
+
+            modalContent.innerHTML = `
+                <div class="mb-7">
+                    <h3 class="text-cyan-400 font-bold mb-3 flex items-center text-base"><i class="fa-solid fa-book mr-2"></i>Taught Courses</h3>
+                    ${coursesHtml}
+                </div>
+                <div>
+                    <h3 class="text-indigo-400 font-bold mb-3 flex items-center text-base"><i class="fa-solid fa-graduation-cap mr-2"></i>Educational Background</h3>
+                    ${eduHtml}
+                </div>
+            `;
+
+            document.getElementById('faculty-modal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            document.getElementById('faculty-modal').classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        function filterFaculty() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.faculty-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        function toggleMobileMenu() { 
+            if (mobileMenu) mobileMenu.classList.toggle('hidden'); 
+        }
+        if (menuBtn) menuBtn.addEventListener('click', toggleMobileMenu);
+
+        // --- Routine Modal Logic ---
         const routineBtnDesktop = document.getElementById('routine-btn-desktop');
         const routineBtnMobile = document.getElementById('routine-btn-mobile');
         const sectionModal = document.getElementById('section-modal');
@@ -511,7 +507,7 @@
         const routineSectionTitle = document.getElementById('routine-section-title');
 
         function openSectionModal(e) {
-            e.preventDefault();
+            if(e) e.preventDefault();
             if(mobileMenu) mobileMenu.classList.add('hidden');
             sectionModal.classList.remove('hidden');
             document.body.classList.add('modal-open');
@@ -594,49 +590,7 @@
             }
         }
 
-        // --- Mobile Menu Toggle Logic ---
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        function toggleMobileMenu() { 
-            if (mobileMenu) {
-                mobileMenu.classList.toggle('hidden'); 
-            }
-        }
-        if (menuBtn) {
-            menuBtn.addEventListener('click', toggleMobileMenu);
-        }
-
-        // ==========================================
-        // BACKGROUND PRE-FETCHING (Ninja Technique)
-        // ==========================================
-        setTimeout(async () => {
-            const sheetsToPrefetch = ['Student_List', 'Faculty_List', 'Routine-List', 'Notice_List', 'Materials_List', 'Semesters_List'];
-
-            for (const sheetName of sheetsToPrefetch) {
-                try {
-                    const cacheKey = 'bup_ict_data_' + sheetName;
-                    const timeKey = cacheKey + '_time';
-                    const cacheTime = localStorage.getItem(timeKey);
-                    const now = new Date().getTime();
-
-                    if (!cacheTime || (now - parseInt(cacheTime) > 60 * 60 * 1000)) {
-                        const response = await fetch(baseUrl + '?sheet=' + sheetName);
-                        const text = await response.text();
-                        try {
-                            const data = JSON.parse(text);
-                            if (data && !data.error) {
-                                localStorage.setItem(cacheKey, JSON.stringify(data));
-                                localStorage.setItem(timeKey, now.toString());
-                            }
-                        } catch (e) {
-                            // Silent fail for background tasks
-                        }
-                    }
-                } catch (err) {
-                    // Silent fail
-                }
-            }
-        }, 2000); 
+        window.onload = initFaculty;
     </script>
 </body>
 </html>
